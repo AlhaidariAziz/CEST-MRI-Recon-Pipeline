@@ -57,15 +57,18 @@ print('kdat shape [Reps,Necho,Ncoils,Nx,PE2,PE1] :', np.shape(kdat))
 print('mps_ shape [coils,nx,PE2,PE1]:', np.shape(mps_))
 
 del mps
-
-if torch.cuda.is_available():
-  print('CUDA is available. Using GPU.')
-  device=sp.Device(0)
-  xp = device.xp
-else:
-  print('CUDA is not available. Using CPU.')
-  device=sp.Device(-1)
-  xp = np
+    
+try: 
+    # Check if there is at least one GPU available
+    if cp.cuda.runtime.getDeviceCount() > 0:
+        device = sp.Device(0)
+        print(f'GPU detected: {cp.cuda.runtime.getDeviceProperties(0)["name"].decode()}')
+    else:
+        device = sp.Device(-1)
+except (ImportError, Exception):
+    # If cupy isn't installed or fails, fall back to CPU
+    device = sp.Device(-1)
+xp = device.xp
 
 
 # #HDLLR recon
