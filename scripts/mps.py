@@ -19,7 +19,7 @@ print('Current directory:',cwd)
 # print('Data directory:',DATA_DIR)
 DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_Data/"
 
-infile_k='kdat_3D_R65_C32.h5'
+infile_k='CEST_kdat_3D_R65_C32.h5'
 infile_ref='refs_3D.h5'
 
 
@@ -119,17 +119,19 @@ for kx_idx in range(kshape[-1]):
 mps=[x.get() if hasattr(x, 'get') else x for x in mps]
 mps=np.permute_dims(mps,(1,2,3,0))
 
-del ref_2D
+
 print('mps shape:', np.shape(mps)) #mps shape: (32, 72, 180, 224)
 
 # np.save('mps_s',mps)
 
 
+chunks=(ref_2D.shape[0:3]+(1,)) 
+del ref_2D
 
-with h5py.File(cwd / 'recons/mps.h5','w') as f:
-    f.create_dataset('mps',data=mps)
+with h5py.File(cwd / 'maps/mps.h5','w') as f:
+    f.create_dataset('mps',data=mps,chunks=chunks)
     
 print('Done')
-print('you can find recons in', cwd/'kdat')
+print('you can find mps.h5 in', cwd/'maps')
     
 
