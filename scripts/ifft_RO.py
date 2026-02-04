@@ -90,7 +90,7 @@ for data in data_keys:
     print(f'{data} 2D shape:', kdat.shape)
     print('Created/Ammended File: ' + DATA_DIR  + 'CEST_kdat_2D_R65_C32.h5')
 
-    chunks = (kdat.shape[0], kdat.shape[1], kdat.shape[2], kdat.shape[3], 1) # chunking the data based on RO dimension for lighter loading during Recon
+    chunks = (1, kdat.shape[1], kdat.shape[2], kdat.shape[3], 1) # chunking the data based on RO dimension for lighter loading during Recon
     
     if data == data_keys[0]:
         with h5py.File(DATA_DIR  + 'CEST_kdat_2D_R65_C32.h5','w') as f: # to append on existed file
