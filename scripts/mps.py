@@ -9,8 +9,29 @@ import psutil
 import tracemalloc
 import gc
 from pathlib import Path 
+import time
+import argparse 
 
-slice_idx=128
+
+parser = argparse.ArgumentParser(description='run spiritCalib for 3D data in ksapace or Hybird space')
+
+parser.add_argument('--space',
+                    default=None,
+                    help='Hyb for Hybird or ksp for kspace')
+parser.add_argument('--v',
+                    type=bool,
+                    default=False,
+                    help='Verbose mode')
+
+args = parser.parse_args()
+
+if args.space is None:
+     raise SystemExit(  "Please specify the --space argument: "
+                        "'Hyb' for 2D slices 3D mps after RO IFFT, or "
+                        "'ksp' to apply it directly on 3D k-space." )
+
+start_time = time.perf_counter()
+
 cwd=Path.cwd().parent
 
 print('Current directory:',cwd)
@@ -25,6 +46,17 @@ infile_ref='refs_3D.h5'
 
 print (File_path := DATA_DIR + infile_k)
 
+
+def memory_usage():
+    """Track current memory usage"""
+    process = psutil.Process(os.getpid())
+    return process.memory_info().rss / 1024 ** 2  # MB
+
+def track_memory(msg=""):
+    """Helper to print memory usage"""
+    print(f"{msg}: {memory_usage():.2f} MB")
+    
+
 # imaging echo (kdat)
 f = h5py.File(DATA_DIR + infile_k, 'r')
 kdat01 = f['kdat_01'][:,:,:,:,:,:,:,0:2,...]
@@ -33,9 +65,12 @@ f.close()
 
 f = h5py.File(DATA_DIR + infile_ref, 'r')
 ref = f['refs'][:]
+# ref = f['refs'][...,32:96] #experementing with highly truncated lines_ Set ReadOut width ROW below 64
 f.close()
 
-print('kdat shape:',kdat01.shape) # kdat shape: (1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 72, 1, 1, 180, 32, 224)
+ROW=128 #row kx samples 
+
+print('kdat raw shape:',kdat01.shape) # kdat shape: (1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 72, 1, 1, 180, 32, 224)
 print('Reference shape:',ref.shape) # Reference shape: (32, 36, 48, 128)
 
 #  dimensions reorder ( [Ch] , [Part] , [PE] , [FE] )
@@ -57,7 +92,7 @@ del kdat01
 
 us=True
 if us:
-    ref_us=ref[...,0::2]
+    ref_us=ref[...,0::2] # remove over sampling
 else:
     ref_us=ref
 ref_zf = sp.resize(ref_us, kshape)
@@ -72,7 +107,8 @@ print('ref_zf shape:', ref_zf.shape)
 del ref
 del ref_us
 
-
+print ('Ref Data Type:',ref_zf.dtype)
+print ('Ref Data Type:',type(ref_zf))
 try: 
     # Check if there is at least one GPU available
     if cp.cuda.runtime.getDeviceCount() > 0:
@@ -86,52 +122,125 @@ except (ImportError, Exception):
 xp = device.xp
 
 
+if args.space=='Hyb':
+    print ('mode: Hyb')
 
-# from 3D to 2D | IFFT over FE | i.e. decouble Kx slices 
+    # from 3D to 2D | IFFT over FE | i.e. decouble Kx slices 
 
-with device:
-    ref_2D=sp.ifft(ref_zf,axes=[-1]) #uncomment to apply IFFT
-    gc.collect()
-   
-    if device == sp.Device(0):  # GPU
-        torch.cuda.empty_cache()
+    with device:
+        ref_2D=sp.ifft(ref_zf,axes=[-1]) #apply ifft on RO >> HYBIRD SPACE: (kz,ky,x)
+        gc.collect()
+
+        try:
+            if device == sp.Device(0):  # GPU
+                torch.cuda.empty_cache()
+        except (ImportError, Exception):
+        # If cupy isn't installed or fails, fall back to CPU
+            pass
+        del ref_zf
+
+        print('ref_2D shape:', ref_2D.shape) #ref_2D shape: (32, 72, 180, 224)
+
+
+    print(' mps estimation ...')
+    # #  slice mps for 2D Fourier 3D volume 
+    try:
+        if device == sp.Device(0):  # GPU
+            cp.get_default_memory_pool().free_all_blocks()
+    except:
+        pass
+
+    ref_2D=sp.to_device(ref_2D, device=device)
+
+    c=0.97# Crop threshold for EspiritCalib
+    w=36 # ACS region size for EspiritCalib
+    kw=6 #kernel_width
+
+    print(' Ecalib Threshold :', c)
+    print(' kernel width :', kw)
+    print(' calib region width :',w)
+
+    mps=[]
+    for kx_idx in range(kshape[-1]):
+        mps.append(app.EspiritCalib(ref_2D[...,kx_idx],
+                            crop=c,
+                            device=device,
+                            calib_width=w,
+                            kernel_width=kw,
+                            show_pbar=args.v).run())
+
+    chunks=(ref_2D.shape[0:3]+(1,)) 
+    del ref_2D
+
+    mps=[x.get() if hasattr(x, 'get') else x for x in mps]
+    mps=np.permute_dims(mps,(1,2,3,0))
+
+
+    print('mps shape:', np.shape(mps)) #mps shape: (32, 72, 180, 224)
+
+
+
+if args.space=='ksp':
+    print ('mode: ksp')
+    with device:
+        try:
+            if device == sp.Device(0):  # GPU
+                torch.cuda.empty_cache()
+        except (ImportError, Exception):
+        # If cupy isn't installed or fails, fall back to CPU
+            pass
+        
+
+    print('ref_3D shape:', ref_zf.shape) #ref_3D shape: (32, 72, 180, 224)
+
+
+    print(' mps estimation ...')
+    
+    try:
+        if device == sp.Device(0):  # GPU
+            cp.get_default_memory_pool().free_all_blocks()
+    except:
+        pass
+
+    ref_zf=sp.to_device(ref_zf, device=device)
+
+    c=0.97# Crop threshold for EspiritCalib
+    w=36 # ACS region size for EspiritCalib
+    kw=6 #kernel width 
+    print(' Ecalib Threshold :', c)
+    print(' kernel width :', kw)
+    print(' calib region width :',w)
+    # raise SystemExit
+    
+    ref_zf=app.EspiritCalib(ref_zf,
+                            crop=c,
+                            device=device,
+                            calib_width=w,
+                            show_pbar=args.v,
+                            kernel_width=kw).run()
+
+
+    mps=[ref_zf.get() if hasattr(ref_zf, 'get') else ref_zf]
+    mps=np.squeeze(mps)
+    chunks=(ref_zf.shape[0:3]+(1,)) 
     del ref_zf
-
-    print('ref_2D shape:', ref_2D.shape) #ref_2D shape: (32, 72, 180, 224)
-
-
-print(' mps estimation ...')
-# #  slice mps for 2D Fourier 3D volume 
-
-cp.get_default_memory_pool().free_all_blocks()
-
-ACS=sp.to_device(ref_2D, device=device)
-
-mps=[]
-for kx_idx in range(kshape[-1]):
-    mps.append(app.EspiritCalib(ACS[...,kx_idx],
-                        crop=0.8,
-                        device=device,
-                        calib_width=36,
-                        show_pbar=False).run())
+    
+    # mps=np.permute_dims(mps,(1,2,3,0))
 
 
-mps=[x.get() if hasattr(x, 'get') else x for x in mps]
-mps=np.permute_dims(mps,(1,2,3,0))
+    print('mps shape:', np.shape(mps)) #mps shape: (32, 72, 180, 224)
+
+    # np.save('mps_s',mps)
 
 
-print('mps shape:', np.shape(mps)) #mps shape: (32, 72, 180, 224)
-
-# np.save('mps_s',mps)
-
-
-chunks=(ref_2D.shape[0:3]+(1,)) 
-del ref_2D
-
-with h5py.File(cwd / 'maps/mps.h5','w') as f:
+with h5py.File(cwd / f'maps/mps_c_{c}_w_{w}_kw_{kw}_ROW_{ROW}_sp_{args.space}.h5','w') as f:
     f.create_dataset('mps',data=mps,chunks=chunks)
     
 print('Done')
+
+end_time = time.perf_counter()
+duration = (end_time - start_time)/60
+
 print('you can find mps.h5 in', cwd/'maps')
     
 
