@@ -33,6 +33,7 @@ track_memory()
 # DATA_DIR= "/home/hpc/iwbi/iwbi112h/CEST_Data/"
 DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_Data/"
 infile_k='CEST_kdat_3D_R65_C32.h5'
+infile_ref='refs_3D.h5'
 # infile_ref='refs_3D.h5'
 
 print (File_path := DATA_DIR + infile_k)
@@ -54,8 +55,19 @@ xp = device.xp
 
 print(f"Using device: {device} (Backend: {xp.__name__})")
 
+prew=True
+#loading prewhitening Matrix 
+if prew:
+    print('prewhitening is True')
+    with h5py.File(DATA_DIR + infile_k, 'r') as f:
+        # print('keys :',f.keys())
+        W = f['W'][:]
+else:
+    print('prewhitening is False')
 
+# raise SystemExit
 for data in data_keys:
+    # break
     print(f'ifft {data} ...')
 
     with h5py.File(DATA_DIR + infile_k, 'r') as f:
@@ -70,10 +82,22 @@ for data in data_keys:
     
     print(f'{data} shape:',kdat.shape)
     # print('Reference shape:',ref.shape)
-    
+
     with device:
         # kdat01_2D=np.empty(kdat01.shape,dtype=np.complex64)
         gc.collect()
+
+        #Pre_Whiten the noise
+        if prew:
+            # W shape is (32, 32) -> [New_Channel, Old_Channel]
+            # kspace shape is -> (Reps,PE1, PE2, Cha, RO)
+
+            # 'ij' refers to the indices of W (i=New_Channel, j=Old_Channel)
+            # 'ajbcd' refers to the indices of kspace:
+            # a=Reps, j=Cha (must match W), b=PE1, c=PE2, d=RO
+
+            kdat = np.einsum('ij,abcjd->abcid', W, kdat)
+            # print(kdat01.shape)
         if device == sp.Device(0):  # GPU
             xp.get_default_memory_pool().free_all_blocks()
             xp.get_default_pinned_memory_pool().free_all_blocks()
@@ -91,15 +115,71 @@ for data in data_keys:
     print('Created/Ammended File: ' + DATA_DIR  + 'CEST_kdat_2D_R65_C32.h5')
 
     chunks = (1, kdat.shape[1], kdat.shape[2], kdat.shape[3], 1) # chunking the data based on RO dimension for lighter loading during Recon
-    
+    kshape = kdat.shape [-4::] 
     if data == data_keys[0]:
-        with h5py.File(DATA_DIR  + 'CEST_kdat_2D_R65_C32.h5','w') as f: # to append on existed file
+        with h5py.File(DATA_DIR  + ['CEST_kdat_2D_R65_C32_prew.h5' if prew else 'CEST_kdat_2D_R65_C32.h5'],'w') as f: # to append on existed file
             f.create_dataset(data,data=kdat,chunks=chunks)
             f.flush()
     else:
-       with h5py.File(DATA_DIR  + 'CEST_kdat_2D_R65_C32.h5','a') as f: # to append on existed file
+       with h5py.File(DATA_DIR  + ['CEST_kdat_2D_R65_C32_prew.h5' if prew else 'CEST_kdat_2D_R65_C32.h5'],'a') as f: # to append on existed file
             f.create_dataset(data,data=kdat,chunks=chunks)
             f.flush() 
            
     print(f'ifft {data} ... done')
     del kdat
+
+#Ifft RO for Ref data
+print('ref_3D to ref_2D.....')
+# kshape=(32, 72, 180, 224)
+# chunks=(1,32, 72, 180, 1)
+f = h5py.File(DATA_DIR + infile_ref, 'r')
+ref = f['refs'][:]
+# ref = f['refs'][...,32:96] #experementing with highly truncated lines_ Set ReadOut width ROW below 64
+f.close()
+
+print (' Ref  shape [Ch] , [PE2] , [PE1] , [FE] :',ref.shape) # Ref  shape [Ch] , [PE2] , [PE1] , [FE] : (32, 36, 48, 128)
+
+print('kshape  [Ch] , [PE2] , [PE1] , [FE] :',kshape) #kshape  [Ch] , [PE2] , [PE1] , [FE] : (32, 72, 180, 224)
+
+#Ref zero filling 
+
+us=True
+if us:
+    ref_us=ref[...,0::2] # remove over sampling
+else:
+    ref_us=ref
+
+# print('ref_us shape:',ref_us.shape)
+# raise SystemExit
+#Pre_Whiten the noise
+
+if prew:
+    # W shape is (32, 32) -> [New_Channel, Old_Channel]
+    # kspace shape is -> ( Cha, PE1, PE2, RO)
+
+    # 'ij' refers to the indices of W (i=New_Channel, j=Old_Channel)
+    # 'ajbcd' refers to the indices of kspace:
+    # a=Reps, j=Cha (must match W), b=PE1, c=PE2, d=RO
+
+    ref_us = np.einsum('ij,jbcd->ibcd', W, ref_us)
+ref_zf = sp.resize(ref_us, kshape)
+print('ref shape:', ref.shape)
+print('ref_us shape:', ref_us.shape)
+print('ref_zf shape:', ref_zf.shape)
+
+# ref shape: (32, 36, 48, 128)
+# ref_us shape: (32, 36, 48, 64)
+# ref_zf shape: (32, 72, 180, 224)
+
+del ref
+del ref_us
+print('Created/Ammended ref_2D File: ' + DATA_DIR  + 'CEST_kdat_2D_R65_C32.h5')
+
+with device:
+    ref_2D=sp.ifft(ref_zf,axes=[-1]) #apply ifft on RO >> HYBIRD SPACE: (kz,ky,x)
+    gc.collect()
+
+    with h5py.File(DATA_DIR  + ['CEST_kdat_2D_R65_C32_prew.h5' if prew else 'CEST_kdat_2D_R65_C32.h5'] ,'a') as f: # to append on existed file
+        f.create_dataset('ref_2D',data=ref_2D,chunks=chunks[-4::])
+            
+           
