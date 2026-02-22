@@ -1,8 +1,0 @@
-/home/hpc/iwbi/iwbi112h/.bash_profile: line 11: unexpected EOF while looking for matching `"'
-               total        used        free      shared  buff/cache   available
-Mem:           503Gi        36Gi       467Gi       263Mi       2.8Gi       466Gi
-Swap:          8.0Gi       6.7Mi       8.0Gi
-/home/woody/iwbi/iwbi112h/software/private/conda/envs/LLRv3/lib/python3.10/site-packages/sigpy/config.py:29: UserWarning: Importing cupy.cuda.cudnn failed. For more details, see the error stack below:
-No module named 'cupyx.cudnn'
-  warnings.warn(
-slurmstepd: error: *** JOB 1519495 ON tg090 CANCELLED AT 2026-01-29T15:52:05 DUE TO TIME LIMIT ***
