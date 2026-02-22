@@ -29,18 +29,23 @@ from sigpy.mri import app, epi, sms, cc
 # print(sp.__file__)
 
 # DIR = os.path.dirname(os.path.realpath(__file__))
-DIR='/home/vault/iwbi/iwbi112h/CEST_Data'
-#2D Grappa single offset
+DIR='/home/vault/iwbi/iwbi112h/CEST_DATA'
+outprefstr = '/home/vault/iwbi/iwbi112h/CEST_DATA/'
+
+#2D Grappa single offset (WM)
 # infile= 'meas_MID00454_FID01852_100_wip_Snap_Cai_4_3_1_1_2.dat'
 
-# 2D Grappa 65 offsets
-infile='meas_MID00455_FID01853_100_wip_Snap_Cai_4_3_1_1_2_1p00.dat'
-outprefstr = '/home/vault/iwbi/iwbi112h/CEST_Data'
-# 1D Grappa single offset 
+# 2D Grappa 65 offsets (WM)
+# infile='meas_MID00455_FID01853_100_wip_Snap_Cai_4_3_1_1_2_1p00.dat'
+# 1D Grappa single offset (WASABI)
 # infile='meas_MID00018_FID13340_gre_cest_100_p145_ice_001.dat'
 
-# 1D Grappa 35 offset 
+# 1D Grappa 35 offset  (WASABI)
 # infile='meas_MID00022_FID13344_gre_cest_WASABI_32.dat'
+
+
+# CEST_3shots 34 offsets (Simon)
+infile='meas_MID00070_FID33988_CEST_3shot.dat'
 
 # %% argument parser
 parser = argparse.ArgumentParser(description='prepare data and store output k-space data separately.')
@@ -78,16 +83,15 @@ twix = twixobj[-1]
 
 
 
-REMOVE_OS = True  #over-sampling
-REMOVE_OS_Ref = True  #over-sampling for reference scan
-if REMOVE_OS is True:
-    os = 2
-else:
-    os = 1
+REMOVE_OS = False  #over-sampling
+REMOVE_OS_Ref = False  #over-sampling for reference scan
+# if REMOVE_OS is True:
+#     os = 2
+# else:
+#     os = 1
 
 
 mapped = twixtools.map_twix(twix)
-
 
 # kdat twix
 kdat_twix = mapped['image']
@@ -98,13 +102,24 @@ kdat_twix.flags['zf_missing_lines'] = True
 kdat_twix.flags['average']['Seg'] = False
 kdat_twix.flags['skip_empty_lead'] = False
 
-N_Accel_PE1 = 2 #dummy to perform some operations
+Accel_PE1 = twix['hdr']['MeasYaps']['sPat'] ['lAccelFactPE'] 
+Accel_3D = twix['hdr']['MeasYaps']['sPat'] ['lAccelFact3D']
+Accel_total = twix['hdr']['MeasYaps']['sPat'] ['dTotalAccelFact']
+
+
+# N_Accel_PE1 = 2 #dummy to perform some operations
+
+# calculate the total accelaration factor (excluding partial fourier and eliptical sampling if any)
+
+print('> Accel_PE1: ', Accel_PE1)
+print('> Accel_3D: ', Accel_3D)
+print('> Total Acceleration: ', Accel_total)
 
 N_Part= mapped['hdr']['Config']['NPar']
 N_Lin= mapped['hdr']['Config']['NLinMeas']
 
 
-if N_Accel_PE1 > 1:
+if Accel_total > 1:
     refs_twix = mapped['refscan']
     refs_twix.flags['regrid'] = True
     refs_twix.flags['remove_os'] = REMOVE_OS_Ref
@@ -112,59 +127,56 @@ if N_Accel_PE1 > 1:
     refs_twix.flags['average']['Seg'] = False
 
 # %% data shape
-N_Offs = kdat_twix.shape[-9]  # Repetition with different Saturation Offsets 
+print('> unsorted kdat shape: ', kdat_twix.shape)
+
 central_part = kdat_twix.kspace_center_par # central slice in 3D
 central_Lin = kdat_twix.kspace_center_lin # central slice in 3D
 
+print('> central_part: ', central_part)
+print('> central_Lin: ', central_Lin)
 
-offset_size=kdat_twix.shape[-9]
+Reps=kdat_twix.shape[-7]
 # central_part_ref = 18
 N_y = kdat_twix.shape[-3]     # Lin
 N_x = kdat_twix.shape[-1]     # Col
 N_coil = kdat_twix.shape[-2]  # Cha
-print('> N_Offs: ', N_Offs)
+print('> N_Offs: ', Reps)
 # print('> N_Offs_ref: ', N_Offs_ref)
 # %% read out data
 # kdat = kdat_twix[:]
-print('> unsorted kdat shape: ', kdat_twix.shape)
 
 # pcor = pcor_twix[:]
 # print('> pcor shape: ', pcor.shape)
 
 
 #uncomment below for ref
-if N_Accel_PE1 > 1:
+if Accel_total > 1:
     refs = refs_twix[:]
     print('> refs shape: ', refs.shape)
 
-
-
-
 print('> N_Partitions ', int(N_Part))
-print('> Number of Repetions ', int(offset_size))
+
+kdat_twix = np.squeeze(kdat_twix[:])
+print('> unsorted squeezed kdat shape: ', kdat_twix.shape)
+kdat_twix = np.transpose(kdat_twix, (-5,-2,-4,-3,-1)) #choose the order that suituble for your application. 
+
+print('> sorted kdat shape: ', kdat_twix.shape)
+# raise SystemExit('Stop here for now')
 
 
+with h5py.File(outprefstr + f'/kdat_3D_R{int(Reps)}_C{int(N_coil)}' + '.h5', 'w') as f:
+    # split CEST Data into 2 parts for easier handling, it can be split into more parts if needed based on Reps size. 
 
-
-f = h5py.File(outprefstr + f'/kdat_3D_R65_C32' + '.h5', 'w')
-f.create_dataset('kdat_01', data = kdat_twix[:,:,:,:,:,:,:,0:15,...])
-f.create_dataset('kdat_02', data = kdat_twix[:,:,:,:,:,:,:,15:30,...])
-f.create_dataset('kdat_03', data = kdat_twix[:,:,:,:,:,:,:,30:45,...])
-f.create_dataset('kdat_04', data = kdat_twix[:,:,:,:,:,:,:,45::,...])
-if N_Accel_PE1 > 1:
-    f.create_dataset('ref', data = refs)
-# f.create_dataset('kdat_02', data = kdat_twix[:,:,:,:,:,:,:,30::,...])
-# f.create_dataset('Partitions', data=N_Part)
-# f.create_dataset('Accel_PE1', data=N_Accel_PE1)
-# f.create_dataset('Accel_PE2', data=N_Accel_PE2)
-f.create_dataset('central_Lin', data=central_Lin)
-# f.create_dataset('central_Lin_ref', data=central_Lin_ref)
-f.create_dataset('central_Part', data=central_part)
-# f.create_dataset('central_Part_ref', data=central_part_ref)
-f.create_dataset('N_Offs', data=N_Offs)
-# f.create_dataset('N_Offs_ref', data=N_Offs_ref)
-# f.create_dataset('N_virt', data=N_virt)
-f.close()
+    dset=f.create_dataset('kdat_01', data = kdat_twix[0:17,...])
+    dset.attrs['Accel_PE1'] = Accel_PE1
+    dset.attrs['Accel_3D'] = Accel_3D
+    dset.attrs['Accel_total'] = Accel_total
+    dset.attrs['central_Lin'] = central_Lin
+    dset.attrs['central_Part'] = central_part
+    f.create_dataset('kdat_02', data = kdat_twix[17::,...])
+    if Accel_total > 1:
+        f.create_dataset('ref', data = refs)
+    f.close()
 
 print ('Done')
 # %%
