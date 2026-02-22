@@ -1,0 +1,39 @@
+/home/hpc/iwbi/iwbi112h/.bash_profile: line 11: unexpected EOF while looking for matching `"'
+               total        used        free      shared  buff/cache   available
+Mem:           503Gi        87Gi       414Gi       5.1Gi       9.5Gi       416Gi
+Swap:          8.0Gi       1.5Mi       8.0Gi
+/home/woody/iwbi/iwbi112h/software/private/conda/envs/LLRv3/lib/python3.10/site-packages/sigpy/config.py:29: UserWarning: Importing cupy.cuda.cudnn failed. For more details, see the error stack below:
+No module named 'cupyx.cudnn'
+  warnings.warn(
+Current directory: /home/hpc/iwbi/iwbi112h/LLR codebooks/lab_llr_alhaidari
+/home/vault/iwbi/iwbi112h/CEST_Data/CEST_kdat_3D_R65_C32.h5
+kdat shape: (1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 72, 1, 1, 180, 32, 224)
+Reference shape: (32, 36, 48, 128)
+ kdat shape [Reps], [Ch] , [PE2] , [PE1] , [FE] : (2, 32, 72, 180, 224)
+ Ref  shape [Ch] , [PE2] , [PE1] , [FE] : (32, 36, 48, 128)
+kshape  [Ch] , [PE2] , [PE1] , [FE] : (32, 72, 180, 224)
+ref shape: (32, 36, 48, 128)
+ref_us shape: (32, 36, 48, 64)
+ref_zf shape: (32, 72, 180, 224)
+GPU detected: NVIDIA A100-SXM4-40GB
+mode: ksp
+ref_3D shape: (32, 72, 180, 224)
+ mps estimation ...
+ Ecalib Threshold : 0.97
+Traceback (most recent call last):
+  File "/home/hpc/iwbi/iwbi112h/LLR codebooks/lab_llr_alhaidari/scripts/mps.py", line 190, in <module>
+    ref_zf=app.EspiritCalib(ref_zf,
+  File "/home/woody/iwbi/iwbi112h/software/private/conda/envs/LLRv3/lib/python3.10/site-packages/sigpy/mri/app.py", line 556, in __init__
+    AHA += aH @ a
+  File "cupy/_core/core.pyx", line 1395, in cupy._core.core._ndarray_base.__matmul__
+  File "cupy/_core/_routines_linalg.pyx", line 960, in cupy._core._routines_linalg.matmul
+  File "cupy/_core/core.pyx", line 167, in cupy._core.core.ndarray.__new__
+  File "cupy/_core/core.pyx", line 254, in cupy._core.core._ndarray_base._init
+  File "cupy/cuda/memory.pyx", line 875, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1579, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1600, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1271, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1292, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1537, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+  File "cupy/cuda/memory.pyx", line 1540, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 23,781,703,680 bytes (allocated so far: 30,198,029,824 bytes).

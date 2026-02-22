@@ -1,0 +1,15 @@
+/home/hpc/iwbi/iwbi112h/.bash_profile: line 11: unexpected EOF while looking for matching `"'
+               total        used        free      shared  buff/cache   available
+Mem:           503Gi        41Gi       463Gi       296Mi       2.4Gi       462Gi
+Swap:          8.0Gi       6.7Mi       8.0Gi
+/home/woody/iwbi/iwbi112h/software/private/conda/envs/LLRv3/lib/python3.10/site-packages/sigpy/config.py:29: UserWarning: Importing cupy.cuda.cudnn failed. For more details, see the error stack below:
+No module named 'cupyx.cudnn'
+  warnings.warn(
+GPU detected: NVIDIA A100-SXM4-40GB
+Using device: <CUDA Device 0> (Backend: cupy)
+keys : <KeysViewHDF5 ['kdat_01', 'kdat_02', 'kdat_03', 'kdat_04', 'ref_2D']>
+ref 2D shape: (32, 72, 180)
+Traceback (most recent call last):
+  File "/home/hpc/iwbi/iwbi112h/LLR codebooks/lab_llr_alhaidari/scripts/HybVolGRAPPA.py", line 81, in <module>
+    print('kdat shape:',kdat_temp.shape)
+NameError: name 'kdat_temp' is not defined. Did you mean: 'kdat_temp0'?

@@ -1,0 +1,7 @@
+/home/hpc/iwbi/iwbi112h/.bash_profile: line 11: unexpected EOF while looking for matching `"'
+               total        used        free      shared  buff/cache   available
+Mem:           503Gi        23Gi       481Gi       745Mi       2.5Gi       480Gi
+Swap:          8.0Gi          0B       8.0Gi
+  File "/home/hpc/iwbi/iwbi112h/LLR codebooks/lab_llr_alhaidari/scripts/ifft_RO.py", line 130
+    print(f'ifft {data} ... done')
+IndentationError: unexpected indent

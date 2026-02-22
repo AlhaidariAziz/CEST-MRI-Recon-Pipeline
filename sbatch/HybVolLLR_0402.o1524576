@@ -1,0 +1,464 @@
+/home/hpc/iwbi/iwbi112h/.bash_profile: line 11: unexpected EOF while looking for matching `"'
+               total        used        free      shared  buff/cache   available
+Mem:           503Gi        20Gi       484Gi       2.3Gi       3.7Gi       483Gi
+Swap:          8.0Gi       1.8Mi       8.0Gi
+/home/woody/iwbi/iwbi112h/software/private/conda/envs/LLRv3/lib/python3.10/site-packages/sigpy/config.py:29: UserWarning: Importing cupy.cuda.cudnn failed. For more details, see the error stack below:
+No module named 'cupyx.cudnn'
+  warnings.warn(
+RO start:80, RO end :160
+Current directory: /home/hpc/iwbi/iwbi112h/LLR codebooks/lab_llr_alhaidari
+> blk_shape:  (1, 2, 2)
+> blk_strides:  (1, 1, 1)
+>  lamda(r):  1e-06
+>  Max iteration (i):  30
+GPU detected: NVIDIA A100-SXM4-40GB
+Using device: <CUDA Device 0> (Backend: cupy)
+RO: 80
+RO: 81
+RO: 82
+RO: 83
+RO: 84
+RO: 85
+RO: 86
+RO: 87
+RO: 88
+RO: 89
+RO: 90
+RO: 91
+RO: 92
+RO: 93
+RO: 94
+RO: 95
+RO: 96
+RO: 97
+RO: 98
+RO: 99
+RO: 100
+RO: 101
+RO: 102
+RO: 103
+RO: 104
+RO: 105
+RO: 106
+RO: 107
+RO: 108
+RO: 109
+RO: 110
+RO: 111
+RO: 112
+RO: 113
+RO: 114
+RO: 115
+RO: 116
+RO: 117
+RO: 118
+RO: 119
+RO: 120
+RO: 121
+RO: 122
+RO: 123
+RO: 124
+RO: 125
+RO: 126
+RO: 127
+RO: 128
+RO: 129
+RO: 130
+RO: 131
+RO: 132
+RO: 133
+RO: 134
+RO: 135
+RO: 136
+RO: 137
+RO: 138
+RO: 139
+RO: 140
+RO: 141
+RO: 142
+RO: 143
+RO: 144
+RO: 145
+RO: 146
+RO: 147
+RO: 148
+RO: 149
+RO: 150
+RO: 151
+RO: 152
+RO: 153
+RO: 154
+RO: 155
+RO: 156
+RO: 157
+RO: 158
+RO: 159
+Reconstruction completed in 1.69 Minutes
+/home/woody/iwbi/iwbi112h/software/private/conda/envs/LLRv3/lib/python3.10/site-packages/sigpy/config.py:29: UserWarning: Importing cupy.cuda.cudnn failed. For more details, see the error stack below:
+No module named 'cupyx.cudnn'
+  warnings.warn(
+RO start:80, RO end :160
+Current directory: /home/hpc/iwbi/iwbi112h/LLR codebooks/lab_llr_alhaidari
+> blk_shape:  (1, 4, 4)
+> blk_strides:  (1, 1, 1)
+>  lamda(r):  1e-06
+>  Max iteration (i):  30
+GPU detected: NVIDIA A100-SXM4-40GB
+Using device: <CUDA Device 0> (Backend: cupy)
+RO: 80
+RO: 81
+RO: 82
+RO: 83
+RO: 84
+RO: 85
+RO: 86
+RO: 87
+RO: 88
+RO: 89
+RO: 90
+RO: 91
+RO: 92
+RO: 93
+RO: 94
+RO: 95
+RO: 96
+RO: 97
+RO: 98
+RO: 99
+RO: 100
+RO: 101
+RO: 102
+RO: 103
+RO: 104
+RO: 105
+RO: 106
+RO: 107
+RO: 108
+RO: 109
+RO: 110
+RO: 111
+RO: 112
+RO: 113
+RO: 114
+RO: 115
+RO: 116
+RO: 117
+RO: 118
+RO: 119
+RO: 120
+RO: 121
+RO: 122
+RO: 123
+RO: 124
+RO: 125
+RO: 126
+RO: 127
+RO: 128
+RO: 129
+RO: 130
+RO: 131
+RO: 132
+RO: 133
+RO: 134
+RO: 135
+RO: 136
+RO: 137
+RO: 138
+RO: 139
+RO: 140
+RO: 141
+RO: 142
+RO: 143
+RO: 144
+RO: 145
+RO: 146
+RO: 147
+RO: 148
+RO: 149
+RO: 150
+RO: 151
+RO: 152
+RO: 153
+RO: 154
+RO: 155
+RO: 156
+RO: 157
+RO: 158
+RO: 159
+Reconstruction completed in 1.97 Minutes
+/home/woody/iwbi/iwbi112h/software/private/conda/envs/LLRv3/lib/python3.10/site-packages/sigpy/config.py:29: UserWarning: Importing cupy.cuda.cudnn failed. For more details, see the error stack below:
+No module named 'cupyx.cudnn'
+  warnings.warn(
+RO start:80, RO end :160
+Current directory: /home/hpc/iwbi/iwbi112h/LLR codebooks/lab_llr_alhaidari
+> blk_shape:  (1, 8, 8)
+> blk_strides:  (1, 1, 1)
+>  lamda(r):  1e-06
+>  Max iteration (i):  30
+GPU detected: NVIDIA A100-SXM4-40GB
+Using device: <CUDA Device 0> (Backend: cupy)
+RO: 80
+RO: 81
+RO: 82
+RO: 83
+RO: 84
+RO: 85
+RO: 86
+RO: 87
+RO: 88
+RO: 89
+RO: 90
+RO: 91
+RO: 92
+RO: 93
+RO: 94
+RO: 95
+RO: 96
+RO: 97
+RO: 98
+RO: 99
+RO: 100
+RO: 101
+RO: 102
+RO: 103
+RO: 104
+RO: 105
+RO: 106
+RO: 107
+RO: 108
+RO: 109
+RO: 110
+RO: 111
+RO: 112
+RO: 113
+RO: 114
+RO: 115
+RO: 116
+RO: 117
+RO: 118
+RO: 119
+RO: 120
+RO: 121
+RO: 122
+RO: 123
+RO: 124
+RO: 125
+RO: 126
+RO: 127
+RO: 128
+RO: 129
+RO: 130
+RO: 131
+RO: 132
+RO: 133
+RO: 134
+RO: 135
+RO: 136
+RO: 137
+RO: 138
+RO: 139
+RO: 140
+RO: 141
+RO: 142
+RO: 143
+RO: 144
+RO: 145
+RO: 146
+RO: 147
+RO: 148
+RO: 149
+RO: 150
+RO: 151
+RO: 152
+RO: 153
+RO: 154
+RO: 155
+RO: 156
+RO: 157
+RO: 158
+RO: 159
+Reconstruction completed in 287.28 Minutes
+/home/woody/iwbi/iwbi112h/software/private/conda/envs/LLRv3/lib/python3.10/site-packages/sigpy/config.py:29: UserWarning: Importing cupy.cuda.cudnn failed. For more details, see the error stack below:
+No module named 'cupyx.cudnn'
+  warnings.warn(
+RO start:80, RO end :160
+Current directory: /home/hpc/iwbi/iwbi112h/LLR codebooks/lab_llr_alhaidari
+> blk_shape:  (1, 10, 10)
+> blk_strides:  (1, 1, 1)
+>  lamda(r):  1e-06
+>  Max iteration (i):  30
+GPU detected: NVIDIA A100-SXM4-40GB
+Using device: <CUDA Device 0> (Backend: cupy)
+RO: 80
+RO: 81
+RO: 82
+RO: 83
+RO: 84
+RO: 85
+RO: 86
+RO: 87
+RO: 88
+RO: 89
+RO: 90
+RO: 91
+RO: 92
+RO: 93
+RO: 94
+RO: 95
+RO: 96
+RO: 97
+RO: 98
+RO: 99
+RO: 100
+RO: 101
+RO: 102
+RO: 103
+RO: 104
+RO: 105
+RO: 106
+RO: 107
+RO: 108
+RO: 109
+RO: 110
+RO: 111
+RO: 112
+RO: 113
+RO: 114
+RO: 115
+RO: 116
+RO: 117
+RO: 118
+RO: 119
+RO: 120
+RO: 121
+RO: 122
+RO: 123
+RO: 124
+RO: 125
+RO: 126
+RO: 127
+RO: 128
+RO: 129
+RO: 130
+RO: 131
+RO: 132
+RO: 133
+RO: 134
+RO: 135
+RO: 136
+RO: 137
+RO: 138
+RO: 139
+RO: 140
+RO: 141
+RO: 142
+RO: 143
+RO: 144
+RO: 145
+RO: 146
+RO: 147
+RO: 148
+RO: 149
+RO: 150
+RO: 151
+RO: 152
+RO: 153
+RO: 154
+RO: 155
+RO: 156
+RO: 157
+RO: 158
+RO: 159
+Reconstruction completed in 294.46 Minutes
+/home/woody/iwbi/iwbi112h/software/private/conda/envs/LLRv3/lib/python3.10/site-packages/sigpy/config.py:29: UserWarning: Importing cupy.cuda.cudnn failed. For more details, see the error stack below:
+No module named 'cupyx.cudnn'
+  warnings.warn(
+RO start:80, RO end :160
+Current directory: /home/hpc/iwbi/iwbi112h/LLR codebooks/lab_llr_alhaidari
+> blk_shape:  (1, 12, 12)
+> blk_strides:  (1, 1, 1)
+>  lamda(r):  1e-06
+>  Max iteration (i):  30
+GPU detected: NVIDIA A100-SXM4-40GB
+Using device: <CUDA Device 0> (Backend: cupy)
+RO: 80
+RO: 81
+RO: 82
+RO: 83
+RO: 84
+RO: 85
+RO: 86
+RO: 87
+RO: 88
+RO: 89
+RO: 90
+RO: 91
+RO: 92
+RO: 93
+RO: 94
+RO: 95
+RO: 96
+RO: 97
+RO: 98
+RO: 99
+RO: 100
+RO: 101
+RO: 102
+RO: 103
+RO: 104
+RO: 105
+RO: 106
+RO: 107
+RO: 108
+RO: 109
+RO: 110
+RO: 111
+RO: 112
+RO: 113
+RO: 114
+RO: 115
+RO: 116
+RO: 117
+RO: 118
+RO: 119
+RO: 120
+RO: 121
+RO: 122
+RO: 123
+RO: 124
+RO: 125
+RO: 126
+RO: 127
+RO: 128
+RO: 129
+RO: 130
+RO: 131
+RO: 132
+RO: 133
+RO: 134
+RO: 135
+RO: 136
+RO: 137
+RO: 138
+RO: 139
+RO: 140
+RO: 141
+RO: 142
+RO: 143
+RO: 144
+RO: 145
+RO: 146
+RO: 147
+RO: 148
+RO: 149
+RO: 150
+RO: 151
+RO: 152
+RO: 153
+RO: 154
+RO: 155
+RO: 156
+RO: 157
+RO: 158
+RO: 159
+Reconstruction completed in 265.96 Minutes

@@ -22,6 +22,10 @@ parser.add_argument('--v',
                     type=bool,
                     default=False,
                     help='Verbose mode')
+parser.add_argument('--prew',
+                    type=bool,
+                    default=False,
+                    help='Apply prewhitening flags')
 
 args = parser.parse_args()
 
@@ -56,11 +60,17 @@ def track_memory(msg=""):
     """Helper to print memory usage"""
     print(f"{msg}: {memory_usage():.2f} MB")
     
+prew=args.prew
 
 # imaging echo (kdat)
 f = h5py.File(DATA_DIR + infile_k, 'r')
 kdat01 = f['kdat_01'][:,:,:,:,:,:,:,0:2,...]
-
+#loading prewhitening Matrix 
+if prew:
+    print('prewhitening is True')
+    W = f['W'][:]
+else:
+    print('prewhitening is False')
 f.close()
 
 f = h5py.File(DATA_DIR + infile_ref, 'r')
@@ -95,6 +105,18 @@ if us:
     ref_us=ref[...,0::2] # remove over sampling
 else:
     ref_us=ref
+
+#apply Prewhitening on ACS
+if prew:
+    # W shape is (32, 32) -> [New_Channel, Old_Channel]
+    # kspace shape is -> ( Cha, PE1, PE2, RO)
+
+    # 'ij' refers to the indices of W (i=New_Channel, j=Old_Channel)
+    # 'ajbcd' refers to the indices of kspace:
+    # a=Reps, j=Cha (must match W), b=PE1, c=PE2, d=RO
+
+    ref_us = np.einsum('ij,jbcd->ibcd', W, ref_us)
+
 ref_zf = sp.resize(ref_us, kshape)
 print('ref shape:', ref.shape)
 print('ref_us shape:', ref_us.shape)
@@ -109,6 +131,9 @@ del ref_us
 
 print ('Ref Data Type:',ref_zf.dtype)
 print ('Ref Data Type:',type(ref_zf))
+
+
+
 try: 
     # Check if there is at least one GPU available
     if cp.cuda.runtime.getDeviceCount() > 0:
@@ -204,9 +229,10 @@ if args.space=='ksp':
 
     ref_zf=sp.to_device(ref_zf, device=device)
 
-    c=0.97# Crop threshold for EspiritCalib
+    c=0.8# Crop threshold for EspiritCalib
     w=36 # ACS region size for EspiritCalib
     kw=6 #kernel width 
+    t=0.05 #eigen values threshold for calibration matrix in Espirit
     print(' Ecalib Threshold :', c)
     print(' kernel width :', kw)
     print(' calib region width :',w)
@@ -217,6 +243,7 @@ if args.space=='ksp':
                             device=device,
                             calib_width=w,
                             show_pbar=args.v,
+                            thresh=t,
                             kernel_width=kw).run()
 
 
@@ -232,8 +259,8 @@ if args.space=='ksp':
 
     # np.save('mps_s',mps)
 
-
-with h5py.File(cwd / f'maps/mps_c_{c}_w_{w}_kw_{kw}_ROW_{ROW}_sp_{args.space}.h5','w') as f:
+file_name = f'maps/mps_c_{c}_t{t}_w_{w}_kw_{kw}_ROW_{ROW}_sp_{args.space}_prew.h5' if prew is True else f'maps/mps_c_{c}_t{t}_w_{w}_kw_{kw}_ROW_{ROW}_sp_{args.space}.h5'
+with h5py.File(cwd / file_name,'w') as f:
     f.create_dataset('mps',data=mps,chunks=chunks)
     
 print('Done')

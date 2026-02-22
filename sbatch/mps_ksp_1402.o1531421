@@ -1,0 +1,36 @@
+/home/hpc/iwbi/iwbi112h/.bash_profile: line 11: unexpected EOF while looking for matching `"'
+               total        used        free      shared  buff/cache   available
+Mem:           503Gi        19Gi       485Gi       171Mi       1.9Gi       484Gi
+Swap:          8.0Gi        11Mi       8.0Gi
+/home/woody/iwbi/iwbi112h/software/private/conda/envs/LLRv3/lib/python3.10/site-packages/sigpy/config.py:29: UserWarning: Importing cupy.cuda.cudnn failed. For more details, see the error stack below:
+No module named 'cupyx.cudnn'
+  warnings.warn(
+: 636.82 MB
+/home/vault/iwbi/iwbi112h/CEST_Data/CEST_kdat_3D_R65_C32.h5
+GPU detected: NVIDIA A100-SXM4-40GB
+Using device: <CUDA Device 0> (Backend: cupy)
+prewhitening is True
+ifft kdat_01 ...
+keys : <KeysViewHDF5 ['N_Offs', 'W', 'central_Lin', 'central_Part', 'kdat_01', 'kdat_02', 'kdat_03', 'kdat_04', 'noise', 'refs_3D']>
+kdat_01 shape: (15, 72, 180, 32, 224)
+Memory before looping over Reps: : 21901.02 MB
+Memory before looping over Reps: : 21901.20 MB
+Memory before looping over Reps: : 21901.20 MB
+Memory before looping over Reps: : 21901.20 MB
+Memory before looping over Reps: : 21901.20 MB
+Memory before looping over Reps: : 21901.20 MB
+Memory before looping over Reps: : 21901.21 MB
+Memory before looping over Reps: : 21901.21 MB
+Memory before looping over Reps: : 21901.21 MB
+Memory before looping over Reps: : 21901.21 MB
+Memory before looping over Reps: : 21901.21 MB
+Memory before looping over Reps: : 21901.21 MB
+Memory before looping over Reps: : 21901.21 MB
+Memory before looping over Reps: : 21901.21 MB
+Memory before looping over Reps: : 21901.21 MB
+kdat_01 2D shape: (15, 72, 180, 32, 224)
+Created/Ammended File: /home/vault/iwbi/iwbi112h/CEST_Data/CEST_kdat_2D_R65_C32.h5
+Traceback (most recent call last):
+  File "/home/hpc/iwbi/iwbi112h/LLR codebooks/lab_llr_alhaidari/scripts/ifft_RO.py", line 120, in <module>
+    with h5py.File(DATA_DIR  + ['CEST_kdat_2D_R65_C32_prew.h5' if prew else 'CEST_kdat_2D_R65_C32.h5'],'w') as f: # to append on existed file
+TypeError: can only concatenate str (not "list") to str

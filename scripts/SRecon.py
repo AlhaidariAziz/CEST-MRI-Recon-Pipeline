@@ -131,7 +131,7 @@ for r in range(kdat.shape[0]): #loop over CEST Repititions
 
 recons_L1W = recons_L1W.get() if hasattr(recons_L1W, 'get') else recons_L1W
                       
-reons_L1W=np.squeeze(recons_L1W)
+recons_L1W=np.squeeze(recons_L1W)
 # plotw(np.squeeze(recons_L1W))
 
 

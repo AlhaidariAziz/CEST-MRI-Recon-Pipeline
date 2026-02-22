@@ -1,5 +1,8 @@
-
 """
+#To do: update and clean the code
+        singlton Chunking at Rep and RO dimension
+        
+
 This script converts .dat to .h5 files
 
 

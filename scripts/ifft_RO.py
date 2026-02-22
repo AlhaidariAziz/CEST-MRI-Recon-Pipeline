@@ -38,7 +38,6 @@ infile_ref='refs_3D.h5'
 
 print (File_path := DATA_DIR + infile_k)
 
-data_keys=['kdat_01','kdat_02','kdat_03','kdat_04']
     
 try: 
     import cupy as cp
@@ -55,7 +54,7 @@ xp = device.xp
 
 print(f"Using device: {device} (Backend: {xp.__name__})")
 
-prew=True
+prew=True #set True to load prewhitening matrix and apply it to kdat and ACS data  
 #loading prewhitening Matrix 
 if prew:
     print('prewhitening is True')
@@ -64,6 +63,8 @@ if prew:
         W = f['W'][:]
 else:
     print('prewhitening is False')
+
+data_keys=['kdat_01','kdat_02','kdat_03','kdat_04']
 
 # raise SystemExit
 for data in data_keys:
@@ -98,33 +99,37 @@ for data in data_keys:
 
             kdat = np.einsum('ij,abcjd->abcid', W, kdat)
             # print(kdat01.shape)
-        if device == sp.Device(0):  # GPU
-            xp.get_default_memory_pool().free_all_blocks()
-            xp.get_default_pinned_memory_pool().free_all_blocks()
-    
-        for r in range(kdat.shape[0]-1,-1,-1):
+        try:
+            if device == sp.Device(0):  # GPU
+                xp.get_default_memory_pool().free_all_blocks()
+                xp.get_default_pinned_memory_pool().free_all_blocks()
+        except:
+            pass
+        for r in range(kdat.shape[-5]-1,-1,-1):
             track_memory(f"Memory before looping over Reps: ")
             
-            for c in range(kdat.shape[1]-1,-1,-1):
-                kdat[r,c,:,:,:]=(sp.ifft(kdat[r,c,:,:,:],axes=[-1])) #uncomment to apply IFFT
+            for c in range(kdat.shape[-2]-1,-1,-1):
+                kdat[r,:,:,c,:]=(sp.ifft(kdat[r,:,:,c,:],axes=[-1])) #uncomment to apply IFFT
             
             gc.collect()
             
     
     print(f'{data} 2D shape:', kdat.shape)
-    print('Created/Ammended File: ' + DATA_DIR  + 'CEST_kdat_2D_R65_C32.h5')
 
     chunks = (1, kdat.shape[1], kdat.shape[2], kdat.shape[3], 1) # chunking the data based on RO dimension for lighter loading during Recon
     kshape = kdat.shape [-4::] 
+    file_name= 'CEST_kdat_2D_R65_C32_prew.h5' if prew else 'CEST_kdat_2D_R65_C32.h5'
+
     if data == data_keys[0]:
-        with h5py.File(DATA_DIR  + ['CEST_kdat_2D_R65_C32_prew.h5' if prew else 'CEST_kdat_2D_R65_C32.h5'],'w') as f: # to append on existed file
+        with h5py.File(DATA_DIR  + file_name,'w') as f: # to append on existed file
             f.create_dataset(data,data=kdat,chunks=chunks)
             f.flush()
     else:
-       with h5py.File(DATA_DIR  + ['CEST_kdat_2D_R65_C32_prew.h5' if prew else 'CEST_kdat_2D_R65_C32.h5'],'a') as f: # to append on existed file
+       with h5py.File(DATA_DIR  + file_name,'a') as f: # to append on existed file
             f.create_dataset(data,data=kdat,chunks=chunks)
             f.flush() 
            
+    print('Created/Ammended File: ' + DATA_DIR  + file_name)
     print(f'ifft {data} ... done')
     del kdat
 
@@ -173,13 +178,17 @@ print('ref_zf shape:', ref_zf.shape)
 
 del ref
 del ref_us
-print('Created/Ammended ref_2D File: ' + DATA_DIR  + 'CEST_kdat_2D_R65_C32.h5')
+
+file_name= 'CEST_kdat_2D_R65_C32_prew.h5' if prew else 'CEST_kdat_2D_R65_C32.h5'
 
 with device:
-    ref_2D=sp.ifft(ref_zf,axes=[-1]) #apply ifft on RO >> HYBIRD SPACE: (kz,ky,x)
     gc.collect()
+    ref_2D=sp.ifft(ref_zf,axes=[-1]) #apply ifft on RO >> HYBIRD SPACE: (kz,ky,x)
 
-    with h5py.File(DATA_DIR  + ['CEST_kdat_2D_R65_C32_prew.h5' if prew else 'CEST_kdat_2D_R65_C32.h5'] ,'a') as f: # to append on existed file
+    with h5py.File(DATA_DIR  + file_name ,'a') as f: # to append on existed file
+        if 'ref_2D' in f.keys():
+            del f['ref_2D']   
         f.create_dataset('ref_2D',data=ref_2D,chunks=chunks[-4::])
             
+print('Created/Ammended ref_2D File: ' + file_name)
            

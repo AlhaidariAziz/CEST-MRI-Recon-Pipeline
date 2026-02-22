@@ -12,30 +12,23 @@ from sigpy.mri import app
 import argparse
 
 cwd=Path.cwd().parent
-
 DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_Data/"
-infile_k='CEST_kdat_2D_R65_C32.h5'
-# mps_file=cwd/'maps/mps_c_0.97.h5'
-mps_file=cwd/'maps/mps_c_0.97.h5'
-RO=224 #number of readout positions at each we have a hyber slice
-RO_start=15 #start and end RO positin that cover FOV || 80
-RO_end=205 #||160
-#To do: add RO in h5 file dataset
 
-print('Current directory:',cwd)
-print('mps file:',mps_file)
 
 parser = argparse.ArgumentParser(description='run SENSE reconstruction.')
 
-parser.add_argument('--data',
-                    default=DATA_DIR+infile_k,
-                    help='raw dat file')
+# parser.add_argument('--data',
+#                     default=DATA_DIR,
+#                     help='raw dat file')
 
 parser.add_argument('--r', type=float, default=1e-2,
                     help=' LLR regularization constant    [default: 1e-8]')
 
 parser.add_argument('--i', type=int , default=20,
                     help=' Max iterations    [default: 20]')
+
+parser.add_argument('--prew', type=bool , default=False,
+                    help=' prewhitening')
 
 
 start_time = time.perf_counter()
@@ -44,7 +37,28 @@ args = parser.parse_args()
 
 print('>  lamda(r): ', args.r)
 print('>  Max iteration (i): ', args.i)
+print('>  prewhitened: ', args.prew)
 
+
+
+prew=args.prew
+if prew:
+    infile_k='CEST_kdat_2D_R65_C32_prew.h5'
+    mps_file=cwd/'maps/mps_c_0.8_w_36_kw_6_ROW_128_sp_ksp_prew.h5'
+else:    
+    infile_k='CEST_kdat_2D_R65_C32.h5'
+    mps_file=cwd/'maps/mps_c_0.8_w_36_kw_6_ROW_128_sp_ksp.h5'
+
+
+# mps_file=cwd/'maps/mps_c_0.97.h5'
+# mps_file=cwd/'maps/mps_c_0.97.h5'
+RO=224 #number of readout positions at each we have a hyber slice
+RO_start=15 #start and end RO positin that cover FOV || 80
+RO_end=205 #||160
+#To do: add RO in h5 file dataset
+
+print('Current directory:',cwd)
+print('mps file:',mps_file)
 
 def memory_usage():
     """Track current memory usage"""
@@ -86,8 +100,8 @@ with device:
     for RO_idx in range(RO_start,RO_end):
     # for RO_idx in range(RO):
         
-        with h5py.File(DATA_DIR + infile_k,'r') as f:
-           
+        with h5py.File(DATA_DIR+infile_k,'r') as f:
+        
             # kdat_temp=np.concatenate((f['kdat_01'][...,RO_idx],  # all 65 Cest Reps
             #                 f['kdat_02'][...,RO_idx],
             #                 f['kdat_03'][...,RO_idx],
@@ -131,15 +145,26 @@ with device:
         recon = kdat_temp[:,0,...].get() if hasattr(kdat_temp, 'get') else kdat_temp[:,0,...]
         # print('recon :',recon.shape)
         del kdat_temp, mps
-      
+    
         recon = np.squeeze(recon)
         chunks=((1,)+ recon.shape[1::]) #(1,72,180)
 
+        if prew:
+            idx=[0, 2 ,-2,-1] #expected string indices in mps_file
+        else:
+            idx=[0, 2 , -1] 
+        
+       
+        mps_pars='_'.join([mps_file.name.split('_')[i] for i in idx]).rsplit('.',1)[0]
+        
+        file_name=f'CEST_SENSE_recons_{Rep}_r_{args.r}_i_{args.i}_'+mps_pars+'.h5'
+            
+
         if RO_idx==RO_start:
-            with h5py.File(DATA_DIR+f'CEST_SENSE_recons_{Rep}_r_{args.r}_i_{args.i}_mapc_{str(mps_file).split("_")[-1].rsplit(".",1)[0]}.h5','w') as f:
+            with h5py.File(DATA_DIR+file_name,'w') as f:
                 f.create_dataset(f'CEST_recon_RO_idx_{RO_idx}',data=recon,chunks=chunks)
         else:
-            with h5py.File(DATA_DIR+f'CEST_SENSE_recons_{Rep}_r_{args.r}_i_{args.i}_mapc_{str(mps_file).split("_")[-1].rsplit(".",1)[0]}.h5','a') as f:
+            with h5py.File(DATA_DIR+file_name,'a') as f:
                 f.create_dataset(f'CEST_recon_RO_idx_{RO_idx}',data=recon,chunks=chunks)
         del recon
 

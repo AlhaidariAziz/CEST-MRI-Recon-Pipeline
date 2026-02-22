@@ -1,0 +1,570 @@
+/home/hpc/iwbi/iwbi112h/.bash_profile: line 11: unexpected EOF while looking for matching `"'
+               total        used        free      shared  buff/cache   available
+Mem:           503Gi        20Gi       484Gi       559Mi       1.9Gi       483Gi
+Swap:          8.0Gi        10Mi       8.0Gi
+/home/woody/iwbi/iwbi112h/software/private/conda/envs/LLRv3/lib/python3.10/site-packages/sigpy/config.py:29: UserWarning: Importing cupy.cuda.cudnn failed. For more details, see the error stack below:
+No module named 'cupyx.cudnn'
+  warnings.warn(
+RO start:0, RO end :224
+Current directory: /home/hpc/iwbi/iwbi112h/LLR codebooks/lab_llr_alhaidari
+> blk_shape:  (1, 5, 5)
+> blk_strides:  (1, 1, 1)
+>  lamda(r):  0.01
+>  Max iteration (i):  30
+GPU detected: NVIDIA A100-SXM4-40GB
+Using device: <CUDA Device 0> (Backend: cupy)
+RO: 0
+RO: 1
+RO: 2
+RO: 3
+RO: 4
+RO: 5
+RO: 6
+RO: 7
+RO: 8
+RO: 9
+RO: 10
+RO: 11
+RO: 12
+RO: 13
+RO: 14
+RO: 15
+RO: 16
+RO: 17
+RO: 18
+RO: 19
+RO: 20
+RO: 21
+RO: 22
+RO: 23
+RO: 24
+RO: 25
+RO: 26
+RO: 27
+RO: 28
+RO: 29
+RO: 30
+RO: 31
+RO: 32
+RO: 33
+RO: 34
+RO: 35
+RO: 36
+RO: 37
+RO: 38
+RO: 39
+RO: 40
+RO: 41
+RO: 42
+RO: 43
+RO: 44
+RO: 45
+RO: 46
+RO: 47
+RO: 48
+RO: 49
+RO: 50
+RO: 51
+RO: 52
+RO: 53
+RO: 54
+RO: 55
+RO: 56
+RO: 57
+RO: 58
+RO: 59
+RO: 60
+RO: 61
+RO: 62
+RO: 63
+RO: 64
+RO: 65
+RO: 66
+RO: 67
+RO: 68
+RO: 69
+RO: 70
+RO: 71
+RO: 72
+RO: 73
+RO: 74
+RO: 75
+RO: 76
+RO: 77
+RO: 78
+RO: 79
+RO: 80
+RO: 81
+RO: 82
+RO: 83
+RO: 84
+RO: 85
+RO: 86
+RO: 87
+RO: 88
+RO: 89
+RO: 90
+RO: 91
+RO: 92
+RO: 93
+RO: 94
+RO: 95
+RO: 96
+RO: 97
+RO: 98
+RO: 99
+RO: 100
+RO: 101
+RO: 102
+RO: 103
+RO: 104
+RO: 105
+RO: 106
+RO: 107
+RO: 108
+RO: 109
+RO: 110
+RO: 111
+RO: 112
+  cg iter:  0; resid:     18.614289; norm:    331.204590
+  cg iter:  1; resid:      5.487716; norm:    380.158661
+  cg iter:  2; resid:      1.637020; norm:    386.948395
+  cg iter:  3; resid:      0.663390; norm:    387.934662
+  cg iter:  4; resid:      0.259741; norm:    388.146606
+  cg iter:  5; resid:      0.106330; norm:    388.190063
+  cg iter:  6; resid:      0.042070; norm:    388.199646
+  cg iter:  7; resid:      0.015884; norm:    388.201202
+  cg iter:  8; resid:      0.006366; norm:    388.201477
+  cg iter:  9; resid:      0.006366; norm:    388.201538
+admm iter:  1, r norm:     8.3912, eps pri:     0.4224, s norm:    19.2129, eps dual:     0.0342
+  cg iter:  0; resid:      6.881373; norm:    501.192963
+  cg iter:  1; resid:      1.992701; norm:    517.609131
+  cg iter:  2; resid:      0.736787; norm:    519.388123
+  cg iter:  3; resid:      0.298409; norm:    519.720825
+  cg iter:  4; resid:      0.125403; norm:    519.778687
+  cg iter:  5; resid:      0.051783; norm:    519.791443
+  cg iter:  6; resid:      0.018230; norm:    519.794250
+  cg iter:  7; resid:      0.007622; norm:    519.794617
+  cg iter:  8; resid:      0.003084; norm:    519.794678
+  cg iter:  9; resid:      0.003084; norm:    519.794678
+admm iter:  2, r norm:     3.2230, eps pri:     0.5539, s norm:     7.0818, eps dual:     0.0346
+  cg iter:  0; resid:      2.662106; norm:    572.506531
+  cg iter:  1; resid:      0.897633; norm:    574.901794
+  cg iter:  2; resid:      0.387098; norm:    575.292053
+  cg iter:  3; resid:      0.146889; norm:    575.378113
+  cg iter:  4; resid:      0.063018; norm:    575.392456
+  cg iter:  5; resid:      0.024124; norm:    575.395020
+  cg iter:  6; resid:      0.009122; norm:    575.395325
+  cg iter:  7; resid:      0.003839; norm:    575.395386
+  cg iter:  8; resid:      0.001481; norm:    575.395386
+  cg iter:  9; resid:      0.001481; norm:    575.395386
+admm iter:  3, r norm:     1.2890, eps pri:     0.6095, s norm:     3.2100, eps dual:     0.0347
+  cg iter:  0; resid:      1.043367; norm:    602.441040
+  cg iter:  1; resid:      0.477894; norm:    601.450928
+  cg iter:  2; resid:      0.189419; norm:    601.551025
+  cg iter:  3; resid:      0.072721; norm:    601.570007
+  cg iter:  4; resid:      0.028364; norm:    601.573425
+  cg iter:  5; resid:      0.011102; norm:    601.573914
+  cg iter:  6; resid:      0.004738; norm:    601.573914
+  cg iter:  7; resid:      0.001763; norm:    601.573975
+  cg iter:  8; resid:      0.000701; norm:    601.573975
+  cg iter:  9; resid:      0.000701; norm:    601.573975
+admm iter:  4, r norm:     0.6396, eps pri:     0.6357, s norm:     1.7403, eps dual:     0.0347
+  cg iter:  0; resid:      0.513671; norm:    616.719788
+  cg iter:  1; resid:      0.246727; norm:    615.240417
+  cg iter:  2; resid:      0.089051; norm:    615.384827
+  cg iter:  3; resid:      0.035834; norm:    615.392273
+  cg iter:  4; resid:      0.012879; norm:    615.393005
+  cg iter:  5; resid:      0.005550; norm:    615.393188
+  cg iter:  6; resid:      0.002300; norm:    615.393127
+  cg iter:  7; resid:      0.000840; norm:    615.393188
+  cg iter:  8; resid:      0.000361; norm:    615.393188
+  cg iter:  9; resid:      0.000361; norm:    615.393127
+admm iter:  5, r norm:     0.4049, eps pri:     0.6495, s norm:     1.0980, eps dual:     0.0348
+  cg iter:  0; resid:      0.298512; norm:    624.672791
+  cg iter:  1; resid:      0.112541; norm:    623.353333
+  cg iter:  2; resid:      0.045077; norm:    623.472168
+  cg iter:  3; resid:      0.017609; norm:    623.485291
+  cg iter:  4; resid:      0.006669; norm:    623.482910
+  cg iter:  5; resid:      0.002832; norm:    623.482849
+  cg iter:  6; resid:      0.001104; norm:    623.482910
+  cg iter:  7; resid:      0.000458; norm:    623.482910
+  cg iter:  8; resid:      0.000191; norm:    623.482910
+  cg iter:  9; resid:      0.000191; norm:    623.482910
+admm iter:  6, r norm:     0.2855, eps pri:     0.6576, s norm:     0.7801, eps dual:     0.0348
+  cg iter:  0; resid:      0.178840; norm:    629.561584
+  cg iter:  1; resid:      0.058417; norm:    628.603760
+  cg iter:  2; resid:      0.026097; norm:    628.657959
+  cg iter:  3; resid:      0.009611; norm:    628.686829
+  cg iter:  4; resid:      0.003929; norm:    628.683411
+  cg iter:  5; resid:      0.001562; norm:    628.682373
+  cg iter:  6; resid:      0.000633; norm:    628.682678
+  cg iter:  7; resid:      0.000274; norm:    628.682678
+  cg iter:  8; resid:      0.000103; norm:    628.682678
+  cg iter:  9; resid:      0.000103; norm:    628.682678
+admm iter:  7, r norm:     0.2139, eps pri:     0.6628, s norm:     0.5993, eps dual:     0.0348
+  cg iter:  0; resid:      0.107847; norm:    632.877808
+  cg iter:  1; resid:      0.037715; norm:    632.258179
+  cg iter:  2; resid:      0.016424; norm:    632.270691
+  cg iter:  3; resid:      0.006158; norm:    632.304077
+  cg iter:  4; resid:      0.002513; norm:    632.304626
+  cg iter:  5; resid:      0.001010; norm:    632.302429
+  cg iter:  6; resid:      0.000417; norm:    632.302429
+  cg iter:  7; resid:      0.000174; norm:    632.302551
+  cg iter:  8; resid:      0.000063; norm:    632.302551
+  cg iter:  9; resid:      0.000063; norm:    632.302490
+admm iter:  8, r norm:     0.1682, eps pri:     0.6665, s norm:     0.4824, eps dual:     0.0348
+  cg iter:  0; resid:      0.067340; norm:    635.345703
+  cg iter:  1; resid:      0.028548; norm:    634.967285
+  cg iter:  2; resid:      0.010759; norm:    634.958435
+  cg iter:  3; resid:      0.004536; norm:    634.985596
+  cg iter:  4; resid:      0.001682; norm:    634.989807
+  cg iter:  5; resid:      0.000750; norm:    634.987976
+  cg iter:  6; resid:      0.000287; norm:    634.987488
+  cg iter:  7; resid:      0.000120; norm:    634.987549
+  cg iter:  8; resid:      0.000043; norm:    634.987610
+  cg iter:  9; resid:      0.000043; norm:    634.987610
+admm iter:  9, r norm:     0.1367, eps pri:     0.6691, s norm:     0.3992, eps dual:     0.0348
+  cg iter:  0; resid:      0.044615; norm:    637.298950
+  cg iter:  1; resid:      0.023261; norm:    637.072327
+  cg iter:  2; resid:      0.007438; norm:    637.053101
+  cg iter:  3; resid:      0.003478; norm:    637.071167
+  cg iter:  4; resid:      0.001220; norm:    637.077332
+  cg iter:  5; resid:      0.000564; norm:    637.076599
+  cg iter:  6; resid:      0.000210; norm:    637.075867
+  cg iter:  7; resid:      0.000086; norm:    637.075745
+  cg iter:  8; resid:      0.000032; norm:    637.075806
+  cg iter:  9; resid:      0.000032; norm:    637.075867
+admm iter: 10, r norm:     0.1142, eps pri:     0.6712, s norm:     0.3362, eps dual:     0.0348
+  cg iter:  0; resid:      0.031635; norm:    638.899414
+  cg iter:  1; resid:      0.019377; norm:    638.763184
+  cg iter:  2; resid:      0.005494; norm:    638.739929
+  cg iter:  3; resid:      0.002619; norm:    638.750488
+  cg iter:  4; resid:      0.000969; norm:    638.756653
+  cg iter:  5; resid:      0.000417; norm:    638.756775
+  cg iter:  6; resid:      0.000162; norm:    638.756226
+  cg iter:  7; resid:      0.000064; norm:    638.756042
+  cg iter:  8; resid:      0.000025; norm:    638.756042
+  cg iter:  9; resid:      0.000025; norm:    638.756042
+admm iter: 11, r norm:     0.0984, eps pri:     0.6729, s norm:     0.2867, eps dual:     0.0348
+  cg iter:  0; resid:      0.023903; norm:    640.237061
+  cg iter:  1; resid:      0.016162; norm:    640.153503
+  cg iter:  2; resid:      0.004363; norm:    640.130005
+  cg iter:  3; resid:      0.001944; norm:    640.135559
+  cg iter:  4; resid:      0.000807; norm:    640.140686
+  cg iter:  5; resid:      0.000318; norm:    640.141296
+  cg iter:  6; resid:      0.000125; norm:    640.140930
+  cg iter:  7; resid:      0.000050; norm:    640.140747
+  cg iter:  8; resid:      0.000020; norm:    640.140747
+  cg iter:  9; resid:      0.000020; norm:    640.140747
+admm iter: 12, r norm:     0.0866, eps pri:     0.6743, s norm:     0.2467, eps dual:     0.0348
+  cg iter:  0; resid:      0.019001; norm:    641.369385
+  cg iter:  1; resid:      0.013419; norm:    641.315979
+  cg iter:  2; resid:      0.003683; norm:    641.294617
+  cg iter:  3; resid:      0.001467; norm:    641.297241
+  cg iter:  4; resid:      0.000670; norm:    641.300842
+  cg iter:  5; resid:      0.000258; norm:    641.301758
+  cg iter:  6; resid:      0.000097; norm:    641.301636
+  cg iter:  7; resid:      0.000041; norm:    641.301453
+  cg iter:  8; resid:      0.000016; norm:    641.301392
+  cg iter:  9; resid:      0.000016; norm:    641.301392
+admm iter: 13, r norm:     0.0771, eps pri:     0.6755, s norm:     0.2140, eps dual:     0.0348
+  cg iter:  0; resid:      0.015655; norm:    642.336548
+  cg iter:  1; resid:      0.011149; norm:    642.300476
+  cg iter:  2; resid:      0.003223; norm:    642.282166
+  cg iter:  3; resid:      0.001151; norm:    642.283142
+  cg iter:  4; resid:      0.000544; norm:    642.285461
+  cg iter:  5; resid:      0.000218; norm:    642.286438
+  cg iter:  6; resid:      0.000078; norm:    642.286377
+  cg iter:  7; resid:      0.000033; norm:    642.286255
+  cg iter:  8; resid:      0.000014; norm:    642.286194
+  cg iter:  9; resid:      0.000014; norm:    642.286194
+admm iter: 14, r norm:     0.0690, eps pri:     0.6764, s norm:     0.1867, eps dual:     0.0348
+  cg iter:  0; resid:      0.013204; norm:    643.168335
+  cg iter:  1; resid:      0.009314; norm:    643.142639
+  cg iter:  2; resid:      0.002863; norm:    643.127197
+  cg iter:  3; resid:      0.000940; norm:    643.127258
+  cg iter:  4; resid:      0.000438; norm:    643.128784
+  cg iter:  5; resid:      0.000187; norm:    643.129578
+  cg iter:  6; resid:      0.000066; norm:    643.129639
+  cg iter:  7; resid:      0.000027; norm:    643.129578
+  cg iter:  8; resid:      0.000012; norm:    643.129517
+  cg iter:  9; resid:      0.000012; norm:    643.129517
+admm iter: 15, r norm:     0.0618, eps pri:     0.6773, s norm:     0.1639, eps dual:     0.0348
+  cg iter:  0; resid:      0.011300; norm:    643.887756
+  cg iter:  1; resid:      0.007839; norm:    643.868408
+  cg iter:  2; resid:      0.002556; norm:    643.855469
+  cg iter:  3; resid:      0.000793; norm:    643.855103
+  cg iter:  4; resid:      0.000356; norm:    643.856079
+  cg iter:  5; resid:      0.000159; norm:    643.856689
+  cg iter:  6; resid:      0.000057; norm:    643.856812
+  cg iter:  7; resid:      0.000023; norm:    643.856750
+  cg iter:  8; resid:      0.000010; norm:    643.856750
+  cg iter:  9; resid:      0.000010; norm:    643.856750
+admm iter: 16, r norm:     0.0553, eps pri:     0.6780, s norm:     0.1445, eps dual:     0.0348
+  cg iter:  0; resid:      0.009756; norm:    644.512695
+  cg iter:  1; resid:      0.006650; norm:    644.497620
+  cg iter:  2; resid:      0.002282; norm:    644.486694
+  cg iter:  3; resid:      0.000683; norm:    644.486084
+  cg iter:  4; resid:      0.000294; norm:    644.486755
+  cg iter:  5; resid:      0.000136; norm:    644.487244
+  cg iter:  6; resid:      0.000050; norm:    644.487366
+  cg iter:  7; resid:      0.000020; norm:    644.487366
+  cg iter:  8; resid:      0.000009; norm:    644.487305
+  cg iter:  9; resid:      0.000009; norm:    644.487305
+admm iter: 17, r norm:     0.0494, eps pri:     0.6786, s norm:     0.1280, eps dual:     0.0348
+  cg iter:  0; resid:      0.008479; norm:    645.057983
+  cg iter:  1; resid:      0.005679; norm:    645.045715
+  cg iter:  2; resid:      0.002036; norm:    645.036560
+  cg iter:  3; resid:      0.000596; norm:    645.035828
+  cg iter:  4; resid:      0.000248; norm:    645.036255
+  cg iter:  5; resid:      0.000116; norm:    645.036621
+  cg iter:  6; resid:      0.000045; norm:    645.036743
+  cg iter:  7; resid:      0.000018; norm:    645.036682
+  cg iter:  8; resid:      0.000007; norm:    645.036682
+  cg iter:  9; resid:      0.000007; norm:    645.036682
+admm iter: 18, r norm:     0.0442, eps pri:     0.6792, s norm:     0.1139, eps dual:     0.0348
+  cg iter:  0; resid:      0.007400; norm:    645.535400
+  cg iter:  1; resid:      0.004882; norm:    645.525269
+  cg iter:  2; resid:      0.001815; norm:    645.517395
+  cg iter:  3; resid:      0.000525; norm:    645.516602
+  cg iter:  4; resid:      0.000213; norm:    645.516907
+  cg iter:  5; resid:      0.000100; norm:    645.517212
+  cg iter:  6; resid:      0.000040; norm:    645.517273
+  cg iter:  7; resid:      0.000016; norm:    645.517273
+  cg iter:  8; resid:      0.000007; norm:    645.517273
+  cg iter:  9; resid:      0.000007; norm:    645.517273
+admm iter: 19, r norm:     0.0395, eps pri:     0.6797, s norm:     0.1017, eps dual:     0.0348
+  cg iter:  0; resid:      0.006482; norm:    645.954712
+  cg iter:  1; resid:      0.004216; norm:    645.946167
+  cg iter:  2; resid:      0.001621; norm:    645.939392
+  cg iter:  3; resid:      0.000465; norm:    645.938599
+  cg iter:  4; resid:      0.000186; norm:    645.938843
+  cg iter:  5; resid:      0.000087; norm:    645.939026
+  cg iter:  6; resid:      0.000036; norm:    645.939148
+  cg iter:  7; resid:      0.000014; norm:    645.939148
+  cg iter:  8; resid:      0.000006; norm:    645.939087
+  cg iter:  9; resid:      0.000006; norm:    645.939087
+admm iter: 20, r norm:     0.0354, eps pri:     0.6801, s norm:     0.0912, eps dual:     0.0348
+  cg iter:  0; resid:      0.005706; norm:    646.324158
+  cg iter:  1; resid:      0.003662; norm:    646.316895
+  cg iter:  2; resid:      0.001450; norm:    646.310974
+  cg iter:  3; resid:      0.000414; norm:    646.310181
+  cg iter:  4; resid:      0.000164; norm:    646.310364
+  cg iter:  5; resid:      0.000077; norm:    646.310547
+  cg iter:  6; resid:      0.000032; norm:    646.310608
+  cg iter:  7; resid:      0.000013; norm:    646.310608
+  cg iter:  8; resid:      0.000005; norm:    646.310608
+  cg iter:  9; resid:      0.000005; norm:    646.310608
+admm iter: 21, r norm:     0.0317, eps pri:     0.6805, s norm:     0.0821, eps dual:     0.0348
+  cg iter:  0; resid:      0.005037; norm:    646.650696
+  cg iter:  1; resid:      0.003194; norm:    646.644348
+  cg iter:  2; resid:      0.001298; norm:    646.639221
+  cg iter:  3; resid:      0.000371; norm:    646.638428
+  cg iter:  4; resid:      0.000146; norm:    646.638550
+  cg iter:  5; resid:      0.000068; norm:    646.638733
+  cg iter:  6; resid:      0.000029; norm:    646.638733
+  cg iter:  7; resid:      0.000012; norm:    646.638733
+  cg iter:  8; resid:      0.000005; norm:    646.638733
+  cg iter:  9; resid:      0.000005; norm:    646.638733
+admm iter: 22, r norm:     0.0285, eps pri:     0.6808, s norm:     0.0740, eps dual:     0.0348
+  cg iter:  0; resid:      0.004464; norm:    646.939697
+  cg iter:  1; resid:      0.002798; norm:    646.934326
+  cg iter:  2; resid:      0.001166; norm:    646.929749
+  cg iter:  3; resid:      0.000333; norm:    646.929016
+  cg iter:  4; resid:      0.000131; norm:    646.929138
+  cg iter:  5; resid:      0.000061; norm:    646.929260
+  cg iter:  6; resid:      0.000026; norm:    646.929260
+  cg iter:  7; resid:      0.000011; norm:    646.929260
+  cg iter:  8; resid:      0.000004; norm:    646.929260
+  cg iter:  9; resid:      0.000004; norm:    646.929260
+admm iter: 23, r norm:     0.0257, eps pri:     0.6811, s norm:     0.0670, eps dual:     0.0348
+  cg iter:  0; resid:      0.003971; norm:    647.196594
+  cg iter:  1; resid:      0.002463; norm:    647.191772
+  cg iter:  2; resid:      0.001049; norm:    647.187744
+  cg iter:  3; resid:      0.000301; norm:    647.187073
+  cg iter:  4; resid:      0.000118; norm:    647.187134
+  cg iter:  5; resid:      0.000055; norm:    647.187256
+  cg iter:  6; resid:      0.000024; norm:    647.187256
+  cg iter:  7; resid:      0.000010; norm:    647.187256
+  cg iter:  8; resid:      0.000004; norm:    647.187256
+  cg iter:  9; resid:      0.000004; norm:    647.187317
+admm iter: 24, r norm:     0.0232, eps pri:     0.6813, s norm:     0.0608, eps dual:     0.0348
+  cg iter:  0; resid:      0.003548; norm:    647.425110
+  cg iter:  1; resid:      0.002178; norm:    647.420898
+  cg iter:  2; resid:      0.000948; norm:    647.417358
+  cg iter:  3; resid:      0.000273; norm:    647.416687
+  cg iter:  4; resid:      0.000107; norm:    647.416748
+  cg iter:  5; resid:      0.000050; norm:    647.416809
+  cg iter:  6; resid:      0.000022; norm:    647.416931
+  cg iter:  7; resid:      0.000009; norm:    647.416870
+  cg iter:  8; resid:      0.000003; norm:    647.416870
+  cg iter:  9; resid:      0.000003; norm:    647.416870
+admm iter: 25, r norm:     0.0210, eps pri:     0.6816, s norm:     0.0554, eps dual:     0.0348
+  cg iter:  0; resid:      0.003178; norm:    647.628967
+  cg iter:  1; resid:      0.001935; norm:    647.625305
+  cg iter:  2; resid:      0.000857; norm:    647.622131
+  cg iter:  3; resid:      0.000248; norm:    647.621521
+  cg iter:  4; resid:      0.000097; norm:    647.621582
+  cg iter:  5; resid:      0.000045; norm:    647.621643
+  cg iter:  6; resid:      0.000020; norm:    647.621704
+  cg iter:  7; resid:      0.000008; norm:    647.621704
+  cg iter:  8; resid:      0.000003; norm:    647.621704
+  cg iter:  9; resid:      0.000003; norm:    647.621704
+admm iter: 26, r norm:     0.0190, eps pri:     0.6818, s norm:     0.0505, eps dual:     0.0348
+  cg iter:  0; resid:      0.002856; norm:    647.811218
+  cg iter:  1; resid:      0.001728; norm:    647.807983
+  cg iter:  2; resid:      0.000778; norm:    647.805115
+  cg iter:  3; resid:      0.000226; norm:    647.804626
+  cg iter:  4; resid:      0.000089; norm:    647.804626
+  cg iter:  5; resid:      0.000041; norm:    647.804688
+  cg iter:  6; resid:      0.000018; norm:    647.804749
+  cg iter:  7; resid:      0.000007; norm:    647.804749
+  cg iter:  8; resid:      0.000003; norm:    647.804749
+  cg iter:  9; resid:      0.000003; norm:    647.804749
+admm iter: 27, r norm:     0.0173, eps pri:     0.6820, s norm:     0.0462, eps dual:     0.0348
+  cg iter:  0; resid:      0.002578; norm:    647.974548
+  cg iter:  1; resid:      0.001551; norm:    647.971619
+  cg iter:  2; resid:      0.000709; norm:    647.969116
+  cg iter:  3; resid:      0.000206; norm:    647.968628
+  cg iter:  4; resid:      0.000081; norm:    647.968628
+  cg iter:  5; resid:      0.000037; norm:    647.968689
+  cg iter:  6; resid:      0.000016; norm:    647.968689
+  cg iter:  7; resid:      0.000007; norm:    647.968750
+  cg iter:  8; resid:      0.000002; norm:    647.968689
+  cg iter:  9; resid:      0.000002; norm:    647.968689
+admm iter: 28, r norm:     0.0158, eps pri:     0.6821, s norm:     0.0424, eps dual:     0.0348
+  cg iter:  0; resid:      0.002333; norm:    648.121155
+  cg iter:  1; resid:      0.001399; norm:    648.118530
+  cg iter:  2; resid:      0.000646; norm:    648.116272
+  cg iter:  3; resid:      0.000189; norm:    648.115845
+  cg iter:  4; resid:      0.000075; norm:    648.115845
+  cg iter:  5; resid:      0.000034; norm:    648.115906
+  cg iter:  6; resid:      0.000015; norm:    648.115906
+  cg iter:  7; resid:      0.000006; norm:    648.115906
+  cg iter:  8; resid:      0.000002; norm:    648.115906
+  cg iter:  9; resid:      0.000002; norm:    648.115906
+admm iter: 29, r norm:     0.0144, eps pri:     0.6823, s norm:     0.0389, eps dual:     0.0348
+  cg iter:  0; resid:      0.002119; norm:    648.252930
+  cg iter:  1; resid:      0.001268; norm:    648.250610
+  cg iter:  2; resid:      0.000591; norm:    648.248596
+  cg iter:  3; resid:      0.000173; norm:    648.248108
+  cg iter:  4; resid:      0.000068; norm:    648.248169
+  cg iter:  5; resid:      0.000031; norm:    648.248230
+  cg iter:  6; resid:      0.000014; norm:    648.248230
+  cg iter:  7; resid:      0.000005; norm:    648.248230
+  cg iter:  8; resid:      0.000002; norm:    648.248230
+  cg iter:  9; resid:      0.000002; norm:    648.248230
+admm iter: 30, r norm:     0.0131, eps pri:     0.6824, s norm:     0.0359, eps dual:     0.0348
+RO: 113
+RO: 114
+RO: 115
+RO: 116
+RO: 117
+RO: 118
+RO: 119
+RO: 120
+RO: 121
+RO: 122
+RO: 123
+RO: 124
+RO: 125
+RO: 126
+RO: 127
+RO: 128
+RO: 129
+RO: 130
+RO: 131
+RO: 132
+RO: 133
+RO: 134
+RO: 135
+RO: 136
+RO: 137
+RO: 138
+RO: 139
+RO: 140
+RO: 141
+RO: 142
+RO: 143
+RO: 144
+RO: 145
+RO: 146
+RO: 147
+RO: 148
+RO: 149
+RO: 150
+RO: 151
+RO: 152
+RO: 153
+RO: 154
+RO: 155
+RO: 156
+RO: 157
+RO: 158
+RO: 159
+RO: 160
+RO: 161
+RO: 162
+RO: 163
+RO: 164
+RO: 165
+RO: 166
+RO: 167
+RO: 168
+RO: 169
+RO: 170
+RO: 171
+RO: 172
+RO: 173
+RO: 174
+RO: 175
+RO: 176
+RO: 177
+RO: 178
+RO: 179
+RO: 180
+RO: 181
+RO: 182
+RO: 183
+RO: 184
+RO: 185
+RO: 186
+RO: 187
+RO: 188
+RO: 189
+RO: 190
+RO: 191
+RO: 192
+RO: 193
+RO: 194
+RO: 195
+RO: 196
+RO: 197
+RO: 198
+RO: 199
+RO: 200
+RO: 201
+RO: 202
+RO: 203
+RO: 204
+RO: 205
+RO: 206
+RO: 207
+RO: 208
+RO: 209
+RO: 210
+RO: 211
+RO: 212
+RO: 213
+RO: 214
+RO: 215
+RO: 216
+RO: 217
+RO: 218
+RO: 219
+RO: 220
+RO: 221
+RO: 222
+RO: 223
+Reconstruction completed in 5.49 Minutes

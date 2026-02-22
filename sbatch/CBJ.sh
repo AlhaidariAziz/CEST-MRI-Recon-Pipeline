@@ -30,10 +30,11 @@ mkdir $TMPDIR/$SLURM_JOB_ID
 free -h 
 python --version
 
-python -c"print('gona Worked! Hoooa')"
+python -c"print('gona Work! Hoooa')"
 ##Original Work
 
-python "${DATA_DIR}mps.py" --space ksp --v True
+python "${DATA_DIR}mps.py" --space ksp --prew True 
+# python "${DATA_DIR}ifft_RO.py"  
 
 python -c"print('Worked! Hoooa')"
 rm -r $TMPDIR/$SLURM_JOB_ID

@@ -1,0 +1,21 @@
+Running on tf094
+Start time: Sun Feb 15 03:20:23 PM CET 2026
+no change     /apps/python/3.12-conda/condabin/conda
+no change     /apps/python/3.12-conda/bin/conda
+no change     /apps/python/3.12-conda/bin/conda-env
+no change     /apps/python/3.12-conda/bin/activate
+no change     /apps/python/3.12-conda/bin/deactivate
+no change     /apps/python/3.12-conda/etc/profile.d/conda.sh
+no change     /apps/python/3.12-conda/etc/fish/conf.d/conda.fish
+no change     /apps/python/3.12-conda/shell/condabin/Conda.psm1
+no change     /apps/python/3.12-conda/shell/condabin/conda-hook.ps1
+no change     /apps/python/3.12-conda/lib/python3.12/site-packages/xontrib/conda.xsh
+no change     /apps/python/3.12-conda/etc/profile.d/conda.csh
+no change     /home/hpc/iwbi/iwbi112h/.bashrc
+No action taken.
+               total        used        free      shared  buff/cache   available
+Mem:           503Gi       5.4Gi       499Gi       3.4Mi       216Mi       498Gi
+Swap:          8.0Gi        88Mi       7.9Gi
+Python 3.10.18
+gona Work! Hoooa
+[2026-02-15T15:24:44.106] error: *** JOB 640488 ON tf094 CANCELLED AT 2026-02-15T15:24:44 DUE to SIGNAL Terminated ***
