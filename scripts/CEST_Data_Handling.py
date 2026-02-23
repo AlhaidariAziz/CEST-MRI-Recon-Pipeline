@@ -44,8 +44,9 @@ outprefstr = '/home/vault/iwbi/iwbi112h/CEST_DATA/'
 # infile='meas_MID00022_FID13344_gre_cest_WASABI_32.dat'
 
 
-# CEST_3shots 34 offsets (Simon)
-infile='meas_MID00070_FID33988_CEST_3shot.dat'
+# CEST_34 offsets (Simon)
+# infile='meas_MID00070_FID33988_CEST_3shot.dat'  #3shot
+infile='meas_MID00071_FID33989_CEST_1shot.dat'  #1shot
 
 # %% argument parser
 parser = argparse.ArgumentParser(description='prepare data and store output k-space data separately.')
@@ -163,8 +164,8 @@ kdat_twix = np.transpose(kdat_twix, (-5,-2,-4,-3,-1)) #choose the order that sui
 print('> sorted kdat shape: ', kdat_twix.shape)
 # raise SystemExit('Stop here for now')
 
-
-with h5py.File(outprefstr + f'/kdat_3D_R{int(Reps)}_C{int(N_coil)}' + '.h5', 'w') as f:
+file_name = f'/kdat_3D_R{int(Reps)}_C{int(N_coil)}_'+ infile.split('_')[-1].rsplit('.',1)[0]+'.h5'
+with h5py.File(outprefstr + file_name, 'w') as f:
     # split CEST Data into 2 parts for easier handling, it can be split into more parts if needed based on Reps size. 
 
     dset=f.create_dataset('kdat_01', data = kdat_twix[0:17,...])
@@ -178,5 +179,5 @@ with h5py.File(outprefstr + f'/kdat_3D_R{int(Reps)}_C{int(N_coil)}' + '.h5', 'w'
         f.create_dataset('ref', data = refs)
     f.close()
 
-print ('Done')
+print ('Done, saved  : ', outprefstr + file_name)
 # %%
