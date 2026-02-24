@@ -256,7 +256,7 @@ if args.space=='ksp':
 
     mps=[ref_zf.get() if hasattr(ref_zf, 'get') else ref_zf]
     mps=np.squeeze(mps)
-    chunks=(ref_zf.shape[0:3]+(1,)) 
+    chunks=(ref_zf.shape[0], 1, ref_zf.shape[2], 1) 
     del ref_zf
     
     # mps=np.permute_dims(mps,(1,2,3,0))
