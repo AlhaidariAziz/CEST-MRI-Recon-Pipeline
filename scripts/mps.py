@@ -54,6 +54,9 @@ DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_DATA/"
 infile_k='kdat_3D_R34_C44_1shot.h5'
 infile_ref='ACS_3D_C44_1shot.h5'
 
+# infile_k='kdat_3D_R34_C44_3shot_us_Cart_3.h5'
+# infile_ref='kdat_3D_R34_C44_3shot_us_Cart_3.h5'
+
 
 print (File_path := DATA_DIR + infile_k)
 
@@ -266,7 +269,9 @@ if args.space=='ksp':
 
     # np.save('mps_s',mps)
 
-file_name = f'maps/mps_c_{c}_t{t}_w_{w}_kw_{kw}_sp_{args.space}_prew.h5' if prew is True else f'maps/mps_c_{c}_t{t}_w_{w}_kw_{kw}_sp_{args.space}.h5'
+name_str =  "_".join(infile_k.rsplit('.', 1)[0].split('_')[-4:])
+
+file_name = f'maps/mps_c_{c}_t{t}_w_{w}_kw_{kw}_sp_{args.space}_'+name_str+'_prew.h5' if prew is True else f'maps/mps_c_{c}_t{t}_w_{w}_kw_{kw}_sp_{args.space}_'+name_str+'.h5'
 with h5py.File(cwd / file_name,'w') as f:
     f.create_dataset('mps',data=mps,chunks=chunks)
     
@@ -276,5 +281,6 @@ end_time = time.perf_counter()
 duration = (end_time - start_time)/60
 print ('Duration:',duration)
 print('you can find mps.h5 in', cwd/'maps')
+print(f'saved as:{file_name}')
     
 

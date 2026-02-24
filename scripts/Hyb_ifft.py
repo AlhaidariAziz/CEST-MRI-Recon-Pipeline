@@ -28,6 +28,7 @@ track_memory()
 
 parser=argparse.ArgumentParser(description='Ifft over Readout or PE2 dimension ')
 parser.add_argument('--dim', type=int, required=True, choices=[-1,-3],help='flag for ifft dim, enter either -1 for RO or -3 for PE2')
+parser.add_argument('--refs', type=bool, default=False, help='flag for either Rereference scan contained in the same h5 file')
 
 args=parser.parse_args()
 
@@ -36,8 +37,10 @@ args=parser.parse_args()
 DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_DATA/" 
 # infile_k='CEST_kdat_3D_R65_C32.h5' #WM
 # infile_ref='refs_3D.h5'#WM
-infile_k='kdat_3D_R34_C44_1shot.h5' #WM
-infile_ref='ACS_3D_C44_1shot.h5'#WM
+infile_k='kdat_3D_R34_C44_1shot.h5'
+# infile_k='kdat_3D_R34_C44_3shot.h5'
+# infile_k='kdat_3D_R34_C44_3shot_us_Cart_3.h5'
+# infile_ref='ACS_3D_C44_1shot.h5'
 # infile_ref='refs_3D.h5'
 
 print (File_path := DATA_DIR + infile_k)
@@ -70,7 +73,10 @@ else:
 
 with h5py.File(DATA_DIR + infile_k, 'r') as f:
     # print(f.keys())
-    data_keys=list(f.keys())
+    if args.refs:
+        data_keys=list(f.keys())[0:-1] #excluding refs at the end
+    else:
+        data_keys=list(f.keys()) #assuming no refs exist
     f.close()
 
 print('data keys',data_keys)
@@ -119,8 +125,8 @@ for data in data_keys:
         for r in range(kdat.shape[-5]-1,-1,-1):
             track_memory(f"Memory before looping over Reps: ")
             
-            for c in range(kdat.shape[-2]-1,-1,-1):
-                kdat[r,:,:,c,:]=(sp.ifft(kdat[r,:,:,c,:],axes=[args.dim])) #uncomment to apply IFFT
+            for c in range(kdat.shape[-4]-1,-1,-1):
+                kdat[r,c,:,:,:]=(sp.ifft(kdat[r,c,:,:,:],axes=[args.dim])) #uncomment to apply IFFT
             
             gc.collect()
             
@@ -129,7 +135,9 @@ for data in data_keys:
 
     chunks = (1, kdat.shape[1], 1, kdat.shape[3], 1) # chunking the data based on RO dimension for lighter loading during Recon
     # kshape = kdat.shape [-4::] 
-    file_name= 'kdat_2D_R34_C44_1shot_prew.h5' if prew else 'kdat_2D_R34_C44_1shot.h5'
+
+    name_str =  "_".join(infile_k.rsplit('.', 1)[0].split('_')[-6:])
+    file_name= 'kdat_2D_'+ name_str +'_prew.h5' if prew else 'kdat_2D_'+ name_str +'.h5'
 
     if data == data_keys[0]:
         with h5py.File(DATA_DIR  + file_name,'w') as f: # to append on existed file
