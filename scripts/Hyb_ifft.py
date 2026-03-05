@@ -10,6 +10,8 @@ import os
 import tracemalloc
 import gc
 
+append=False #set True to add 2 zf lines at the end of PE1/ky dimension. 
+
 def memory_usage():
     """Track current memory usage"""
     process = psutil.Process(os.getpid())
@@ -27,21 +29,27 @@ import argparse
 track_memory()
 
 parser=argparse.ArgumentParser(description='Ifft over Readout or PE2 dimension ')
-parser.add_argument('--dim', type=int, required=True, choices=[-1,-3],help='flag for ifft dim, enter either -1 for RO or -3 for PE2')
-parser.add_argument('--refs', type=bool, default=False, help='flag for either Rereference scan contained in the same h5 file')
+parser.add_argument('--file',  default=None,help='file within default directory defined in the code script')
+parser.add_argument('--dim', type=int, default=-1, choices=[-1,-3],help='flag for ifft dim, enter either -1 for RO or -3 for PE2')
+parser.add_argument('--refs', type=bool, default=False, help='flag to let the code know if Rereference scan is contained in the same h5 file')
 
 args=parser.parse_args()
 
 # DATA_DIR= 'c:\\Users\\abalh\\miniconda3\\LLR\\CEST_Data\\Prep_CEST_Data\\'
 # DATA_DIR= "/home/hpc/iwbi/iwbi112h/CEST_Data/"
-DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_DATA/" 
-# infile_k='CEST_kdat_3D_R65_C32.h5' #WM
-# infile_ref='refs_3D.h5'#WM
-infile_k='kdat_3D_R34_C44_1shot.h5'
-# infile_k='kdat_3D_R34_C44_3shot.h5'
-# infile_k='kdat_3D_R34_C44_3shot_us_Cart_3.h5'
-# infile_ref='ACS_3D_C44_1shot.h5'
-# infile_ref='refs_3D.h5'
+DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_DATA/"
+
+if args.file is None:
+    # infile_k='CEST_kdat_3D_R65_C32.h5' #WM
+    # infile_ref='refs_3D.h5'#WM
+    # infile_k='kdat_3D_R34_C44_1shot.h5'
+    # infile_k='kdat_3D_R34_C44_3shot.h5'
+    # infile_k='kdat_3D_R34_C44_3shot_us_Cart_12.h5'
+    infile_k='kdat_3D_R34_C44_3shot_us_CAIP_4.h5'
+    # infile_ref='ACS_3D_C44_1shot.h5'
+    # infile_ref='refs_3D.h5'
+else:
+    infile_k=args.file
 
 print (File_path := DATA_DIR + infile_k)
 
@@ -122,6 +130,9 @@ for data in data_keys:
                 xp.get_default_pinned_memory_pool().free_all_blocks()
         except:
             pass
+        if append:
+            kdat=np.insert(kdat, [-1,-1], 0, axis=-2)
+
         for r in range(kdat.shape[-5]-1,-1,-1):
             track_memory(f"Memory before looping over Reps: ")
             
