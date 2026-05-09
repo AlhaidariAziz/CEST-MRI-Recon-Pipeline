@@ -17,14 +17,12 @@ DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_DATA/"
 
 parser = argparse.ArgumentParser(description='run SENSE reconstruction.')
 
-# parser.add_argument('--data',
-#                     default=DATA_DIR,
-#                     help='raw dat file')
+parser.add_argument('--file',  default=None,help='file within default directory defined in the code script')
 
 parser.add_argument('--r', type=float, default=1e-2,
                     help=' LLR regularization constant    [default: 1e-2]')
 
-parser.add_argument('--Hybdim', required=True, choices=['RO','PE2'],help='select hyb decoubled slices dim')
+parser.add_argument('--Hybdim', default='RO', choices=['RO','PE2'] ,help='select hyb decoubled slices dim')
 
 parser.add_argument('--i', type=int , default=20,
                     help=' Max iterations    [default: 20]')
@@ -44,21 +42,38 @@ print('>  prewhitened: ', args.prew)
 
 
 prew=args.prew
-if prew:
-    infile_k='kdat_2D_R34_C44_1shot_prew.h5'
-    mps_file=cwd/'maps/mps_c_0.8_t0.02_w_24_kw_6_sp_ksp_prew.h5'
-else:    
-    infile_k='kdat_2D_kdat_3D_R34_C44_1shot.h5'
-    mps_file=cwd/'maps/mps_c_0.8_t0.02_w_24_kw_6_sp_ksp_3D_R34_C44_1shot.h5'
-    # infile_k='kdat_2D_R34_C44_3shot_us_Cart_3.h5'
-    # mps_file=cwd/'maps/mps_c_0.8_t0.02_w_24_kw_6_sp_ksp.h5'
+if args.file is None:
+    if prew:
+        infile_k='kdat_2D_R34_C44_1shot_prew.h5'
+        mps_file=cwd/'maps/mps_c_0.8_t0.02_w_24_kw_6_sp_ksp_prew.h5'
+    else:    
+        # infile_k='kdat_2D_kdat_3D_R34_C44_1shot.h5'
+        
+        # infile_k='kdat_2D_R34_C44_3shot_us_Cart_3.h5'
+    #3shots
+        # infile_k='kdat_2D_R34_C44_3shot_us_Cart_12.h5'
+        infile_k='kdat_2D_R34_C44_3shot_us_CAIP_4.h5'
+        
+        
+else:
+    infile_k=args.file
 
 
 # mps_file=cwd/'maps/mps_c_0.97.h5'
 # mps_file=cwd/'maps/mps_c_0.97.h5'
+# mps_file=cwd/'maps/mps_c_0.8_t0.05_w_24_kw_6_sp_ksp_3D_R34_C44_3shot.h5' # PE1 shape =96 #estimated from CEST0 (3shots) 
+# mps_file=cwd/'maps/mps_c_0_t0.02_w_24_kw_6_sp_ksp_3D_R34_C44_3shot.h5' # 
+# mps_file=cwd/'maps/mps_c_0_t0.02_w_24_kw_6_sp_ksp_acs_PE1_96.h5' # 
+# mps_file=cwd/'maps/mps_c_0_t0.05_w_24_kw_6_sp_ksp_3D_R34_C44_3shot.h5' #estimated from CEST0 (3shots) 
+mps_file=cwd/'maps/mps_c_0_t0.05_w_24_kw_6_sp_ksp_3D_R34_C44_1shot.h5' #best mps from acs  
+# mps_file=cwd/'maps/mps_acs_rss.h5' # ACS rss normalized 
+# mps_file=cwd/'maps/mps_c0_rss.h5' # CEST0 rss normalized 
+
+
 #To do: add RO in h5 file dataset
 
 print('Current directory:',cwd)
+
 print('mps file:',mps_file)
 
 def memory_usage():
@@ -84,9 +99,25 @@ xp = device.xp
 
 print(f"Using device: {device} (Backend: {xp.__name__})")
 
+Part_start=0
+Parts=24
+Reps=34
+Rep=16
 
+########
+#name string for the output file
+if hasattr(mps_file, 'name'):
+    mps_pars = "_".join(mps_file.name.rsplit('.',1)[0].split('_')[0:10])
+else:
+    mps_pars = "_".join(mps_file.rsplit('.',1)[0].split('_')[0:10])
 
+name_str =  "_".join(infile_k.rsplit('.', 1)[0].split('_')[-6:])
 
+file_name=f'CEST_SENSE_recons_Reps_0_{Reps}_r_{args.r}_i_{args.i}_'+name_str+'_'+mps_pars+'.h5' # for all Reps
+
+print('file_name:',file_name)
+
+# raise SystemExit()
 
 #Volume recon with slice pyGRAPPA
 
@@ -97,10 +128,6 @@ print(f"Using device: {device} (Backend: {xp.__name__})")
 # inter_kspace = np.empty(img_shape,dtype=np.complex64)
 # recons_LLR = []
 
-Part_start=0
-Parts=24
-Reps=34
-Rep=16
 
 if args.Hybdim=='PE2':
 
@@ -164,9 +191,6 @@ if args.Hybdim=='PE2':
             else:
                 idx=[0, 2 , -1] 
             
-        
-            mps_pars='_'.join([mps_file.name.split('_')[i] for i in idx]).rsplit('.',1)[0]
-            name_str =  "_".join(infile_k.rsplit('.', 1)[0].split('_')[-6:])
 
             file_name=f'CEST_SENSE_recons_{Rep}_r_{args.r}_i_{args.i}_'+name_str+'_'+mps_pars+'.h5'
                 
@@ -195,13 +219,13 @@ if args.Hybdim=='RO':
                 #                 f['kdat_04'][...,RO_idx]),
                 #                 axis =0)
 
-                # kdat_temp=np.concatenate((f['kdat_01'][...,RO_idx],  # first 30 Cest Reps
-                #                 f['kdat_02'][...,RO_idx]),                
-                #                 axis =0)
+                kdat_temp=np.concatenate((f['kdat_01'][...,RO_idx],  # all 34 Reps
+                                f['kdat_02'][...,RO_idx]),                
+                                axis =0)
                 
                 # kdat_temp=f['kdat_01'][...,RO_idx]  # first 15 Cest Reps
                 # kdat_temp=f['kdat_01'][Rep,...,RO_idx][None,...]  # Sagital slices at a certain RO position for a single rep 
-                kdat_temp=f['kdat_01'][...,RO_idx][:]  # Sagital slices at a certain RO position for all reps 
+                # kdat_temp=f['kdat_01'][...,RO_idx][:]  # Sagital slices at a certain RO position for mutliple reps 
                 # print('con kdat_temp shape before permution:',kdat_temp.shape)
                 
             # track_memory(f'RO {RO_idx} :')   
@@ -243,11 +267,12 @@ if args.Hybdim=='RO':
                 idx=[0, 2 , -1] 
             
         
-            mps_pars='_'.join([mps_file.name.split('_')[i] for i in idx]).rsplit('.',1)[0]
-            name_str =  "_".join(infile_k.rsplit('.', 1)[0].split('_')[-6:])
+            # mps_pars='_'.join([mps_file.name.split('_')[i] for i in idx]).rsplit('.',1)[0]
+            # mps_pars = '_'.join(mps_file.name.split('.')[0].split('_')[1:9])
+            # name_str =  "_".join(infile_k.rsplit('.', 1)[0].split('_')[-6:])
 
-            # file_name=f'CEST_SENSE_recons_{Rep}_r_{args.r}_i_{args.i}_'+name_str+'_'+mps_pars+'.h5' #for certain Rep
-            file_name=f'CEST_SENSE_recons_Reps_0_{Reps}_r_{args.r}_i_{args.i}_'+name_str+'_'+mps_pars+'.h5' # for all Reps
+            # # file_name=f'CEST_SENSE_recons_{Rep}_r_{args.r}_i_{args.i}_'+name_str+'_'+mps_pars+'.h5' #for certain Rep
+            # file_name=f'CEST_SENSE_recons_Reps_0_{Reps}_r_{args.r}_i_{args.i}_'+name_str+'_'+mps_pars+'.h5' # for all Reps
                 
 
             if RO_idx==RO_start:

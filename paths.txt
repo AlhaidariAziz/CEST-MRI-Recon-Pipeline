@@ -1,1 +1,8 @@
 home/woody/iwbi/iwbi112h/software/private/conda/envs/LLRv3/lib/python3.10/site-packages/pygrappa$
+
+
+#CEST
+/home/vault/iwbi/iwbi112h/CEST_DATA/
+
+#scripts
+hpc/iwbi/iwbi112h/LLR\ codebooks/lab_llr_alhaidari/scripts

@@ -147,7 +147,8 @@ for data in data_keys:
     chunks = (1, kdat.shape[1], 1, kdat.shape[3], 1) # chunking the data based on RO dimension for lighter loading during Recon
     # kshape = kdat.shape [-4::] 
 
-    name_str =  "_".join(infile_k.rsplit('.', 1)[0].split('_')[-6:])
+    # name_str =  "_".join(infile_k.rsplit('.', 1)[0].split('_')[-6:])
+    name_str =  infile_k.replace('kdat_3D_','').replace('.h5','')
     file_name= 'kdat_2D_'+ name_str +'_prew.h5' if prew else 'kdat_2D_'+ name_str +'.h5'
 
     if data == data_keys[0]:

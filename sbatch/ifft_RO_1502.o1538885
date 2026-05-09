@@ -1,0 +1,923 @@
+/home/hpc/iwbi/iwbi112h/.bash_profile: line 11: unexpected EOF while looking for matching `"'
+               total        used        free      shared  buff/cache   available
+Mem:           503Gi        14Gi       490Gi       213Mi       1.5Gi       489Gi
+Swap:          8.0Gi        54Mi       7.9Gi
+Running on tg092
+Start time: Wed Feb 25 01:01:21 AM CET 2026
+/home/woody/iwbi/iwbi112h/software/private/conda/envs/LLRv3/lib/python3.10/site-packages/sigpy/config.py:29: UserWarning: Importing cupy.cuda.cudnn failed. For more details, see the error stack below:
+No module named 'cupyx.cudnn'
+  warnings.warn(
+> blk_shape:  (1, 5, 5)
+> blk_strides:  (1, 1, 1)
+>  lamda(r):  1e-06
+>  Max iteration (i):  30
+> prewhitening is set to:  False
+Current directory: /home/hpc/iwbi/iwbi112h/LLR codebooks/lab_llr_alhaidari
+RO start:0, RO end :114
+GPU detected: NVIDIA A100-SXM4-40GB
+Using device: <CUDA Device 0> (Backend: cupy)
+RO: 0
+RO: 1
+RO: 2
+RO: 3
+RO: 4
+RO: 5
+RO: 6
+RO: 7
+RO: 8
+RO: 9
+RO: 10
+RO: 11
+RO: 12
+RO: 13
+RO: 14
+RO: 15
+RO: 16
+RO: 17
+RO: 18
+RO: 19
+RO: 20
+RO: 21
+RO: 22
+RO: 23
+RO: 24
+RO: 25
+RO: 26
+RO: 27
+RO: 28
+RO: 29
+RO: 30
+RO: 31
+RO: 32
+RO: 33
+RO: 34
+RO: 35
+RO: 36
+RO: 37
+RO: 38
+RO: 39
+RO: 40
+RO: 41
+RO: 42
+RO: 43
+RO: 44
+RO: 45
+RO: 46
+RO: 47
+RO: 48
+RO: 49
+RO: 50
+RO: 51
+RO: 52
+RO: 53
+RO: 54
+RO: 55
+RO: 56
+RO: 57
+  cg iter:  0; resid:      5.503801; norm:     53.777431
+  cg iter:  1; resid:      1.814021; norm:     58.190811
+  cg iter:  2; resid:      1.109977; norm:     59.067684
+  cg iter:  3; resid:      0.615839; norm:     59.479076
+  cg iter:  4; resid:      0.163181; norm:     59.633881
+  cg iter:  5; resid:      0.084357; norm:     59.654503
+  cg iter:  6; resid:      0.036518; norm:     59.659225
+  cg iter:  7; resid:      0.014361; norm:     59.660049
+  cg iter:  8; resid:      0.005932; norm:     59.660259
+  cg iter:  9; resid:      0.005932; norm:     59.660294
+admm iter:  1, r norm:     0.0008, eps pri:     0.0874, s norm:     2.9830, eps dual:     0.0277
+  cg iter:  0; resid:      0.973728; norm:     65.590981
+  cg iter:  1; resid:      0.421507; norm:     66.669014
+  cg iter:  2; resid:      0.203473; norm:     66.921227
+  cg iter:  3; resid:      0.086471; norm:     66.959167
+  cg iter:  4; resid:      0.036267; norm:     66.965546
+  cg iter:  5; resid:      0.012884; norm:     66.967781
+  cg iter:  6; resid:      0.005261; norm:     66.967995
+  cg iter:  7; resid:      0.002820; norm:     66.968025
+  cg iter:  8; resid:      0.001026; norm:     66.968040
+  cg iter:  9; resid:      0.001026; norm:     66.968040
+admm iter:  2, r norm:     0.0001, eps pri:     0.0947, s norm:     0.4159, eps dual:     0.0277
+  cg iter:  0; resid:      0.243717; norm:     68.170578
+  cg iter:  1; resid:      0.097699; norm:     68.234894
+  cg iter:  2; resid:      0.028673; norm:     68.246788
+  cg iter:  3; resid:      0.013435; norm:     68.247688
+  cg iter:  4; resid:      0.007888; norm:     68.247879
+  cg iter:  5; resid:      0.002005; norm:     68.247948
+  cg iter:  6; resid:      0.000973; norm:     68.247963
+  cg iter:  7; resid:      0.000476; norm:     68.247955
+  cg iter:  8; resid:      0.000212; norm:     68.247955
+  cg iter:  9; resid:      0.000212; norm:     68.247955
+admm iter:  3, r norm:     0.0000, eps pri:     0.0959, s norm:     0.1022, eps dual:     0.0277
+  cg iter:  0; resid:      0.050147; norm:     68.604881
+  cg iter:  1; resid:      0.017520; norm:     68.553627
+  cg iter:  2; resid:      0.005023; norm:     68.553970
+  cg iter:  3; resid:      0.002490; norm:     68.554008
+  cg iter:  4; resid:      0.001059; norm:     68.554016
+  cg iter:  5; resid:      0.000419; norm:     68.554016
+  cg iter:  6; resid:      0.000183; norm:     68.554016
+  cg iter:  7; resid:      0.000081; norm:     68.554016
+  cg iter:  8; resid:      0.000046; norm:     68.554016
+  cg iter:  9; resid:      0.000046; norm:     68.554016
+admm iter:  4, r norm:     0.0000, eps pri:     0.0962, s norm:     0.0321, eps dual:     0.0277
+  cg iter:  0; resid:      0.007480; norm:     68.653801
+  cg iter:  1; resid:      0.002951; norm:     68.640785
+  cg iter:  2; resid:      0.001100; norm:     68.641968
+  cg iter:  3; resid:      0.000387; norm:     68.641975
+  cg iter:  4; resid:      0.000168; norm:     68.641975
+  cg iter:  5; resid:      0.000107; norm:     68.641975
+  cg iter:  6; resid:      0.000034; norm:     68.641975
+  cg iter:  7; resid:      0.000017; norm:     68.641975
+  cg iter:  8; resid:      0.000008; norm:     68.641975
+  cg iter:  9; resid:      0.000008; norm:     68.641975
+admm iter:  5, r norm:     0.0000, eps pri:     0.0963, s norm:     0.0107, eps dual:     0.0277
+  cg iter:  0; resid:      0.001279; norm:     68.671654
+  cg iter:  1; resid:      0.000536; norm:     68.669060
+  cg iter:  2; resid:      0.000236; norm:     68.669601
+  cg iter:  3; resid:      0.000075; norm:     68.669571
+  cg iter:  4; resid:      0.000048; norm:     68.669563
+  cg iter:  5; resid:      0.000023; norm:     68.669563
+  cg iter:  6; resid:      0.000008; norm:     68.669563
+  cg iter:  7; resid:      0.000005; norm:     68.669563
+  cg iter:  8; resid:      0.000002; norm:     68.669563
+  cg iter:  9; resid:      0.000002; norm:     68.669563
+admm iter:  6, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0036, eps dual:     0.0277
+  cg iter:  0; resid:      0.000281; norm:     68.678993
+  cg iter:  1; resid:      0.000103; norm:     68.678452
+  cg iter:  2; resid:      0.000047; norm:     68.678596
+  cg iter:  3; resid:      0.000021; norm:     68.678589
+  cg iter:  4; resid:      0.000013; norm:     68.678581
+  cg iter:  5; resid:      0.000004; norm:     68.678581
+  cg iter:  6; resid:      0.000002; norm:     68.678581
+  cg iter:  7; resid:      0.000001; norm:     68.678581
+  cg iter:  8; resid:      0.000000; norm:     68.678581
+  cg iter:  9; resid:      0.000000; norm:     68.678581
+admm iter:  7, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0013, eps dual:     0.0277
+  cg iter:  0; resid:      0.000074; norm:     68.681679
+  cg iter:  1; resid:      0.000032; norm:     68.681564
+  cg iter:  2; resid:      0.000014; norm:     68.681580
+  cg iter:  3; resid:      0.000008; norm:     68.681587
+  cg iter:  4; resid:      0.000003; norm:     68.681587
+  cg iter:  5; resid:      0.000001; norm:     68.681587
+  cg iter:  6; resid:      0.000001; norm:     68.681587
+  cg iter:  7; resid:      0.000000; norm:     68.681587
+  cg iter:  8; resid:      0.000000; norm:     68.681587
+  cg iter:  9; resid:      0.000000; norm:     68.681587
+admm iter:  8, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0004, eps dual:     0.0277
+  cg iter:  0; resid:      0.000024; norm:     68.682625
+  cg iter:  1; resid:      0.000018; norm:     68.682602
+  cg iter:  2; resid:      0.000007; norm:     68.682602
+  cg iter:  3; resid:      0.000003; norm:     68.682602
+  cg iter:  4; resid:      0.000001; norm:     68.682602
+  cg iter:  5; resid:      0.000001; norm:     68.682602
+  cg iter:  6; resid:      0.000000; norm:     68.682602
+  cg iter:  7; resid:      0.000000; norm:     68.682602
+  cg iter:  8; resid:      0.000000; norm:     68.682602
+  cg iter:  9; resid:      0.000000; norm:     68.682602
+admm iter:  9, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0001, eps dual:     0.0277
+  cg iter:  0; resid:      0.000013; norm:     68.682953
+  cg iter:  1; resid:      0.000006; norm:     68.682953
+  cg iter:  2; resid:      0.000004; norm:     68.682953
+  cg iter:  3; resid:      0.000002; norm:     68.682945
+  cg iter:  4; resid:      0.000001; norm:     68.682945
+  cg iter:  5; resid:      0.000000; norm:     68.682945
+  cg iter:  6; resid:      0.000000; norm:     68.682945
+  cg iter:  7; resid:      0.000000; norm:     68.682945
+  cg iter:  8; resid:      0.000000; norm:     68.682945
+  cg iter:  9; resid:      0.000000; norm:     68.682945
+admm iter: 10, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0001, eps dual:     0.0277
+  cg iter:  0; resid:      0.000011; norm:     68.683067
+  cg iter:  1; resid:      0.000003; norm:     68.683067
+  cg iter:  2; resid:      0.000002; norm:     68.683067
+  cg iter:  3; resid:      0.000001; norm:     68.683067
+  cg iter:  4; resid:      0.000000; norm:     68.683067
+  cg iter:  5; resid:      0.000000; norm:     68.683067
+  cg iter:  6; resid:      0.000000; norm:     68.683067
+  cg iter:  7; resid:      0.000000; norm:     68.683067
+  cg iter:  8; resid:      0.000000; norm:     68.683067
+  cg iter:  9; resid:      0.000000; norm:     68.683067
+admm iter: 11, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000009; norm:     68.683098
+  cg iter:  1; resid:      0.000002; norm:     68.683105
+  cg iter:  2; resid:      0.000001; norm:     68.683098
+  cg iter:  3; resid:      0.000000; norm:     68.683098
+  cg iter:  4; resid:      0.000000; norm:     68.683098
+  cg iter:  5; resid:      0.000000; norm:     68.683098
+  cg iter:  6; resid:      0.000000; norm:     68.683098
+  cg iter:  7; resid:      0.000000; norm:     68.683098
+  cg iter:  8; resid:      0.000000; norm:     68.683098
+  cg iter:  9; resid:      0.000000; norm:     68.683098
+admm iter: 12, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000006; norm:     68.683113
+  cg iter:  1; resid:      0.000002; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 13, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000003; norm:     68.683121
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 14, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683121
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 15, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683121
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 16, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683121
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 17, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683121
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 18, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683121
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 19, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683128
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 20, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683121
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 21, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683121
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683128
+  cg iter:  3; resid:      0.000000; norm:     68.683128
+  cg iter:  4; resid:      0.000000; norm:     68.683128
+  cg iter:  5; resid:      0.000000; norm:     68.683128
+  cg iter:  6; resid:      0.000000; norm:     68.683128
+  cg iter:  7; resid:      0.000000; norm:     68.683128
+  cg iter:  8; resid:      0.000000; norm:     68.683128
+  cg iter:  9; resid:      0.000000; norm:     68.683128
+admm iter: 22, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683121
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 23, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683121
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 24, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683121
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 25, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683121
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 26, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683128
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 27, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683121
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683128
+  cg iter:  3; resid:      0.000000; norm:     68.683128
+  cg iter:  4; resid:      0.000000; norm:     68.683128
+  cg iter:  5; resid:      0.000000; norm:     68.683128
+  cg iter:  6; resid:      0.000000; norm:     68.683128
+  cg iter:  7; resid:      0.000000; norm:     68.683128
+  cg iter:  8; resid:      0.000000; norm:     68.683128
+  cg iter:  9; resid:      0.000000; norm:     68.683128
+admm iter: 28, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683121
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 29, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683121
+  cg iter:  1; resid:      0.000001; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 30, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+RO: 58
+RO: 59
+RO: 60
+RO: 61
+RO: 62
+RO: 63
+RO: 64
+RO: 65
+RO: 66
+RO: 67
+RO: 68
+RO: 69
+RO: 70
+RO: 71
+RO: 72
+RO: 73
+RO: 74
+RO: 75
+RO: 76
+RO: 77
+RO: 78
+RO: 79
+RO: 80
+RO: 81
+RO: 82
+RO: 83
+RO: 84
+RO: 85
+RO: 86
+RO: 87
+RO: 88
+RO: 89
+RO: 90
+RO: 91
+RO: 92
+RO: 93
+RO: 94
+RO: 95
+RO: 96
+RO: 97
+RO: 98
+RO: 99
+RO: 100
+RO: 101
+RO: 102
+RO: 103
+RO: 104
+RO: 105
+RO: 106
+RO: 107
+RO: 108
+RO: 109
+RO: 110
+RO: 111
+RO: 112
+RO: 113
+Reconstruction completed in 164.73 Minutes
+Created file at : CEST_LLR_recons_Reps_0_34_RO_0_114_1x5x5_r_1e-06_i_30_2D_kdat_3D_R34_C44_1shot_mps_0.8_1shot.h5
+/home/woody/iwbi/iwbi112h/software/private/conda/envs/LLRv3/lib/python3.10/site-packages/sigpy/config.py:29: UserWarning: Importing cupy.cuda.cudnn failed. For more details, see the error stack below:
+No module named 'cupyx.cudnn'
+  warnings.warn(
+> blk_shape:  (1, 8, 8)
+> blk_strides:  (1, 1, 1)
+>  lamda(r):  1e-06
+>  Max iteration (i):  30
+> prewhitening is set to:  False
+Current directory: /home/hpc/iwbi/iwbi112h/LLR codebooks/lab_llr_alhaidari
+RO start:0, RO end :114
+GPU detected: NVIDIA A100-SXM4-40GB
+Using device: <CUDA Device 0> (Backend: cupy)
+RO: 0
+RO: 1
+RO: 2
+RO: 3
+RO: 4
+RO: 5
+RO: 6
+RO: 7
+RO: 8
+RO: 9
+RO: 10
+RO: 11
+RO: 12
+RO: 13
+RO: 14
+RO: 15
+RO: 16
+RO: 17
+RO: 18
+RO: 19
+RO: 20
+RO: 21
+RO: 22
+RO: 23
+RO: 24
+RO: 25
+RO: 26
+RO: 27
+RO: 28
+RO: 29
+RO: 30
+RO: 31
+RO: 32
+RO: 33
+RO: 34
+RO: 35
+RO: 36
+RO: 37
+RO: 38
+RO: 39
+RO: 40
+RO: 41
+RO: 42
+RO: 43
+RO: 44
+RO: 45
+RO: 46
+RO: 47
+RO: 48
+RO: 49
+RO: 50
+RO: 51
+RO: 52
+RO: 53
+RO: 54
+RO: 55
+RO: 56
+RO: 57
+  cg iter:  0; resid:      5.503801; norm:     53.777431
+  cg iter:  1; resid:      1.814021; norm:     58.190811
+  cg iter:  2; resid:      1.109977; norm:     59.067684
+  cg iter:  3; resid:      0.615839; norm:     59.479076
+  cg iter:  4; resid:      0.163181; norm:     59.633881
+  cg iter:  5; resid:      0.084357; norm:     59.654503
+  cg iter:  6; resid:      0.036518; norm:     59.659225
+  cg iter:  7; resid:      0.014361; norm:     59.660049
+  cg iter:  8; resid:      0.005932; norm:     59.660259
+  cg iter:  9; resid:      0.005932; norm:     59.660294
+admm iter:  1, r norm:     0.0006, eps pri:     0.0874, s norm:     2.9830, eps dual:     0.0277
+  cg iter:  0; resid:      0.973730; norm:     65.590988
+  cg iter:  1; resid:      0.421509; norm:     66.669029
+  cg iter:  2; resid:      0.203474; norm:     66.921242
+  cg iter:  3; resid:      0.086471; norm:     66.959183
+  cg iter:  4; resid:      0.036267; norm:     66.965561
+  cg iter:  5; resid:      0.012884; norm:     66.967796
+  cg iter:  6; resid:      0.005261; norm:     66.968010
+  cg iter:  7; resid:      0.002820; norm:     66.968040
+  cg iter:  8; resid:      0.001026; norm:     66.968056
+  cg iter:  9; resid:      0.001026; norm:     66.968056
+admm iter:  2, r norm:     0.0001, eps pri:     0.0947, s norm:     0.4159, eps dual:     0.0277
+  cg iter:  0; resid:      0.243717; norm:     68.170601
+  cg iter:  1; resid:      0.097699; norm:     68.234901
+  cg iter:  2; resid:      0.028673; norm:     68.246803
+  cg iter:  3; resid:      0.013435; norm:     68.247704
+  cg iter:  4; resid:      0.007888; norm:     68.247902
+  cg iter:  5; resid:      0.002005; norm:     68.247971
+  cg iter:  6; resid:      0.000973; norm:     68.247971
+  cg iter:  7; resid:      0.000476; norm:     68.247971
+  cg iter:  8; resid:      0.000212; norm:     68.247971
+  cg iter:  9; resid:      0.000212; norm:     68.247971
+admm iter:  3, r norm:     0.0000, eps pri:     0.0959, s norm:     0.1022, eps dual:     0.0277
+  cg iter:  0; resid:      0.050147; norm:     68.604897
+  cg iter:  1; resid:      0.017520; norm:     68.553642
+  cg iter:  2; resid:      0.005023; norm:     68.553986
+  cg iter:  3; resid:      0.002490; norm:     68.554024
+  cg iter:  4; resid:      0.001059; norm:     68.554031
+  cg iter:  5; resid:      0.000419; norm:     68.554031
+  cg iter:  6; resid:      0.000183; norm:     68.554031
+  cg iter:  7; resid:      0.000081; norm:     68.554031
+  cg iter:  8; resid:      0.000046; norm:     68.554031
+  cg iter:  9; resid:      0.000046; norm:     68.554031
+admm iter:  4, r norm:     0.0000, eps pri:     0.0962, s norm:     0.0321, eps dual:     0.0277
+  cg iter:  0; resid:      0.007480; norm:     68.653816
+  cg iter:  1; resid:      0.002951; norm:     68.640800
+  cg iter:  2; resid:      0.001100; norm:     68.641983
+  cg iter:  3; resid:      0.000387; norm:     68.641991
+  cg iter:  4; resid:      0.000168; norm:     68.641983
+  cg iter:  5; resid:      0.000107; norm:     68.641983
+  cg iter:  6; resid:      0.000034; norm:     68.641983
+  cg iter:  7; resid:      0.000017; norm:     68.641991
+  cg iter:  8; resid:      0.000008; norm:     68.641991
+  cg iter:  9; resid:      0.000008; norm:     68.641991
+admm iter:  5, r norm:     0.0000, eps pri:     0.0963, s norm:     0.0107, eps dual:     0.0277
+  cg iter:  0; resid:      0.001279; norm:     68.671661
+  cg iter:  1; resid:      0.000536; norm:     68.669075
+  cg iter:  2; resid:      0.000236; norm:     68.669617
+  cg iter:  3; resid:      0.000075; norm:     68.669586
+  cg iter:  4; resid:      0.000048; norm:     68.669579
+  cg iter:  5; resid:      0.000023; norm:     68.669579
+  cg iter:  6; resid:      0.000008; norm:     68.669579
+  cg iter:  7; resid:      0.000005; norm:     68.669579
+  cg iter:  8; resid:      0.000002; norm:     68.669579
+  cg iter:  9; resid:      0.000002; norm:     68.669579
+admm iter:  6, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0036, eps dual:     0.0277
+  cg iter:  0; resid:      0.000281; norm:     68.679001
+  cg iter:  1; resid:      0.000103; norm:     68.678467
+  cg iter:  2; resid:      0.000047; norm:     68.678612
+  cg iter:  3; resid:      0.000021; norm:     68.678596
+  cg iter:  4; resid:      0.000013; norm:     68.678589
+  cg iter:  5; resid:      0.000004; norm:     68.678589
+  cg iter:  6; resid:      0.000002; norm:     68.678589
+  cg iter:  7; resid:      0.000001; norm:     68.678589
+  cg iter:  8; resid:      0.000000; norm:     68.678589
+  cg iter:  9; resid:      0.000000; norm:     68.678589
+admm iter:  7, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0013, eps dual:     0.0277
+  cg iter:  0; resid:      0.000074; norm:     68.681694
+  cg iter:  1; resid:      0.000032; norm:     68.681580
+  cg iter:  2; resid:      0.000015; norm:     68.681587
+  cg iter:  3; resid:      0.000008; norm:     68.681602
+  cg iter:  4; resid:      0.000003; norm:     68.681602
+  cg iter:  5; resid:      0.000001; norm:     68.681602
+  cg iter:  6; resid:      0.000001; norm:     68.681602
+  cg iter:  7; resid:      0.000000; norm:     68.681602
+  cg iter:  8; resid:      0.000000; norm:     68.681602
+  cg iter:  9; resid:      0.000000; norm:     68.681602
+admm iter:  8, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0004, eps dual:     0.0277
+  cg iter:  0; resid:      0.000024; norm:     68.682640
+  cg iter:  1; resid:      0.000018; norm:     68.682617
+  cg iter:  2; resid:      0.000007; norm:     68.682610
+  cg iter:  3; resid:      0.000003; norm:     68.682610
+  cg iter:  4; resid:      0.000001; norm:     68.682617
+  cg iter:  5; resid:      0.000001; norm:     68.682617
+  cg iter:  6; resid:      0.000000; norm:     68.682617
+  cg iter:  7; resid:      0.000000; norm:     68.682617
+  cg iter:  8; resid:      0.000000; norm:     68.682617
+  cg iter:  9; resid:      0.000000; norm:     68.682617
+admm iter:  9, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0001, eps dual:     0.0277
+  cg iter:  0; resid:      0.000013; norm:     68.682968
+  cg iter:  1; resid:      0.000006; norm:     68.682968
+  cg iter:  2; resid:      0.000004; norm:     68.682961
+  cg iter:  3; resid:      0.000002; norm:     68.682961
+  cg iter:  4; resid:      0.000001; norm:     68.682961
+  cg iter:  5; resid:      0.000000; norm:     68.682961
+  cg iter:  6; resid:      0.000000; norm:     68.682961
+  cg iter:  7; resid:      0.000000; norm:     68.682961
+  cg iter:  8; resid:      0.000000; norm:     68.682961
+  cg iter:  9; resid:      0.000000; norm:     68.682961
+admm iter: 10, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0001, eps dual:     0.0277
+  cg iter:  0; resid:      0.000011; norm:     68.683075
+  cg iter:  1; resid:      0.000003; norm:     68.683075
+  cg iter:  2; resid:      0.000002; norm:     68.683075
+  cg iter:  3; resid:      0.000001; norm:     68.683075
+  cg iter:  4; resid:      0.000000; norm:     68.683075
+  cg iter:  5; resid:      0.000000; norm:     68.683075
+  cg iter:  6; resid:      0.000000; norm:     68.683075
+  cg iter:  7; resid:      0.000000; norm:     68.683075
+  cg iter:  8; resid:      0.000000; norm:     68.683075
+  cg iter:  9; resid:      0.000000; norm:     68.683075
+admm iter: 11, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000010; norm:     68.683113
+  cg iter:  1; resid:      0.000002; norm:     68.683121
+  cg iter:  2; resid:      0.000001; norm:     68.683121
+  cg iter:  3; resid:      0.000000; norm:     68.683121
+  cg iter:  4; resid:      0.000000; norm:     68.683121
+  cg iter:  5; resid:      0.000000; norm:     68.683121
+  cg iter:  6; resid:      0.000000; norm:     68.683121
+  cg iter:  7; resid:      0.000000; norm:     68.683121
+  cg iter:  8; resid:      0.000000; norm:     68.683121
+  cg iter:  9; resid:      0.000000; norm:     68.683121
+admm iter: 12, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000006; norm:     68.683128
+  cg iter:  1; resid:      0.000002; norm:     68.683128
+  cg iter:  2; resid:      0.000001; norm:     68.683128
+  cg iter:  3; resid:      0.000000; norm:     68.683128
+  cg iter:  4; resid:      0.000000; norm:     68.683128
+  cg iter:  5; resid:      0.000000; norm:     68.683128
+  cg iter:  6; resid:      0.000000; norm:     68.683128
+  cg iter:  7; resid:      0.000000; norm:     68.683128
+  cg iter:  8; resid:      0.000000; norm:     68.683128
+  cg iter:  9; resid:      0.000000; norm:     68.683128
+admm iter: 13, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000003; norm:     68.683128
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 14, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 15, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 16, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 17, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 18, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 19, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 20, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 21, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 22, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 23, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 24, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 25, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 26, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 27, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 28, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 29, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+  cg iter:  0; resid:      0.000002; norm:     68.683136
+  cg iter:  1; resid:      0.000001; norm:     68.683136
+  cg iter:  2; resid:      0.000001; norm:     68.683136
+  cg iter:  3; resid:      0.000000; norm:     68.683136
+  cg iter:  4; resid:      0.000000; norm:     68.683136
+  cg iter:  5; resid:      0.000000; norm:     68.683136
+  cg iter:  6; resid:      0.000000; norm:     68.683136
+  cg iter:  7; resid:      0.000000; norm:     68.683136
+  cg iter:  8; resid:      0.000000; norm:     68.683136
+  cg iter:  9; resid:      0.000000; norm:     68.683136
+admm iter: 30, r norm:     0.0000, eps pri:     0.0964, s norm:     0.0000, eps dual:     0.0277
+RO: 58
+RO: 59
+RO: 60
+RO: 61
+RO: 62
+RO: 63
+RO: 64
+RO: 65
+RO: 66
+RO: 67
+RO: 68
+RO: 69
+RO: 70
+RO: 71
+RO: 72
+RO: 73
+RO: 74
+RO: 75
+RO: 76
+RO: 77
+RO: 78
+RO: 79
+RO: 80
+RO: 81
+RO: 82
+RO: 83
+RO: 84
+RO: 85
+RO: 86
+RO: 87
+RO: 88
+RO: 89
+RO: 90
+RO: 91
+RO: 92
+RO: 93
+RO: 94
+RO: 95
+RO: 96
+RO: 97
+RO: 98
+RO: 99
+RO: 100
+RO: 101
+RO: 102
+RO: 103
+RO: 104
+RO: 105
+RO: 106
+RO: 107
+RO: 108
+RO: 109
+RO: 110
+RO: 111
+RO: 112
+RO: 113
+Reconstruction completed in 214.69 Minutes
+Created file at : CEST_LLR_recons_Reps_0_34_RO_0_114_1x8x8_r_1e-06_i_30_2D_kdat_3D_R34_C44_1shot_mps_0.8_1shot.h5
+End time: Wed Feb 25 07:21:03 AM CET 2026

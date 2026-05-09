@@ -10,7 +10,7 @@
 ##SBATCH --cpus-per-task=8
 #SBATCH --time=24:00:00
 ##SBATCH --job-name=HybVolLLR_0402
-#SBATCH --job-name=ifft_RO_1502
+#SBATCH --job-name=LLR_pars_14042026
 #SBATCH --mail-type=END
 #SBATCH --mail-user=ab.alhaidari@yahoo.com
 
@@ -37,8 +37,20 @@ echo "Start time: $(date)"
 ##Original Work
 
 # python "${DATA_DIR}mps.py" --space ksp # space = Hyb || ksp
-# python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 1 1 --i 30
-# python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 2 2 --i 30
+
+python "${DATA_DIR}HybVolLLR.py" --i 30 --r 1e-4
+echo "End time: $(date)"
+python "${DATA_DIR}HybVolLLR.py" --i 30 --r 1e-3
+echo "End time (HybVolLLR.py --i 30 --r 1e-3): $(date)"
+python "${DATA_DIR}HybVolLLR.py" --i 30 --r 1e-1
+echo "End time (HybVolLLR.py --i 30 --r 1e-1): $(date)"
+python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 1 1 --i 30
+echo "End time (HybVolLLR.py --blk_shape 1 1 1 --i 30): $(date)"
+python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 3 3 --i 30
+echo "End time (HybVolLLR.py --blk_shape 1 3 3 --i 30): $(date)"
+python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 7 7 --i 30
+echo "End time (HybVolLLR.py --blk_shape 1 7 7 --i 30): $(date)"
+
 # python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 6 6 --i 50
 # python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 1 1 --i 30 --r 1e-2
 # python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 2 2 --i 30 --r 1e-2
@@ -50,11 +62,13 @@ echo "Start time: $(date)"
 # python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 12 12 --i 30 --r 1e-2
 # python "${DATA_DIR}HybVolGRAPPA.py" 
 # python "${DATA_DIR}mdGRAPPA.py"
-python "${DATA_DIR}ifft_RO.py"
+# python "${DATA_DIR}ifft_RO.py"
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --blk_shape 1 5 5 --r 1e-3
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --blk_shape 1 8 8
 
 rm -r $TMPDIR/$SLURM_JOB_ID
 
 
 
 
-echo "End time: $(date)"
+echo "End time (script): $(date)"

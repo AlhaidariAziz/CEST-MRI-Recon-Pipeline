@@ -23,7 +23,8 @@ print('yshift:',args.yshift)
 
 
 DIR='/home/vault/iwbi/iwbi112h/CEST_DATA/'
-infile='kdat_3D_R34_C44_3shot.h5'  #3shot
+# infile='kdat_3D_R34_C44_3shot.h5'  #3shot
+infile='kdat_3D_R34_C44_3shot_chopped.h5'  #3shot
 
 
 with h5py.File(DIR+infile,'r') as f:

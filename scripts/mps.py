@@ -15,9 +15,13 @@ import argparse
 
 parser = argparse.ArgumentParser(description='run spiritCalib for 3D data in ksapace or Hybird space')
 
-parser.add_argument('--data',
+parser.add_argument('--ref_data',
                     default=None,
                     help='ACS h5 file')
+
+parser.add_argument('--img_data',
+                    default=None,
+                    help='kdat h5 file')
 
 parser.add_argument('--space',
                     default=None,
@@ -41,22 +45,29 @@ if args.space is None:
 start_time = time.perf_counter()
 
 cwd=Path.cwd().parent
+DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_DATA/"
+# DATA_DIR=cwd/'kdat/'
 
 print('Current directory:',cwd)
+if args.ref_data is None:
+    # print('Data directory:',DATA_DIR)
 
-# DATA_DIR=cwd/'kdat/'
-# print('Data directory:',DATA_DIR)
-DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_DATA/"
+    # infile_k='CEST_kdat_3D_R65_C32.h5' # WM
+    infile_k='kdat_3D_R34_C44_1shot.h5' 
+    # infile_k='kdat_3D_R34_C44_3shot_us_CAIP_4.h5'
+    # infile_ref='refs_3D.h5'
 
-# infile_k='CEST_kdat_3D_R65_C32.h5' # WM
-# infile_ref='refs_3D.h5'
+    # infile_k='kdat_2D_kdat_3D_R34_C44_1shot.h5'
+    # infile_k='kdat_2D_kdat_3D_R34_C44_3shot.h5'
+    # infile_ref='kdat_3D_R34_C44_3shot_us_CAIP_4.h5'
+    infile_ref='ACS_3D_C44_1shot.h5'
 
-infile_k='kdat_3D_R34_C44_1shot.h5'
-infile_ref='ACS_3D_C44_1shot.h5'
+    # infile_k='kdat_3D_R34_C44_3shot_us_Cart_3.h5'
+    # infile_ref='kdat_3D_R34_C44_3shot_us_Cart_3.h5'
 
-# infile_k='kdat_3D_R34_C44_3shot_us_Cart_3.h5'
-# infile_ref='kdat_3D_R34_C44_3shot_us_Cart_3.h5'
-
+else:
+    infile_k=args.img_data
+    infile_ref=args.ref_data
 
 print (File_path := DATA_DIR + infile_k)
 
@@ -87,8 +98,6 @@ f = h5py.File(DATA_DIR + infile_ref, 'r')
 ref = f['refs'][:]
 # ref = f['refs'][...,32:96] #experementing with highly truncated lines_ Set ReadOut width ROW below 64
 f.close()
-
-ROW=128 #row kx samples 
 
 print('kdat raw shape:',kdat01.shape) # kdat shape: (1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 72, 1, 1, 180, 32, 224)
 print('Reference shape:',ref.shape) # Reference shape: (32, 36, 48, 128)
@@ -239,11 +248,12 @@ if args.space=='ksp':
 
     ref_zf=sp.to_device(ref_zf, device=device)
 
-    c=0.8# Crop threshold for EspiritCalib
+    c=0# Crop threshold for EspiritCalib
     w=24 # ACS region size for EspiritCalib
     kw=6 #kernel width 
-    t=0.02 #eigen values threshold for calibration matrix in Espirit
-    print(' Ecalib Threshold :', c)
+    t=0.05 #eigen values threshold for calibration matrix in Espirit
+    print(' Ecalib corp :', c)
+    print(' Ecalib Threshold :', t)
     print(' kernel width :', kw)
     print(' calib region width :',w)
     # raise SystemExit
@@ -269,7 +279,8 @@ if args.space=='ksp':
 
     # np.save('mps_s',mps)
 
-name_str =  "_".join(infile_k.rsplit('.', 1)[0].split('_')[-4:])
+# name_str =  "_".join(infile_k.rsplit('.', 1)[0].split('_')[-4:])
+name_str =  infile_k.replace('kdat_','').replace('.h5','')
 
 file_name = f'maps/mps_c_{c}_t{t}_w_{w}_kw_{kw}_sp_{args.space}_'+name_str+'_prew.h5' if prew is True else f'maps/mps_c_{c}_t{t}_w_{w}_kw_{kw}_sp_{args.space}_'+name_str+'.h5'
 with h5py.File(cwd / file_name,'w') as f:

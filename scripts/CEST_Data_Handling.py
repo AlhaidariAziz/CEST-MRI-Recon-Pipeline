@@ -26,7 +26,7 @@ from sigpy.mri import app, epi, sms, cc
 parser=argparse.ArgumentParser(description='Extract data from Twix file to h5py')
 parser.add_argument('--data', default=None, help='data file path')
 parser.add_argument('--acs', type=bool, default=False, help='let the code know if it for a separate ACS data')
-parser.add_argument('--mode', type=str,required=True,choices=['map', 'read'], help='let the code know if it for a separate ACS data')
+parser.add_argument('--mode', type=str,required=True,choices=['map', 'read'], help='choose the method to read the data, either using twixtools map_twix function or read_twix function.')
 
 args=parser.parse_args()
 
@@ -51,8 +51,8 @@ if args.data is None:
 
 
     # CEST_34 offsets (Simon)
-    infile ='meas_MID00070_FID33988_CEST_3shot.dat'  #3shot
-    # infile ='meas_MID00071_FID33989_CEST_1shot.dat'  #1shot
+    # infile ='meas_MID00070_FID33988_CEST_3shot.dat'  #3shot
+    infile ='meas_MID00071_FID33989_CEST_1shot.dat'  #1shot
     # infile = 'acs_1shot.dat' # ACS
 
     file_dir=DIR+infile
@@ -77,7 +77,7 @@ print('>>> .dat: ', file_dir)
 print('> output path: ', out_dir)
 # make a new directory if not exist
 # pathlib.Path(out_dir).mkdir(parents=True, exist_ok=True)
-
+print('> mode: ', args.mode)
 # %% read in twix data
 twixobj = twixtools.read_twix(file_dir)
 
@@ -107,10 +107,10 @@ if args.mode == 'map':
     kdat_twix.flags['average']['Seg'] = False
     kdat_twix.flags['skip_empty_lead'] = False
 
-    Accel_PE1 = twix['hdr']['MeasYaps']['sPat'] ['lAccelFactPE'] 
-    Accel_3D = twix['hdr']['MeasYaps']['sPat'] ['lAccelFact3D']
-    Accel_total = twix['hdr']['MeasYaps']['sPat'] ['dTotalAccelFact']
-
+    Accel_PE1 = mapped['hdr']['MeasYaps']['sPat'] ['lAccelFactPE'] 
+    Accel_3D = mapped['hdr']['MeasYaps']['sPat'] ['lAccelFact3D']
+    Accel_total = mapped['hdr']['MeasYaps']['sPat'] ['dTotalAccelFact']
+    
 
     # N_Accel_PE1 = 2 #dummy to perform some operations
 
@@ -198,18 +198,40 @@ if args.mode == 'map':
             dset.attrs['central_Lin'] = central_Lin
             dset.attrs['central_Part'] = central_part
             f.close()
+
 elif args.mode == 'read':
 
     image_mdbs = []
     for mdb in img_meas['mdb']:
+        # print(dir(img_meas))
         if mdb.is_image_scan():
+        # if hasattr(mdb, 'cLin') and hasattr(mdb, 'cPar'):
             image_mdbs.append(mdb)
+
+    print('> number of image mdbs: ', len(image_mdbs))
 
     n_line = 1 + max([mdb.cLin for mdb in image_mdbs])
     n_part = 1 + max([mdb.cPar for mdb in image_mdbs])
     n_channel, n_column = image_mdbs[0].data.shape
-    # if args.acs is False:
-    n_reps = 1 + max([mdb.cEco for mdb in image_mdbs])
+    if args.acs is False: # ref ACS scan would only have one repetition 
+        n_reps = 1 + max([mdb.cEco for mdb in image_mdbs])
+    
+    print('> n_line: ', n_line)
+    print('> n_part: ', n_part) 
+    print('> n_reps: ', n_reps)
+    print('> n_channel: ', n_channel)
+    print('> n_column: ', n_column)
+    
+    all_lins = [mdb.cLin for mdb in image_mdbs]
+    print("> min:", min(all_lins))
+    print("> max:", max(all_lins))
+    print("> unique count:", len(set(all_lins)))
+    
+    #better estimation of the total number of lines per plane per partition
+    n_line= int(np.ceil(n_line/len(set(all_lins))) * len(set(all_lins)))
+    print('> estimated/corrected n_line: ', n_line) 
+    # raise SystemExit('Stop here for now')
+    
 
     if args.acs is False:
         kdat_twix = np.zeros([n_reps, n_part, n_line, n_channel, n_column], dtype=np.complex64)
