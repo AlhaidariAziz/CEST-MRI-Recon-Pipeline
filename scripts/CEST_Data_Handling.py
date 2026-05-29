@@ -6,8 +6,6 @@
 This script converts .dat to .h5 files
 
 
-Adapted from Author: Zhengguo Tan <zhengguo.tan@gmail.com>
-
 
 """
 
@@ -25,7 +23,8 @@ from sigpy.mri import app, epi, sms, cc
 
 parser=argparse.ArgumentParser(description='Extract data from Twix file to h5py')
 parser.add_argument('--data', default=None, help='data file path')
-parser.add_argument('--acs', type=bool, default=False, help='let the code know if it for a separate ACS data')
+parser.add_argument('--acs', type=bool, default=False, help='Is this a separate ACS dat file?')
+parser.add_argument('--os', action='store_true', default=False, help='read Oversampling? (not recommended for separate ACS dat file)')
 parser.add_argument('--mode', type=str,required=True,choices=['map', 'read'], help='choose the method to read the data, either using twixtools map_twix function or read_twix function.')
 
 args=parser.parse_args()
@@ -59,8 +58,8 @@ if args.data is None:
     out_dir = DIR
 else:
     file_dir=args.data
-    out_dir=np.__file__
-
+    out_dir=args.data.rsplit('/',1)[0] + '/'
+    infile=args.data.rsplit('/',1)[1] 
 
 
 if torch.cuda.is_available():
@@ -78,6 +77,8 @@ print('> output path: ', out_dir)
 # make a new directory if not exist
 # pathlib.Path(out_dir).mkdir(parents=True, exist_ok=True)
 print('> mode: ', args.mode)
+print('> separate ACS file: ', args.acs)
+print('> Read OS: ', args.os)
 # %% read in twix data
 twixobj = twixtools.read_twix(file_dir)
 
@@ -87,8 +88,11 @@ img_meas = twixobj[-1]
 
 
 
-REMOVE_OS = False  #over-sampling
-REMOVE_OS_Ref = False  #over-sampling for reference scan
+REMOVE_OS = not args.os #flag to remove over-sampling
+print('> remove oversampling: ', REMOVE_OS)
+
+# raise SystemExit('Stop here for now')
+REMOVE_OS_Ref = True  #flag to remove  over-sampling for merged reference scan (not applicable for separate ACS dat file)
 # if REMOVE_OS is True:
 #     os = 2
 # else:
@@ -140,7 +144,7 @@ if args.mode == 'map':
     print('> central_part: ', central_part)
     print('> central_Lin: ', central_Lin)
 
-    Reps=kdat_twix.shape[-7]
+    Reps=kdat_twix.shape[-9] # Repeatition: could be -7 or -9 
     # central_part_ref = 18
     N_y = kdat_twix.shape[-3]     # Lin
     N_x = kdat_twix.shape[-1]     # Col
@@ -157,9 +161,14 @@ if args.mode == 'map':
     #uncomment below for ref
     if Accel_total > 1:
         refs = refs_twix[:]
-        print('> refs shape: ', refs.shape)
+        print('> raw refs shape: ', refs.shape)
+        refs=refs.squeeze()
+        print('> unsoreted squeezed refs shape: ', refs.shape)
+        refs= np.transpose(refs, (-2,-4,-3,-1)) #choose the order that suituble for your application.
+        print('> soreted squeezed refs shape: ', refs.shape)
 
     print('> N_Partitions ', int(N_Part))
+    print('> N_lines ', int(N_Lin))
 
     kdat_twix = np.squeeze(kdat_twix[:])
     print('> unsorted squeezed kdat shape: ', kdat_twix.shape)
@@ -168,25 +177,25 @@ if args.mode == 'map':
     
     if args.acs is False:
         kdat_twix = np.transpose(kdat_twix, (-5,-2,-4,-3,-1)) #choose the order that suituble for your application. 
+        print('> sorted squeezed kdat shape: ', kdat_twix.shape)
         file_name = f'/kdat_3D_R{int(Reps)}_C{int(N_coil)}_'+ infile.split('_')[-1].rsplit('.',1)[0]+'.h5'
     else:
         kdat_twix = np.transpose(kdat_twix, (-2,-4,-3,-1)) #choose the order that suituble for your ACS. 
         file_name = f'/ACS_3D_C{int(N_coil)}_'+ infile.split('_')[-1].rsplit('.',1)[0]+'.h5'
 
-    print('> sorted kdat shape: ', kdat_twix.shape)
     # raise SystemExit('Stop here for now')
-
-
+    splits=2 # How many part to split the data into
+    offs_per_split= Reps//splits
     with h5py.File(out_dir + file_name, 'w') as f:
         # split CEST Data into 2 parts for easier handling, it can be split into more parts if needed based on Reps size. 
         if args.acs is False:
-            dset=f.create_dataset('kdat_01', data = kdat_twix[0:17,...])
+            dset=f.create_dataset('kdat_01', data = kdat_twix[0:offs_per_split,...])
             dset.attrs['Accel_PE1'] = Accel_PE1
             dset.attrs['Accel_3D'] = Accel_3D
             dset.attrs['Accel_total'] = Accel_total
             dset.attrs['central_Lin'] = central_Lin
             dset.attrs['central_Part'] = central_part
-            f.create_dataset('kdat_02', data = kdat_twix[17::,...])
+            f.create_dataset('kdat_02', data = kdat_twix[offs_per_split::,...])
             if Accel_total > 1:
                 f.create_dataset('ref', data = refs)
             f.close()
@@ -215,10 +224,11 @@ elif args.mode == 'read':
     n_channel, n_column = image_mdbs[0].data.shape
     if args.acs is False: # ref ACS scan would only have one repetition 
         n_reps = 1 + max([mdb.cEco for mdb in image_mdbs])
+        print('> n_reps: ', n_reps)
+
     
     print('> n_line: ', n_line)
     print('> n_part: ', n_part) 
-    print('> n_reps: ', n_reps)
     print('> n_channel: ', n_channel)
     print('> n_column: ', n_column)
     
@@ -250,14 +260,14 @@ elif args.mode == 'read':
         file_name = f'/ACS_3D_C{int(n_channel)}_'+ infile.split('_')[-1].rsplit('.',1)[0]+'.h5'
 
 
-        
     
     with h5py.File(out_dir + file_name, 'w') as f:
         # split CEST Data into 2 parts for easier handling, it can be split into more parts if needed based on Reps size. 
         if args.acs is False:
-            dset=f.create_dataset('kdat_01', data = kdat_twix[0:17,...])
+            offs_per_split= n_reps//2    
+            dset=f.create_dataset('kdat_01', data = kdat_twix[0:offs_per_split,...])
             
-            f.create_dataset('kdat_02', data = kdat_twix[17::,...])
+            f.create_dataset('kdat_02', data = kdat_twix[offs_per_split::,...])
             f.close()
         else:
             dset=f.create_dataset('refs', data = kdat_twix[:])

@@ -12,24 +12,36 @@ from pathlib import Path
 import time
 import argparse 
 
+# Set parameters for EspiritCalib
+c=0.9 # Crop threshold for EspiritCalib
+w=24 # ACS region size for EspiritCalib
+kw=6 #kernel width 
+t=0.05 #eigen values threshold for calibration matrix in Espirit
 
 parser = argparse.ArgumentParser(description='run spiritCalib for 3D data in ksapace or Hybird space')
 
+
+parser.add_argument('--data',
+                    default=None,
+                    help='kdat h5 file full path')
+
 parser.add_argument('--ref_data',
                     default=None,
-                    help='ACS h5 file')
+                    help='ref h5 file name (within the same directory as kdat h5 file) if reference scan is not contained in the same h5 file as kdat, otherwise specify the --merged_refs argument. ')
 
-parser.add_argument('--img_data',
-                    default=None,
-                    help='kdat h5 file')
+
+parser.add_argument('--merged_refs', action='store_true', help='flag to let the code know if Rereference scan is contained in the same h5 file as kdat')
+                 
 
 parser.add_argument('--space',
                     default=None,
                     help='Hyb for Hybird or ksp for kspace')
+
 parser.add_argument('--v',
                     type=bool,
                     default=False,
                     help='Verbose mode')
+
 parser.add_argument('--prew',
                     type=bool,
                     default=False,
@@ -49,27 +61,33 @@ DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_DATA/"
 # DATA_DIR=cwd/'kdat/'
 
 print('Current directory:',cwd)
-if args.ref_data is None:
+if args.data is None:
     # print('Data directory:',DATA_DIR)
 
     # infile_k='CEST_kdat_3D_R65_C32.h5' # WM
-    infile_k='kdat_3D_R34_C44_1shot.h5' 
+    # infile_k='kdat_3D_R34_C44_1shot.h5' 
     # infile_k='kdat_3D_R34_C44_3shot_us_CAIP_4.h5'
-    # infile_ref='refs_3D.h5'
-
     # infile_k='kdat_2D_kdat_3D_R34_C44_1shot.h5'
     # infile_k='kdat_2D_kdat_3D_R34_C44_3shot.h5'
-    # infile_ref='kdat_3D_R34_C44_3shot_us_CAIP_4.h5'
-    infile_ref='ACS_3D_C44_1shot.h5'
-
     # infile_k='kdat_3D_R34_C44_3shot_us_Cart_3.h5'
-    # infile_ref='kdat_3D_R34_C44_3shot_us_Cart_3.h5'
-
+    raise SystemExit("Pls specify the data file full path with --data argument")
+    pass
 else:
-    infile_k=args.img_data
-    infile_ref=args.ref_data
+    DATA_DIR=args.data.rsplit('/',1)[0] + '/'
+    infile_k=args.data.rsplit('/',1)[1] 
 
-print (File_path := DATA_DIR + infile_k)
+    if args.merged_refs:
+        infile_ref=None
+    else:
+        if args.ref_data is None:
+            raise SystemExit( "if reference scan is not contained in the same h5 file as kdat, please specify the --ref_data argument for the reference scan h5 file name, otherwise specify the --merged_refs argument. " )
+            # infile_ref='refs_3D.h5'
+            # infile_ref='ACS_3D_C44_1shot.h5'
+            # infile_ref='kdat_3D_R34_C44_3shot_us_Cart_3.h5'
+        else:
+            infile_ref=args.ref_data
+            
+print ('File path:', DATA_DIR + infile_k)
 
 
 def memory_usage():
@@ -84,20 +102,25 @@ def track_memory(msg=""):
 prew=args.prew
 
 # imaging echo (kdat)
-f = h5py.File(DATA_DIR + infile_k, 'r')
-kdat01 = f['kdat_01'][0,...]
-#loading prewhitening Matrix 
-if prew:
-    print('prewhitening is True')
-    W = f['W'][:]
-else:
-    print('prewhitening is False')
-f.close()
-
-f = h5py.File(DATA_DIR + infile_ref, 'r')
-ref = f['refs'][:]
-# ref = f['refs'][...,32:96] #experementing with highly truncated lines_ Set ReadOut width ROW below 64
-f.close()
+with h5py.File(DATA_DIR + infile_k, 'r') as f:
+    print('kdat keys:', list(f.keys())) #kdat keys: ['kdat_01', 'kdat_02', 'ref', 'W']
+    kdat01 = f['kdat_01'][:]
+    #loading prewhitening Matrix 
+    if prew:
+        print('prewhitening is True')
+        W = f['W'][:]
+    else:
+        print('prewhitening is False')
+    if args.merged_refs:
+        ref = f['ref'][:]
+    
+if not args.merged_refs:
+    with h5py.File(DATA_DIR + infile_ref, 'r') as f:
+        try:
+            ref = f['ref'][:]
+        except:
+            ref = f['refs'][:]
+        # ref = f['refs'][...,32:96] #experementing with highly truncated lines_ Set ReadOut width ROW below 64
 
 print('kdat raw shape:',kdat01.shape) # kdat shape: (1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 72, 1, 1, 180, 32, 224)
 print('Reference shape:',ref.shape) # Reference shape: (32, 36, 48, 128)
@@ -196,13 +219,12 @@ if args.space=='Hyb':
 
     ref_2D=sp.to_device(ref_2D, device=device)
 
-    c=0.97# Crop threshold for EspiritCalib
-    w=36 # ACS region size for EspiritCalib
-    kw=6 #kernel_width
+
 
     print(' Ecalib Threshold :', c)
     print(' kernel width :', kw)
     print(' calib region width :',w)
+    print(' SVD Threshold :',t)
 
     mps=[]
     for kx_idx in range(kshape[-1]):
@@ -211,6 +233,7 @@ if args.space=='Hyb':
                             device=device,
                             calib_width=w,
                             kernel_width=kw,
+                            thresh=t,
                             show_pbar=args.v).run())
 
     chunks=(ref_2D.shape[0:3]+(1,)) 
@@ -248,10 +271,6 @@ if args.space=='ksp':
 
     ref_zf=sp.to_device(ref_zf, device=device)
 
-    c=0# Crop threshold for EspiritCalib
-    w=24 # ACS region size for EspiritCalib
-    kw=6 #kernel width 
-    t=0.05 #eigen values threshold for calibration matrix in Espirit
     print(' Ecalib corp :', c)
     print(' Ecalib Threshold :', t)
     print(' kernel width :', kw)

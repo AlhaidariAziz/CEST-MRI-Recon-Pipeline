@@ -13,9 +13,13 @@ import argparse
 
 parser = argparse.ArgumentParser(description='run LLR reconstruction.')
 
-parser.add_argument('--file',
+parser.add_argument('--data',
                     default=None,
-                    help='file within the default directory set in the code script')
+                    help='imge h5 file full path')
+
+parser.add_argument('--mps',
+                    default=None,
+                    help='mps h5 file name')
 
 parser.add_argument('--r', type=float, default=1e-8,
                     help=' LLR regularization constant    [default: 1e-8]')
@@ -34,17 +38,26 @@ print('>  Max iteration (i): ', args.i)
 
 cwd=Path.cwd().parent
 
-DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_Data/"
-if args.file is None:
-    infile_k='CEST_kdat_2D_R65_C32.h5'
-else:
-    infile_k=args.file
+if args.data is not None:
+    DATA_DIR= args.data.rsplit('/',1)[0] + '/'
+    infile_k=args.data.rsplit('/',1)[1]
 
-# mps_file=cwd/'maps/mps_c_0.97.h5'
-mps_file=cwd/'maps/mps_c_0.8.h5'
-RO=224 #number of readout positions at each we have a hyber slice
-RO_start=15 #start and end RO positin that cover FOV
-RO_end=205
+else:
+    # DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_Data/"
+    # infile_k='CEST_kdat_2D_R65_C32.h5'
+    raise SystemExit("Pls specify the data file full path with --data argument")
+
+if args.mps is not None:
+    mps_file=  str(cwd) + '/maps/'  + args.mps
+else:
+    # mps_file=cwd/'maps/mps_c_0.97.h5'
+    # mps_file=cwd/'maps/mps_c_0.8.h5'
+    # mps_file=cwd/'maps/mps_c_0.8.h5'
+    raise SystemExit("Pls specify the maps file name with --mps argument")
+
+RO=240 #number of readout positions at each we have a hyber slice
+RO_start = 0 #start and end RO positin that cover FOV (15||)
+RO_end = RO # 205||
 #To do: add RO in h5 file dataset
 
 print('Current directory:',cwd)
@@ -85,7 +98,7 @@ print(f"Using device: {device} (Backend: {xp.__name__})")
 
 # inter_kspace = np.empty(img_shape,dtype=np.complex64)
 # recons_LLR = []
-Rep=9
+Rep=26
 with device:
     for RO_idx in range(RO_start,RO_end):
     # for RO_idx in range(RO):
@@ -107,7 +120,7 @@ with device:
             
         # track_memory(f'RO {RO_idx} :')   
         print('RO:',RO_idx)
-        kdat_temp=np.permute_dims(kdat_temp,(0,3,1,2))
+        # kdat_temp=np.permute_dims(kdat_temp,(0,3,1,2))
         
         with h5py.File(mps_file,'r') as f:
             mps=f['mps'][...,RO_idx]

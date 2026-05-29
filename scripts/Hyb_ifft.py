@@ -29,17 +29,21 @@ import argparse
 track_memory()
 
 parser=argparse.ArgumentParser(description='Ifft over Readout or PE2 dimension ')
-parser.add_argument('--file',  default=None,help='file within default directory defined in the code script')
+parser.add_argument('--data',  default=None,help='file full path')
 parser.add_argument('--dim', type=int, default=-1, choices=[-1,-3],help='flag for ifft dim, enter either -1 for RO or -3 for PE2')
-parser.add_argument('--refs', type=bool, default=False, help='flag to let the code know if Rereference scan is contained in the same h5 file')
+parser.add_argument('--refs', action='store_true', default=False, help='flag to let the code know if Rereference scan is contained in the same h5 file')
 
 args=parser.parse_args()
 
-# DATA_DIR= 'c:\\Users\\abalh\\miniconda3\\LLR\\CEST_Data\\Prep_CEST_Data\\'
-# DATA_DIR= "/home/hpc/iwbi/iwbi112h/CEST_Data/"
-DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_DATA/"
+if args.data is not None:
 
-if args.file is None:
+    DATA_DIR= args.data.rsplit('/',1)[0] + '/'
+    infile_k=args.data.rsplit('/',1)[1]
+
+else:
+    # DATA_DIR= 'c:\\Users\\abalh\\miniconda3\\LLR\\CEST_Data\\Prep_CEST_Data\\'
+    # DATA_DIR= "/home/hpc/iwbi/iwbi112h/CEST_Data/"
+    DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_DATA/"
     # infile_k='CEST_kdat_3D_R65_C32.h5' #WM
     # infile_ref='refs_3D.h5'#WM
     # infile_k='kdat_3D_R34_C44_1shot.h5'
@@ -48,8 +52,7 @@ if args.file is None:
     infile_k='kdat_3D_R34_C44_3shot_us_CAIP_4.h5'
     # infile_ref='ACS_3D_C44_1shot.h5'
     # infile_ref='refs_3D.h5'
-else:
-    infile_k=args.file
+
 
 print (File_path := DATA_DIR + infile_k)
 

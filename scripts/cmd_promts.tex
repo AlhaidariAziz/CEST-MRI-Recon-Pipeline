@@ -1,0 +1,12 @@
+project Dir : /home/hpc/iwbi/iwbi112h/LLR\ codebooks/lab_llr_alhaidari/scripts 
+Data Dir : /home/vault/iwbi/iwbi112h/CEST_DATA_06052026/
+
+python CEST_Data_Handling.py --mode map --data  
+
+python Hyb_ifft.py --refs=True --data 
+
+python mps.py --merged_refs=True  --space ksp --data
+
+python HybVolSENSE.py --i 30 --data /home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_APT_C12/kdat_2D_R26_C58_CAIP12.h5 --mps mps_c_0_t0.05_w_24_kw_6_sp_ksp_3D_R26_C58_CAIP12.h5 
+
+python Hyb_ifft.py --refs=True 
