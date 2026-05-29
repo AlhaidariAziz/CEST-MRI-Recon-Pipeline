@@ -38,18 +38,21 @@ echo "Start time: $(date)"
 
 # python "${DATA_DIR}mps.py" --space ksp # space = Hyb || ksp
 
-python "${DATA_DIR}HybVolLLR.py" --i 30 --r 1e-4
+python "${DATA_DIR}HybVolCS.py" --i 30 --r 1e-4
 echo "End time: $(date)"
-python "${DATA_DIR}HybVolLLR.py" --i 30 --r 1e-3
-echo "End time (HybVolLLR.py --i 30 --r 1e-3): $(date)"
-python "${DATA_DIR}HybVolLLR.py" --i 30 --r 1e-1
-echo "End time (HybVolLLR.py --i 30 --r 1e-1): $(date)"
-python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 1 1 --i 30
-echo "End time (HybVolLLR.py --blk_shape 1 1 1 --i 30): $(date)"
-python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 3 3 --i 30
-echo "End time (HybVolLLR.py --blk_shape 1 3 3 --i 30): $(date)"
-python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 7 7 --i 30
-echo "End time (HybVolLLR.py --blk_shape 1 7 7 --i 30): $(date)"
+
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --r 1e-4
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --r 1e-3
+# echo "End time (HybVolLLR.py --i 30 --r 1e-3): $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --r 1e-1
+# echo "End time (HybVolLLR.py --i 30 --r 1e-1): $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 1 1 --i 30
+# echo "End time (HybVolLLR.py --blk_shape 1 1 1 --i 30): $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 3 3 --i 30
+# echo "End time (HybVolLLR.py --blk_shape 1 3 3 --i 30): $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 7 7 --i 30
+# echo "End time (HybVolLLR.py --blk_shape 1 7 7 --i 30): $(date)"
 
 # python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 6 6 --i 50
 # python "${DATA_DIR}HybVolLLR.py" --blk_shape 1 1 1 --i 30 --r 1e-2

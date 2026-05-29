@@ -1,0 +1,24 @@
+Running on tf060
+Start time: Fri May 15 09:33:15 PM CEST 2026
+no change     /apps/python/3.12-conda/condabin/conda
+no change     /apps/python/3.12-conda/bin/conda
+no change     /apps/python/3.12-conda/bin/conda-env
+no change     /apps/python/3.12-conda/bin/activate
+no change     /apps/python/3.12-conda/bin/deactivate
+no change     /apps/python/3.12-conda/etc/profile.d/conda.sh
+no change     /apps/python/3.12-conda/etc/fish/conf.d/conda.fish
+no change     /apps/python/3.12-conda/shell/condabin/Conda.psm1
+no change     /apps/python/3.12-conda/shell/condabin/conda-hook.ps1
+no change     /apps/python/3.12-conda/lib/python3.12/site-packages/xontrib/conda.xsh
+no change     /apps/python/3.12-conda/etc/profile.d/conda.csh
+no change     /home/hpc/iwbi/iwbi112h/.bashrc
+No action taken.
+               total        used        free      shared  buff/cache   available
+Mem:           503Gi        18Gi       486Gi       1.1Gi       1.6Gi       484Gi
+Swap:          8.0Gi        84Mi       7.9Gi
+Python 3.10.20
+gona Work! Hoooa
+/var/tmp/slurmd_spool/job1202014/slurm_script: line 37: 2111370 Killed                  python "${DATA_DIR}mps.py" --merged_refs=True --space ksp --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_APT_C6/kdat_3D_R26_C58_C6.h5"
+Worked! Hoooa
+End time: Fri May 15 09:45:43 PM CEST 2026
+[2026-05-15T21:45:43.620] error: Detected 1 oom_kill event in StepId=1202014.batch. Some of the step tasks have been OOM Killed.

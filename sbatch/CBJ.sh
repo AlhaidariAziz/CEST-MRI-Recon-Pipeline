@@ -1,9 +1,10 @@
 #!/bin/bash
-#SBATCH --job-name=mps_ksp_14022026
+#SBATCH --job-name=mps_ksp_09052026
 #SBATCH --partition=work
+##SBATCH --partition=broadwell512
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=64
-#SBATCH --mem=500G
+##SBATCH --cpus-per-task=64
+#BATCH --mem=150G
 #SBATCH --time=24:00:00
 #SBATCH --mail-type=END
 #SBATCH --mail-user=ab.alhaidari@yahoo.com
@@ -33,7 +34,9 @@ python --version
 python -c"print('gona Work! Hoooa')"
 ##Original Work
 
-python "${DATA_DIR}mps.py" --space ksp --prew True 
+python "${DATA_DIR}mps.py" --merged_refs=True  --space ksp --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_APT_C6/kdat_3D_R26_C58_C6.h5" 
+# python "${DATA_DIR}mps.py" --merged_refs=True --space ksp --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_APT_C16/kdat_3D_R26_C58_CAIP16.h5" 
+# python "${DATA_DIR}mps.py" --space ksp --prew True 
 # python "${DATA_DIR}ifft_RO.py"  
 
 python -c"print('Worked! Hoooa')"

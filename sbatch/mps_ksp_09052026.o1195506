@@ -1,0 +1,48 @@
+Running on tf041
+Start time: Mon May 11 09:03:43 PM CEST 2026
+no change     /apps/python/3.12-conda/condabin/conda
+no change     /apps/python/3.12-conda/bin/conda
+no change     /apps/python/3.12-conda/bin/conda-env
+no change     /apps/python/3.12-conda/bin/activate
+no change     /apps/python/3.12-conda/bin/deactivate
+no change     /apps/python/3.12-conda/etc/profile.d/conda.sh
+no change     /apps/python/3.12-conda/etc/fish/conf.d/conda.fish
+no change     /apps/python/3.12-conda/shell/condabin/Conda.psm1
+no change     /apps/python/3.12-conda/shell/condabin/conda-hook.ps1
+no change     /apps/python/3.12-conda/lib/python3.12/site-packages/xontrib/conda.xsh
+no change     /apps/python/3.12-conda/etc/profile.d/conda.csh
+no change     /home/hpc/iwbi/iwbi112h/.bashrc
+No action taken.
+               total        used        free      shared  buff/cache   available
+Mem:           503Gi       3.8Gi       501Gi       4.8Mi       257Mi       499Gi
+Swap:          8.0Gi          0B       8.0Gi
+Python 3.10.20
+gona Work! Hoooa
+Current directory: /home/hpc/iwbi/iwbi112h/LLR codebooks/lab_llr_alhaidari
+File path: /home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_APT_C12/kdat_3D_R26_C58_CAIP12.h5
+kdat keys: ['kdat_01', 'kdat_02', 'ref']
+prewhitening is False
+kdat raw shape: (13, 58, 48, 120, 240)
+Reference shape: (58, 36, 32, 64)
+ kdat shape [Reps], [Ch] , [PE2] , [PE1] , [FE] : (13, 58, 48, 120, 240)
+ Ref  shape [Ch] , [PE2] , [PE1] , [FE] : (58, 36, 32, 64)
+kshape  [Ch] , [PE2] , [PE1] , [FE] : (58, 48, 120, 240)
+ref shape: (58, 36, 32, 64)
+ref_us shape: (58, 36, 32, 64)
+ref_zf shape: (58, 48, 120, 240)
+Ref Data Type: complex64
+Ref Data Type: <class 'numpy.ndarray'>
+mode: ksp
+ref_3D shape: (58, 48, 120, 240)
+ mps estimation ...
+ Ecalib corp : 0.8
+ Ecalib Threshold : 0.05
+ kernel width : 6
+ calib region width : 24
+mps shape: (58, 48, 120, 240)
+Done
+Duration: 299.0926026641158
+you can find mps.h5 in /home/hpc/iwbi/iwbi112h/LLR codebooks/lab_llr_alhaidari/maps
+saved as:maps/mps_c_0.8_t0.05_w_24_kw_6_sp_ksp_3D_R26_C58_CAIP12.h5
+Worked! Hoooa
+End time: Tue May 12 02:03:03 AM CEST 2026
