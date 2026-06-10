@@ -22,9 +22,10 @@ print('us PE2 accelaration:',Rz)
 print('yshift:',args.yshift)
 
 
-DIR='/home/vault/iwbi/iwbi112h/CEST_DATA/'
+DIR='/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/'
 # infile='kdat_3D_R34_C44_3shot.h5'  #3shot
-infile='kdat_3D_R34_C44_3shot_chopped.h5'  #3shot
+# infile='kdat_3D_R34_C44_3shot_chopped.h5'  #3shot
+infile='kdat_3D_R34_C52_3Shot.h5'  #3shot
 
 
 with h5py.File(DIR+infile,'r') as f:
@@ -78,23 +79,27 @@ if args.type == 'Cart':
 
 elif args.type == 'CAIP': ##
     #to do 
-    #add CAIP Shift
+    #add CAIP Shifts other than 1
     
     ky=kdat.shape[-2]
     kz=kdat.shape[-3]
-    Bys=ky//R #sampling blocks in ky
-    SBys=R//Rz #sampling sub-blocks in ky
+    Bys=int(np.ceil(ky/R)) #sampling blocks in ky , round up when Bys is non integer 
+    SBys=Rz #  ky indices per sampling block || Rz is the maximum shiftings per CAIP Block, that is the shifting the sample along kz, assuming CAIP delta is 1
+
 
     mask=np.zeros(kdat.shape[-3:-1],dtype=int)
 
     mask=mask.T
     #Caip with delta=1
     for By in range(Bys):
-    # for By in range(1):
-        for SBy in range(Rz):
-        # for SBy in range(1):
-            mask[(By*R)+(SBy+1)*Ry-1,SBy::Rz]=1
-            # m3[0:2,0::2]=0
+        for SBy in range(SBys):
+            SBy_ky_idx=min((By*R)+((SBy+1)*Ry)-1,ky-1)
+            if (By*R)+((SBy+1)*Ry)-1 > ky-1:
+                # print("Hit last ky index, Exiting loop.")
+                break  
+            mask[SBy_ky_idx,SBy::Rz]=1
+    print(f"R={R},Ry={Ry},Rz={Rz}")
+    print(f"Mask undersampling = {np.size(mask)/np.count_nonzero(mask)}")
     mask=mask.T
     mask=np.repeat(mask[None,None,...,None],kdat.shape[-5],axis=-5)
     mask=np.repeat(mask,kdat.shape[-4],axis=-4)
