@@ -8,7 +8,7 @@ CPU/GPU execution.
 ## Repository layout
 
 ```text
-lab_llr_alhaidari/
+CEST Recon Pipeline/
 ├── env/       Conda environment definition
 ├── kdat/      optional folder for k-space data (Git-ignored)
 ├── maps/      Generated ESPIRiT sensitivity maps
