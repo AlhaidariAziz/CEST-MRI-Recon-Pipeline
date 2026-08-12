@@ -43,16 +43,16 @@ if args.data is not None:
 else:
     # DATA_DIR= 'c:\\Users\\abalh\\miniconda3\\LLR\\CEST_Data\\Prep_CEST_Data\\'
     # DATA_DIR= "/home/hpc/iwbi/iwbi112h/CEST_Data/"
-    DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_DATA/"
+    # DATA_DIR= "/home/vault/iwbi/iwbi112h/CEST_DATA/"
     # infile_k='CEST_kdat_3D_R65_C32.h5' #WM
     # infile_ref='refs_3D.h5'#WM
     # infile_k='kdat_3D_R34_C44_1shot.h5'
     # infile_k='kdat_3D_R34_C44_3shot.h5'
     # infile_k='kdat_3D_R34_C44_3shot_us_Cart_12.h5'
-    infile_k='kdat_3D_R34_C44_3shot_us_CAIP_4.h5'
+    # infile_k='kdat_3D_R34_C44_3shot_us_CAIP_4.h5'
     # infile_ref='ACS_3D_C44_1shot.h5'
     # infile_ref='refs_3D.h5'
-
+    raise SystemExit("Please specify the --data argument with the full path to the k-space h5 file you want to process")
 
 print (File_path := DATA_DIR + infile_k)
 

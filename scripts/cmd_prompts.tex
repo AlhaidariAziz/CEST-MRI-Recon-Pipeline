@@ -1,0 +1,45 @@
+scripts Dir : /home/hpc/iwbi/iwbi112h/LLR\ codebooks/lab_llr_alhaidari/scripts 
+sbatch Dir : /home/hpc/iwbi/iwbi112h/LLR\ codebooks/lab_llr_alhaidari/sbatch 
+Data Dir : /home/vault/iwbi/iwbi112h/CEST_DATA_06052026/
+
+ 
+
+salloc.tinyfat -p work -n 64 --time=01:00:00 
+mpirun -n 64 python HybVolLLR_v2.py\
+ --data /home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_APT_C12/kdat_2D_R26_C58_C12.h5 \
+ --mps mps_c_0.9_t0.05_w_24_kw_6_sp_ksp_3D_R26_C58_C12.h5 --i 60 --r 0.01 --splits 2
+
+
+ (openmpi/5.0.5-gcc13.3.0/   openmpi/4.1.7-gcc13.3.0)
+
+ ------------------------------------
+ 0.1
+ python CEST_Data_Handling.py --mode map --data 
+ 
+ 0.2
+ python mps.py --merged_refs --space ksp --data /home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_APT_C12/kdat_3D_R26_C58_C12.h5 --w 
+ python mps.py  --space ksp --data /home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_3D_R34_C52_3Shot.h5 --ref_data ACS_3D_C52.h5   --w 36
+ 
+ 1.1 
+ python Retro_us.py --type Cart --R 3 
+ 1.2
+ python Retro_us.py --type CAIP --R 12 --RPE2 3 
+
+ 2.1 (CAIP)
+ python Hyb_ifft.py --refs --data /home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_3D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5
+
+ 3.1.a (CAIP)
+ python HybVolSENSE.py --i 80 --data /home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_APT_C12/kdat_2D_R26_C58_C12.h5 --r 0.003 
+ --mps mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R26_C58_C12.h5
+3.1.b (Cartitian)
+ python HybVolSENSE.py --i 30 --data /home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_4x1_yshift_False.h5 --r 0.001 \
+ --mps mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5
+
+ 3.2.a CAIP
+ python HybVolLLR.py --i 30 --data /home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_APT_C12/kdat_2D_R26_C58_C12.h5 --mps mps_c_0.9_t0.05_w_24_kw_6_sp_ksp_3D_R26_C58_C12.h5 
+ 3.2.b Cartisian
+python HybVolLLR.py --i 30 --data /home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5 --mps mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5 --r 0.01
+
+
+
+

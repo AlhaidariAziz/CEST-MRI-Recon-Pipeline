@@ -9,8 +9,7 @@
 #SBATCH -p a100
 ##SBATCH --cpus-per-task=8
 #SBATCH --time=24:00:00
-##SBATCH --job-name=HybVolLLR_0402
-#SBATCH --job-name=LLR_pars_14042026
+#SBATCH --job-name=LLR_pars_lamda_12072026
 #SBATCH --mail-type=END
 #SBATCH --mail-user=ab.alhaidari@yahoo.com
 
@@ -38,8 +37,130 @@ echo "Start time: $(date)"
 
 # python "${DATA_DIR}mps.py" --space ksp # space = Hyb || ksp
 
-python "${DATA_DIR}HybVolCS.py" --i 30 --r 1e-4
-echo "End time: $(date)"
+# python "${DATA_DIR}HybVolCS.py" --i 30 --r 1e-4
+# # echo "End time: $(date)"
+
+
+# =======================================================================
+# Cartesian  LLRs variations  
+# =======================================================================
+
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.15
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.08
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 30  --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.001
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 30  --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.0001
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 10 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 50 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 70 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 100 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 --blk_shape 1 1 1
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 --blk_shape 1 3 3
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 --blk_shape 1 7 7
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 --blk_shape 1 9 9
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 --blk_shape 1 11 11
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 --blk_shape 1 13 13
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 --blk_shape 1 15 15
+# echo "End time: $(date)"
+
+# =======================================================================
+# Cartesian (y-shift)  LLRs variations (Regs + blk size +splits) 
+# =======================================================================
+
+
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_3x2_yshift_True.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 --blk_shape 1 5 5
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_3x2_yshift_True.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.001 --blk_shape 1 5 5
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_3x2_yshift_True.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.0001 --blk_shape 1 5 5
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_3x2_yshift_True.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.00001 --blk_shape 1 5 5
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_3x2_yshift_True.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.000001 --blk_shape 1 5 5
+# echo "End time: $(date)"
+
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_3x2_yshift_True.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.000001 --blk_shape 1 1 1
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_3x2_yshift_True.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.000001 --blk_shape 1 3 3
+# echo "End time: $(date)"
+
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_3x2_yshift_True.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.000001 --blk_shape 1 3 3 --splits=4
+# echo "End time: $(date)"
+
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_3x2_yshift_True.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.08 --blk_shape 1 5 5 --splits=8
+# echo "End time: $(date)"
+
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_3x2_yshift_True.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.15 --blk_shape 1 5 5 --splits=8
+# echo "End time: $(date)"
+
+
+
+
+
+# =======================================================================
+# =======================================================================
+# Cartesian  sense 
+# =======================================================================
+
+# python "${DATA_DIR}HybVolSENSE.py" --i 30  --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.001
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolSENSE.py" --i 30  --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_3x2_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.001
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolSENSE.py" --i 30  --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_3x3_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.001
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolSENSE.py" --i 30  --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_4x3_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.001
+# echo "End time: $(date)"
+
+
+# =======================================================================
+# Cartesian  sense  variations
+# =======================================================================
+
+
+
+# python "${DATA_DIR}HybVolSENSE.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.15
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolSENSE.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.08
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolSENSE.py" --i 30  --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.001
+# # echo "End time: $(date)"
+# python "${DATA_DIR}HybVolSENSE.py" --i 30  --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_3x2_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.001
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolSENSE.py" --i 30  --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_4x2_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.001
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolSENSE.py" --i 30  --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_3x3_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.001
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolSENSE.py" --i 30  --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_4x3_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.001
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolSENSE.py" --i 30  --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.0001
+# echo "End time: $(date)"
+
+# python "${DATA_DIR}HybVolSENSE.py" --i 10 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolSENSE.py" --i 50 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolSENSE.py" --i 70 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolSENSE.py" --i 100 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_Cart_3x1_yshift_False.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 
+# echo "End time: $(date)"
+
+#CAIP Ssense Recons 
+# python "${DATA_DIR}HybVolSENSE.py" --i 30 --r 0.001 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_APT_C6/kdat_2D_R26_C58_C6.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R26_C58_C6.h5"
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolSENSE.py" --i 30 --r 0.001 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_APT_C12/kdat_2D_R26_C58_C12.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R26_C58_C12.h5"
+# echo "End time: $(date)"
+# python "${DATA_DIR}HybVolSENSE.py" --i 30 --r 0.001 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_APT_C16/kdat_2D_R26_C58_C16.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R26_C58_C16.h5"
+# echo "End time: $(date)"
+
 
 # python "${DATA_DIR}HybVolLLR.py" --i 30 --r 1e-4
 # echo "End time: $(date)"
@@ -68,6 +189,58 @@ echo "End time: $(date)"
 # python "${DATA_DIR}ifft_RO.py"
 # python "${DATA_DIR}HybVolLLR.py" --i 30 --blk_shape 1 5 5 --r 1e-3
 # python "${DATA_DIR}HybVolLLR.py" --i 30 --blk_shape 1 8 8
+
+
+
+# ==========================================================
+# DC-SYS LLR fine Tuneing
+# ==========================================================
+
+
+    # ++++++++++++++++++++++++++++++++
+    # # Blk-size
+    # ++++++++++++++++++++++++++++++++
+
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_5x4_sym_yshift_True_dc_16.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 --blk_shape 1 1 1 --splits=2
+# echo "End time: $(date)"
+
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_5x4_sym_yshift_True_dc_16.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 --blk_shape 1 3 3 --splits=2
+# echo "End time: $(date)"
+
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_5x4_sym_yshift_True_dc_16.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 --blk_shape 1 7 7 --splits=2
+# echo "End time: $(date)"
+
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_5x4_sym_yshift_True_dc_16.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 --blk_shape 1 9 9 --splits=2
+# echo "End time: $(date)"
+
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_5x4_sym_yshift_True_dc_16.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 --blk_shape 1 11 11 --splits=2
+# echo "End time: $(date)"
+
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_5x4_sym_yshift_True_dc_16.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 --blk_shape 1 13 13 --splits=2
+# echo "End time: $(date)"
+
+# python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_5x4_sym_yshift_True_dc_16.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.01 --blk_shape 1 15 15 --splits=2
+# echo "End time: $(date)"
+
+    # ++++++++++++++++++++++++++++++++
+    # # lamda
+    # ++++++++++++++++++++++++++++++++
+
+python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_5x4_sym_yshift_True_dc_16.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.05 --blk_shape 1 5 5 --splits=2
+echo "End time: $(date)"
+
+python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_5x4_sym_yshift_True_dc_16.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.03 --blk_shape 1 5 5 --splits=2
+echo "End time: $(date)"
+
+python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_5x4_sym_yshift_True_dc_16.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.009 --blk_shape 1 5 5 --splits=2
+echo "End time: $(date)"
+
+python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_5x4_sym_yshift_True_dc_16.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.007 --blk_shape 1 5 5 --splits=2
+echo "End time: $(date)"
+
+python "${DATA_DIR}HybVolLLR.py" --i 30 --data "/home/vault/iwbi/iwbi112h/CEST_DATA_06052026/CEST_GRAPPA3_3Shot/kdat_2D_R34_C52_3Shot_us_CAIP_5x4_sym_yshift_True_dc_16.h5" --mps "mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_R34_C52_3Shot.h5" --r 0.005 --blk_shape 1 5 5 --splits=2
+echo "End time: $(date)"
+
 
 rm -r $TMPDIR/$SLURM_JOB_ID
 

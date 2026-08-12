@@ -13,9 +13,7 @@ import time
 import argparse 
 
 # Set parameters for EspiritCalib
-c=0.9 # Crop threshold for EspiritCalib
-w=24 # ACS region size for EspiritCalib
-kw=6 #kernel width 
+c=0.90 # Crop threshold for EspiritCalib
 t=0.05 #eigen values threshold for calibration matrix in Espirit
 
 parser = argparse.ArgumentParser(description='run spiritCalib for 3D data in ksapace or Hybird space')
@@ -27,7 +25,7 @@ parser.add_argument('--data',
 
 parser.add_argument('--ref_data',
                     default=None,
-                    help='ref h5 file name (within the same directory as kdat h5 file) if reference scan is not contained in the same h5 file as kdat, otherwise specify the --merged_refs argument. ')
+                    help='ref h5 file name (within the same directory as kdat h5 file), otherwise specify the --merged_refs argument. ')
 
 
 parser.add_argument('--merged_refs', action='store_true', help='flag to let the code know if Rereference scan is contained in the same h5 file as kdat')
@@ -47,7 +45,20 @@ parser.add_argument('--prew',
                     default=False,
                     help='Apply prewhitening flags')
 
+parser.add_argument('--w',
+                    type=int,
+                    default=24,
+                    help='calib ragion width_ largest dimension of the calibration region (default: 24)')
+
+parser.add_argument('--kw',
+                    type=int,
+                    default=6,
+                    help='kernel width for espirit mps estimation (default: 6)')
+
 args = parser.parse_args()
+
+w=args.w # ACS region size for EspiritCalib
+kw=args.kw #kernel width 
 
 if args.space is None:
      raise SystemExit(  "Please specify the --space argument: "
