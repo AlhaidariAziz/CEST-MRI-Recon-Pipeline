@@ -11,7 +11,7 @@ CPU/GPU execution.
 CEST Recon Pipeline/
 ├── env/       Conda environment definition
 ├── kdat/      optional folder for k-space data (Git-ignored)
-├── maps/      Generated ESPIRiT sensitivity maps
+├── maps/      Generated ESPIRiT sensitivity maps  (Git-ignored)
 ├── recons/    optional folder for reconstruction results (Git-ignored)
 ├── sbatch/    SLURM job scripts and templates
 └── scripts/   Data preparation, reconstruction, and visualization tools
@@ -36,13 +36,8 @@ automatically. Pass input files explicitly with `--data`. At present:
 
 The repository folders "kdat" and "recons" are for demonstrational purposes.
 Users working with large data on another filesystem can instead set
-`DATA_DIR` and `OUTPUT_DIR` to their own storage paths.
-
-
-- `mps.py` saves sensitivity maps in `$PROJECT_DIR/maps/`.
-- The reconstruction scripts save their HDF5 results beside the input data "DATA_DIR".
-- The scripts still contains example paths or filenames that must be edited before use.
-- The SLURM files in `sbatch/` are templates. Update it before submitting a job.
+`DATA_DIR` and `OUTPUT_DIR` to their own storage paths. It is recommended to
+get access to the complementary data files submitted with this repo. 
 
 ## Environment setup
 
@@ -69,32 +64,67 @@ stage, the files may contain:
 - `mps`: coil-sensitivity maps
 
 
-## Workflow
+## Workflows
 
-The general workflow is:
+There are two possible reconstruction workflows, depending on whether the sensitivity
+maps are calculated directly from 3-D k-space or separately for each 2-D
+k-space after conversion to hybrid space. The first workflow is the one implemented
+this work. 
+
+### Workflow 1: sensitivity maps from 3-D k-space
 
 ```text
 Siemens .dat
     |
     v
-CEST_Data_Handling.py --> 3-D HDF5 k-space
+CEST_Data_Handling.py
     |
-    +--> optional Retro_us.py ( performs retro Undersampling)
+    v
+3-D HDF5 k-space
     |
-    +--> mps.py --space ksp  (Calculate sensitivity maps directly from 3D kspace) -----------#
-    |                                  |
-    +--> Hyb_ifft.py (convert kdata to Hybridspace)  --> mps.py --space Hyb (Calculate sensitivity maps in hybridspace for each 2D kspace separately)
-                           #
-                           |
-                           v
-              HybVolSENSE.py or HybVolLLR.py
+    +--> optional Retro_us.py
+    |
+    +--> mps.py --space ksp ---------> 3-D k-space sensitivity maps
+    |
+    v
+Hyb_ifft.py
+    |
+    v
+Hybrid-space k-data + 3-D k-space sensitivity maps
+    |
+    v
+HybVolSENSE.py or HybVolLLR.py
 ```
 
-Sensitivity maps may therefore be calculated either before `Hyb_ifft.py` in
-3-D k-space or afterward in hybrid space.
+### Workflow 2: sensitivity maps from hybrid space
 
-Run the processing commands from the `scripts/` directory. Several scripts use
-the parent of the current directory to locate `maps/`:
+```text
+Siemens .dat
+    |
+    v
+CEST_Data_Handling.py
+    |
+    v
+3-D HDF5 k-space
+    |
+    +--> optional Retro_us.py
+    |
+    v
+Hyb_ifft.py
+    |
+    v
+Hybrid-space k-data
+    |
+    v
+mps.py --space Hyb
+    |
+    v
+One sensitivity-map set for each 2-D k-space
+    |
+    v
+HybVolSENSE.py or HybVolLLR.py
+```
+
 
 ```bash
 cd "$PROJECT_DIR/scripts"
