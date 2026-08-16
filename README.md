@@ -1,18 +1,14 @@
 # CEST MRI Reconstruction Pipeline
 
-A research pipeline for preparing CEST MRI data and reconstructing accelerated
-acquisitions in hybrid space. The repository provides Python implementations
-for SENSE/L2 and locally low-rank (LLR) reconstruction, together with
-experimental GRAPPA and compressed-sensing workflows.
+A research pipeline for preparing Multi-contrast, multi-dimensional (CEST) MRI data
+and reconstructing accelerated 3D acquisitions. The repository provides 
+Python implementations for SENSE/L2 and locally low-rank (LLR) reconstruction,
+together with GRAPPA and compressed-sensing workflows.
 
 The pipeline supports Siemens raw-data conversion, Cartesian and CAIP
-retrospective undersampling, ESPIRiT coil-sensitivity estimation, HDF5-based
-intermediate data, and CPU/GPU execution with SigPy and CuPy.
-
-> **Project status:** Research code developed for an MSc project. The SENSE and
-> LLR workflows are the primary implemented paths. GRAPPA and compressed
-> sensing are included as experimental scripts and may require dataset-specific
-> configuration. Raw MRI data are not distributed in this repository.
+retrospective undersampling, Temporat/Contrast-dependent sampling viarations,
+ESPIRiT coil-sensitivity estimation, and CPU/GPU execution with SigPy and CuPy.
+Besides, reconstructions comparison and CEST Analysis Notebooks. 
 
 ## Reconstruction methods
 
