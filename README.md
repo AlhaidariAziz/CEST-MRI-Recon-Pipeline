@@ -1,14 +1,32 @@
-# CEST Recon Pipeline
+# CEST MRI Reconstruction Pipeline
 
-Python tools for preparing CEST MRI data and performing hybrid-space SENSE and
-locally low-rank (LLR) reconstructions. The workflow supports Cartesian and
-CAIP retrospective undersampling, ESPIRiT coil-sensitivity estimation, and
-CPU/GPU execution.
+A research pipeline for preparing CEST MRI data and reconstructing accelerated
+acquisitions in hybrid space. The repository provides Python implementations
+for SENSE/L2 and locally low-rank (LLR) reconstruction, together with
+experimental GRAPPA and compressed-sensing workflows.
+
+The pipeline supports Siemens raw-data conversion, Cartesian and CAIP
+retrospective undersampling, ESPIRiT coil-sensitivity estimation, HDF5-based
+intermediate data, and CPU/GPU execution with SigPy and CuPy.
+
+> **Project status:** Research code developed for an MSc project. The SENSE and
+> LLR workflows are the primary implemented paths. GRAPPA and compressed
+> sensing are included as experimental scripts and may require dataset-specific
+> configuration. Raw MRI data are not distributed in this repository.
+
+## Reconstruction methods
+
+| Method | Entry point | Status |
+| --- | --- | --- |
+| SENSE / L2 | `scripts/HybVolSENSE.py` | Primary workflow |
+| Locally low rank (LLR) | `scripts/HybVolLLR.py` | Primary workflow |
+| GRAPPA | `scripts/HybVolGRAPPA.py` | Experimental |
+| Compressed sensing | `scripts/HybVolCS.py` | Experimental |
 
 ## Repository layout
 
 ```text
-CEST Recon Pipeline/
+CEST-MRI-Recon-Pipeline/
 ├── env/       Conda environment definition
 ├── kdat/      optional folder for k-space data (Git-ignored)
 ├── maps/      Generated ESPIRiT sensitivity maps  (Git-ignored)
@@ -31,13 +49,13 @@ mkdir -p "$DATA_DIR" "$OUTPUT_DIR"
 ```
 
 These variables are shell conveniences; the Python scripts do not read them
-automatically. Pass input files explicitly with `--data`. At present:
+automatically. Pass input files explicitly with `--data`.
 
-
-The repository folders "kdat" and "recons" are for demonstrational purposes.
+The repository folders `kdat` and `recons` are placeholders only.
 Users working with large data on another filesystem can instead set
-`DATA_DIR` and `OUTPUT_DIR` to their own storage paths. It is recommended to
-get access to the complementary data files submitted with this repo. 
+`DATA_DIR` and `OUTPUT_DIR` to their own storage paths. Reproducing the original
+experiments requires access to the complementary data submitted with the
+project.
 
 ## Environment setup
 
@@ -66,10 +84,10 @@ stage, the files may contain:
 
 ## Workflows
 
-There are two possible reconstruction workflows, depending on whether the sensitivity
-maps are calculated directly from 3-D k-space or separately for each 2-D
-k-space after conversion to hybrid space. The first workflow is the one implemented
-this work. 
+There are two reconstruction workflows, depending on whether sensitivity maps
+are calculated directly from 3-D k-space or separately for each 2-D k-space
+after conversion to hybrid space. Workflow 1 is the primary path implemented
+and evaluated in this project.
 
 ### Workflow 1: sensitivity maps from 3-D k-space
 
@@ -248,8 +266,9 @@ The principal LLR options are:
 - `--r`: LLR regularization weight (default: `1e-2`)
 - `--blk_shape`: three-dimensional LLR block shape (default: `1 5 5`)
 - `--blk_strides`: block strides (default: `1 1 1`)
-- `--splits`: number of subsets within each LLR is coupled over the contrast/temporal dimension;
-     accepted values are `1`, `2`, `4`, or `8`;
+- `--splits`: number of reconstruction subsets; accepted values are `1`, `2`,
+  `4`, or `8`. LLR regularization is coupled over the contrast/temporal
+  dimension within each subset.
 
 ## Running on SLURM
 
@@ -262,18 +281,21 @@ sbatch sbatch/GBJ.sh
 ```
 
 For interactive commands, request resources according to the cluster policy,
-activate the `LLRv3` environment,load , and run the same commands shown above.
+load the required modules, activate the `LLRv3` environment, and run the same
+commands shown above.
 
 
-## Results analysis and visualization scripts:
+## Results analysis and visualization
+
 - `view_v2.ipynb`: reconstruction visualization
 - `Z_v2.ipynb`: CEST Z-spectrum analysis
 
-Note: the reconstructed data might be fragmented and need to be merged, cells within h5.ipynb file is usefull.
+Split reconstruction outputs may need to be assembled before visualization.
+The utilities in `h5.ipynb` demonstrate this process.
 
 ## Additional scripts
 
-- `HybVolLLR_v2.py`: parrallel implementation on CPUs cluster.
+- `HybVolLLR_v2.py`: parallel implementation for CPU clusters
 - `HybVolCS.py`: compressed-sensing reconstruction
 - `HybVolGRAPPA.py`: GRAPPA reconstruction; currently uses configured filenames
 - `recon_ifft.py`: direct inverse-FFT reconstruction; currently uses configured
@@ -318,70 +340,3 @@ python SCRIPT_NAME.py --help
    reconstruction. In: *Proceedings of the 27th Annual Meeting of ISMRM*;
    2019. Abstract 4819.
    [ISMRM abstract](https://cds.ismrm.org/protected/19MProceedings/PDFfiles/4819.html)
-
-
-============================================================================================
-## DATA Directory README.md 
-=============================
-
-# CEST Data
-
-This directory contains CEST MRI data and reconstructions used by scripts/notebooks located in:
-
-`Main_Project_Folder/scripts`
-
-## Directory overview
-
-- `CEST_APT_C6`, `CEST_APT_C12`, `CEST_APT_C16`: prospective CAIP datasets and reconstructions. CAIP6 is used as the reference for CAIP12/16 comparisons.
-- `CEST_GRAPPA3_3Shot`: Fully sampled GRAPPA datasets and SENSE/LLR retrospective reconstructions.
-- `maps`: ESPIRiT coil-sensitivity maps generated by `mps.py` for the prospective CAIP and fully sampled GRAPPA 3-shot datasets.
-
-Data are primarily stored as HDF5 (`.h5`) files. Depending on the reconstruction, images are stored in the `imgs` dataset or as `CEST_recon_RO_idx_*` datasets in split files. `.dat` files are the original siemens files before extraction. 
-
-## File-naming syntax
-
-Filenames record the main processing and reconstruction settings. For example:
-
-`CEST_LLR_recons_splits_1of2_Reps_0_17_RO_0_114_1x5x5_r_0.01_i_30_R34_C52_3Shot_us_CAIP_3x2_yshift_True_dc_16_mps_c_0.9_t0.05_w_36_kw_6_sp_ksp_3D_...h5`
-
-Common fields are:
-
-- `kdat_3D` / `kdat_2D`: 3-D k-space or hybrid-space data.
-- `SENSE` / `LLR`: reconstruction method.
-- `Reps_a_b`: repetition or contrast range from `a` to `b`.
-- `RO_a_b`: reconstructed readout range.
-- `splits_1of2`: one part of a reconstruction divided into multiple files.
-- `1x5x5`: LLR block shape.
-- `r_0.01`: regularization weight.
-- `i_30`: iteration count.
-- `R34_C52_3Shot`: acquisition dimensions/settings and three-shot acquisition label.
-- `us_Cart_3x1` / `us_CAIP_3x2`: Cartesian or CAIP undersampling pattern and acceleration factors.
-- `yshift_True/False`, `sym`, and `dc_16`: sampling-pattern options.
-- `mps_c_0.9_t0.05_w_36_kw_6`: sensitivity-map calibration parameters.
-- `sp_ksp_3D`: sensitivity maps estimated in 3-D k-space.
-- `_imgs`: file containing an assembled `imgs` image dataset.
-
-## Main scripts
-
-Run the processing commands from the `scripts/` directory. Several scripts use
-the parent of the current directory to locate `maps/`:
-
-- `CEST_Data_Handling.py`: converts Siemens `.dat` data to 3-D HDF5 k-space.
-- `Retro_us.py`: optionally applies Cartesian or CAIP retrospective undersampling.
-- `mps.py`: estimates ESPIRiT coil-sensitivity maps; the maps used with these datasets are stored in `maps/`.
-- `Hyb_ifft.py`: transforms 3-D k-space into hybrid-space (`kdat_2D`) data.
-- `HybVolSENSE.py`: performs hybrid-space SENSE reconstruction.
-- `HybVolLLR.py`: performs hybrid-space locally low-rank (LLR) reconstruction.
-- `view_v2.ipynb`: visualizes and compares reconstructions.
-- `Z_v2.ipynb`: performs CEST Z-spectrum and reconstruction-quality analysis.
-
-Typical workflow: 
-
-`CEST_Data_Handling.py` → optional `Retro_us.py` → `mps.py` → `Hyb_ifft.py` → `HybVolSENSE.py` or `HybVolLLR.py` → `view_v2.ipynb`/`Z_v2.ipynb`;
-
-or 
-
-`CEST_Data_Handling.py` → optional `Retro_us.py` → `Hyb_ifft.py` → `mps.py` → `HybVolSENSE.py` or `HybVolLLR.py` → `view_v2.ipynb`/`Z_v2.ipynb`.
-
-
-Before running either notebook, confirm that its `data_dir` or `DATA_DIR` points to data directory and other hard-coded directory within the used script/notebook file is corrected if any.
