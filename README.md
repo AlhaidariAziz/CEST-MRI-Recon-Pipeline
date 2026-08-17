@@ -6,7 +6,7 @@ Python implementations for SENSE/L2 and locally low-rank (LLR) reconstruction,
 together with GRAPPA and compressed-sensing workflows.
 
 The pipeline supports Siemens raw-data conversion, Cartesian and CAIP
-retrospective undersampling, Temporat/Contrast-dependent sampling viarations,
+retrospective undersampling, Temporal/Contrast-dependent sampling viarations,
 ESPIRiT coil-sensitivity estimation, and CPU/GPU execution with SigPy and CuPy.
 Besides, reconstructions comparison and CEST Analysis Notebooks. 
 
